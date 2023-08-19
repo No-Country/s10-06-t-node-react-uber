@@ -8,6 +8,10 @@ const ticketSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  type:{ 
+    type: String,
+    enum: ['efectivo', 'tarjeta']
+},
   
   fecha: {
     type: Date,
