@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose"
+
 
 const conductorSchema = new mongoose.Schema({
   
@@ -34,4 +35,4 @@ pagos: {
 
 const Conductor = mongoose.model('Conductor', conductorSchema);
 
-module.exports = Conductor;
+export default Conductor;

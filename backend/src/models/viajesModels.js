@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose"
+
 
 const viajeSchema = new mongoose.Schema({
   origen: {
@@ -19,4 +20,4 @@ const viajeSchema = new mongoose.Schema({
 
 const Viaje = mongoose.model('Viaje', viajeSchema);
 
-module.exports = Viaje;
+export default Viaje
