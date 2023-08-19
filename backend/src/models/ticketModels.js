@@ -8,6 +8,7 @@ const ticketSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  
   fecha: {
     type: Date,
     required: true,
