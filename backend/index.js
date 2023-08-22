@@ -3,7 +3,9 @@ import dotenv from 'dotenv';
 import server from './src/routes/serverRoute.js';
 import { initDBConnection } from './src/data/dbConnection.js';
 import login from './src/routes/loginRoute.js';
+
 import cors from 'cors';
+
 dotenv.config();
 const app = express();
 
