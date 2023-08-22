@@ -20,6 +20,7 @@
     "express-validator": "^7.0.1",
     "googleapis": "^125.0.0",
     "install": "^0.13.0",
+    "mercadopago": "^1.5.17",
     "mongodb": "^5.7.0",
     "mongoose": "^7.4.3",
     "nodemailer": "^6.9.4",
