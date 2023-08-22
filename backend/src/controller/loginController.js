@@ -1,6 +1,9 @@
 import User from '../models/userModels.js';
 import bcrypt from 'bcrypt';
 import { createToken } from '../utils/jwt.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export const login = async (req, res) => {
   try {
@@ -9,20 +12,18 @@ export const login = async (req, res) => {
 
     if (!userFound)
       return res.status(400).json({
-        message: ['The email does not exist'],
+        email: 'El correo no está registrado.',
       });
 
     const isMatch = await bcrypt.compare(password, userFound.password);
     if (!isMatch) {
       return res.status(400).json({
-        message: ['The password is incorrect'],
+        password: 'La contraseña es incorrecta.',
       });
     }
 
     const token = await createToken({
       id: userFound._id,
-      name: userFound.name,
-      lastname: userFound.lastname,
     });
 
     res.cookie('token', token, {
@@ -31,7 +32,7 @@ export const login = async (req, res) => {
       sameSite: 'none',
     });
 
-    res.status(200).send('logged successfully');
+    res.status(200).send({ message: 'logged sucessfully' });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
