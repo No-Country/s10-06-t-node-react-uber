@@ -6,7 +6,7 @@ export const Dropdown: FC = () => {
   const [isOpen, setIsOpen] = useState(false)
   return (
     <div
-      className='flex cursor-pointer items-center gap-2'
+      className='flex cursor-pointer items-center gap-2 rounded-full px-2 py-1 duration-300 hover:bg-white hover:bg-opacity-10'
       onClick={() => {
         setIsOpen(!isOpen)
       }}
