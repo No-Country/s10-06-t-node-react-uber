@@ -9,7 +9,7 @@ export const Header: FC = () => {
   return (
     <header className='bg-primary text-lightGray flex h-24 select-none px-24 py-5 font-medium'>
       <div className='flex w-full items-center justify-between'>
-        <nav className='flex items-center gap-4'>
+        <nav className='relative flex items-center gap-4'>
           <img
             src='src/assets/textLogo.svg'
             alt='Urban Move Logo'
