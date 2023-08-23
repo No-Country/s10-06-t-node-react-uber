@@ -29,18 +29,20 @@ export const Dropdown: FC = () => {
         />
       </div>
       <div
-        className={`min-h-20 absolute left-28 top-[73px] z-10 flex flex-col gap-4 overflow-hidden rounded-b-md bg-white p-4 text-center text-neutral-400
+        className={`min-h-20 absolute left-28 top-[73px] z-10 overflow-hidden rounded-b-md bg-white text-center text-neutral-400
             ${isOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'}
           `}
         style={{
           transition: 'max-height 0.4s ease-in-out, opacity 0.4s',
         }}
       >
-        {dropdownOptions.map(({ text, link }) => (
-          <DropdownChip key={text} link={link}>
-            {text}
-          </DropdownChip>
-        ))}
+        <div className='flex flex-col gap-4 p-4'>
+          {dropdownOptions.map(({ text, link }) => (
+            <DropdownChip key={text} link={link}>
+              {text}
+            </DropdownChip>
+          ))}
+        </div>
       </div>
     </>
   )
