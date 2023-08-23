@@ -7,7 +7,7 @@ import { Dropdown } from './Dropdown'
 export const Header: FC = () => {
   const navigate = useNavigate()
   return (
-    <header className='bg-primary text-lightGray flex h-24 select-none px-24 py-5'>
+    <header className='bg-primary text-lightGray flex h-24 select-none px-24 py-5 font-medium'>
       <div className='flex w-full items-center justify-between'>
         <nav className='flex items-center gap-12'>
           <img
