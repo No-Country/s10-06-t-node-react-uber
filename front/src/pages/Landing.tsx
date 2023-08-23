@@ -14,11 +14,11 @@ export const LandingPage: FC = () => {
         />
         <div className='absolute right-24 top-24 flex h-[617px] w-[660px] flex-col items-center rounded-3xl bg-[#FCFCFD] shadow-md'>
           <div className='flex w-full items-center justify-between rounded-3xl border-b border-b-[#E4E7EC] bg-[#F9FAFB] px-20 py-8'>
-            <button className='text-primary flex w-32 flex-col items-center leading-4'>
-              <PiUserListFill className='text-2xl' />
+            <button className='text-primary flex w-32 flex-col items-center gap-2 font-medium leading-4'>
+              <PiUserListFill className='text-4xl' />
               Registrarse como conductor
             </button>
-            <button className='text-gray flex w-32 flex-col items-center'>
+            <button className='text-gray hover:text-dark flex w-32 flex-col items-center gap-2 font-medium duration-500'>
               <BsFillCarFrontFill className='text-2xl' />
               Transporte
             </button>
@@ -35,10 +35,10 @@ export const LandingPage: FC = () => {
             </span>
 
             <div className='flex w-60 flex-col gap-9'>
-              <button className='bg-primary mt-5 rounded-3xl px-6 py-3 text-white'>
+              <button className='bg-primary hover:bg-darkGray mt-5 rounded-3xl px-6 py-3 text-white duration-500'>
                 Seguir como conductor
               </button>
-              <button className='flex items-center justify-start gap-1 border-b-2 border-neutral-300'>
+              <button className='hover:border-dark text-darkGray flex items-center justify-start gap-1 border-b-2 border-neutral-300 text-sm duration-500'>
                 Para más información <BsArrowUpRight />
               </button>
             </div>
