@@ -33,7 +33,7 @@ export const Login: React.FC = () => {
 
       if (regex.test(email)) {
         const authLogin = async (email: string, password: string) => {
-          const response = await fetch('http://localhost:4000/login', {
+          const response = await fetch('http://localhost:1237/login', {
             method: 'POST',
             body: JSON.stringify({
               email: email,
