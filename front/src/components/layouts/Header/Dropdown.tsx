@@ -15,7 +15,7 @@ export const Dropdown: FC = () => {
   return (
     <>
       <div
-        className='rounded-f relative flex cursor-pointer items-center gap-2'
+        className='rounded-f relative flex cursor-pointer items-center gap-2 rounded-full px-2 py-1 duration-300 hover:bg-white hover:bg-opacity-10'
         onClick={handleClick}
       >
         Más{' '}
