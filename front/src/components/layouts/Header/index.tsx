@@ -27,7 +27,7 @@ export const Header: FC = () => {
         <nav className='flex items-center gap-4'>
           <button className='flex cursor-pointer items-center gap-2 rounded-full px-2 py-1 duration-300 hover:bg-white hover:bg-opacity-10'>
             <BsFillGrid3X3GapFill />
-            Productos
+            Servicios
           </button>
           <button className='flex cursor-pointer items-center gap-2 rounded-full px-2 py-1 duration-300 hover:bg-white hover:bg-opacity-10'>
             <BsGlobeAmericas />
