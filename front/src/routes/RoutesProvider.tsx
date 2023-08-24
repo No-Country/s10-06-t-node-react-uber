@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { type FC } from 'react'
-import App from '@/pages/App'
 import { Layout } from '@/components/layouts/Layout'
+import { LandingPage } from '@/pages/Landing'
 import { Login } from '@/pages/Login'
 import { Register } from '@/pages/Register'
 import { RegisterCodigo } from '@/pages/RegisterCodigo'
@@ -12,7 +12,7 @@ const RoutesProvider: FC = () => {
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
-          <Route path='/' element={<App />} />
+          <Route path='/' element={<LandingPage />} />
         </Route>
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
