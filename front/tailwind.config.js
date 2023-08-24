@@ -3,6 +3,10 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      fontFamily: {
+        graduate: ['Graduate', 'sanserif'], // Use the correct font name
+      },
+    
       colors: {
         primary: '#29103A',
         dark: '#1C1C1C',
