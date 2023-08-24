@@ -91,7 +91,7 @@ export const RegisterData: React.FC = () => {
             </div>
           </div>
           <div className='flex w-full flex-col items-center justify-center gap-2'>
-            <Link to='/'>
+            <Link to='/login'>
               <button className='my-3 h-[33px] w-[160px] rounded-full bg-[#29103A] text-[10px] font-semibold text-white shadow-lg'>
                 Siguiente
               </button>
