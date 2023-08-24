@@ -6,6 +6,7 @@ import { Login } from '@/pages/Login'
 import { Register } from '@/pages/Register'
 import { RegisterCodigo } from '@/pages/RegisterCodigo'
 import { RegisterData } from '@/pages/RegisterData'
+import Payment from '@/pages/Payment'
 
 const RoutesProvider: FC = () => {
   return (
@@ -18,6 +19,7 @@ const RoutesProvider: FC = () => {
         <Route path='/register' element={<Register />} />
         <Route path='/register-codigo' element={<RegisterCodigo />} />
         <Route path='/register-data' element={<RegisterData />} />
+        <Route path='/payment' element={<Payment />} />
       </Routes>
     </BrowserRouter>
   )
