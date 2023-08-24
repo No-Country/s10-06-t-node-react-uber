@@ -33,10 +33,20 @@ export const Header: FC = () => {
             <BsGlobeAmericas />
             Español
           </button>
-          <button className='cursor-pointer rounded-full px-2 py-1 duration-300 hover:bg-white hover:bg-opacity-10'>
+          <button
+            className='cursor-pointer rounded-full px-2 py-1 duration-300 hover:bg-white hover:bg-opacity-10'
+            onClick={() => {
+              navigate('/register')
+            }}
+          >
             Registrarse
           </button>
-          <button className='bg-lightGray text-dark cursor-pointer rounded-full px-3 py-2 duration-500 hover:bg-opacity-70'>
+          <button
+            className='bg-lightGray text-dark cursor-pointer rounded-full px-3 py-2 duration-500 hover:bg-opacity-70'
+            onClick={() => {
+              navigate('/login')
+            }}
+          >
             Iniciar Sesión
           </button>
         </nav>
