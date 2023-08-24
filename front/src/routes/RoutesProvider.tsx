@@ -16,7 +16,7 @@ const RoutesProvider: FC = () => {
         </Route>
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
-        <Route path='/register-codigo' element={<RegisterCodigo email='dikedem668@stypedia.com'/>} />
+        <Route path='/register-codigo' element={<RegisterCodigo />} />
         <Route path='/register-data' element={<RegisterData />} />
       </Routes>
     </BrowserRouter>

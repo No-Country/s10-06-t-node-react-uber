@@ -29,7 +29,7 @@ export const Register: React.FC = ({}) => {
             .register({ email })
             .then(() => {
               console.log('iniciaste sesion correctamente')
-              navigate('/register-codigo')
+              navigate('/register-codigo', { state: { email } })
             })
             .catch((err) => {
               console.log('err:', err)

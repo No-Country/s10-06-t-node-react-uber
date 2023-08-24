@@ -2,14 +2,15 @@ import { Link } from 'react-router-dom'
 import '../styles/index.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+
 import * as apiAuth from '../utils/apiAuth'
 
-interface EmailProps {
-  email: string
-}
-
-export const RegisterCodigo: React.FC<EmailProps> = (props: EmailProps) => {
+export const RegisterCodigo: React.FC = ({}) => {
   const navigate = useNavigate()
+  const location = useLocation()
+  const email = location.state.email
+  console.log('email:', email)
   const [verificationCode, setVerificationCode] = useState('')
   const handleVerificationCodeChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -22,7 +23,7 @@ export const RegisterCodigo: React.FC<EmailProps> = (props: EmailProps) => {
     const registerCodigo = (verificationCode: string) => {
       return apiAuth
         .verifyCodigo({
-          email: props.email,
+          email: email,
           verificationCode: verificationCode,
         })
         .then(() => {
