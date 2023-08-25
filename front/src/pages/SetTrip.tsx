@@ -1,5 +1,7 @@
 import Container from "../components/layouts/Container" 
 import { BiArrowBack } from "react-icons/bi"
+import { TbPointFilled } from "react-icons/tb"
+import { GoTriangleDown } from "react-icons/go"
 
 const SetTrip: () => React.ReactNode = () => {
     return (
@@ -7,11 +9,13 @@ const SetTrip: () => React.ReactNode = () => {
             <main className="text-20">
                 <h2 className="flex"><BiArrowBack /> Solicitar un viaje</h2>
                 <form className="my-7">
-                    <div>    
-                        <span></span><Input className="mb-5" inputType="text" inputPlaceholder="¿De dónde salís?" />
+                    <div className="flex items-center">    
+                        <TbPointFilled className="text-24 mr-[4px]" />
+                        <Input className="mb-5" inputType="text" inputPlaceholder="¿De dónde salís?" />
                     </div>
-                    <div>    
-                        <span></span><Input inputType="text" inputPlaceholder="¿A dónde te llevamos?" />
+                    <div className="flex items-center">    
+                        <GoTriangleDown className="text-24 mr-[4px]" />
+                        <Input inputType="text" inputPlaceholder="¿A dónde te llevamos?" />
                     </div>
                 </form>
                 <div>
