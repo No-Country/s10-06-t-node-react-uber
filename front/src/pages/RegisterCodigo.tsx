@@ -28,7 +28,7 @@ export const RegisterCodigo: React.FC = ({}) => {
         })
         .then(() => {
           console.log('codigo correctamente')
-          navigate('/register-data')
+          navigate('/register-data', { state: { email, verificationCode } })
         })
         .catch((err) => {
           console.log('err:', err)
