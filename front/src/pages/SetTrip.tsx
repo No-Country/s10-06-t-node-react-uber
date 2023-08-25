@@ -6,11 +6,13 @@ const SetTrip: () => React.ReactNode = () => {
         <Container>
             <main className="text-20">
                 <h2 className="flex"><BiArrowBack /> Solicitar un viaje</h2>
-                <form>
-                    <ul>
-                        <li><Input className="mb-5" inputType="text" inputPlaceholder="¿De dónde salís?" /></li>
-                        <li><Input inputType="text" inputPlaceholder="¿A dónde te llevamos?" /></li>
-                    </ul>
+                <form className="my-7">
+                    <div>    
+                        <span></span><Input className="mb-5" inputType="text" inputPlaceholder="¿De dónde salís?" />
+                    </div>
+                    <div>    
+                        <span></span><Input inputType="text" inputPlaceholder="¿A dónde te llevamos?" />
+                    </div>
                 </form>
                 <div>
                     <h5>Recientes</h5>
@@ -23,7 +25,7 @@ const SetTrip: () => React.ReactNode = () => {
     );
 
     function Input({ inputType, inputPlaceholder, className = "" }: { inputType: string, inputPlaceholder: string, className?: string }) {
-        const nameClass = `w-full rounded-full p-[6px] border-solid border-dark border-2 placeholder-dark ${className}`
+        const nameClass = `w-full focus:outline-none rounded-full p-[6px] border-solid border-dark border-2 placeholder-dark ${className}`
         return (
             <input className={nameClass} type={inputType} placeholder={inputPlaceholder} /> 
         );
