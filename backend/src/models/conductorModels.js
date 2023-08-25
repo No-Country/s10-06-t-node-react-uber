@@ -1,38 +1,41 @@
-import mongoose from "mongoose"
-
+import mongoose from "mongoose";
 
 const conductorSchema = new mongoose.Schema({
-  
   nombre: {
-    type: String, 
-    required: true
-},
+    type: String,
+    required: true,
+  },
   apellido: {
-    type: String, 
-    required: true
-}, 
-  correoelectronico: {
-    type: String, 
-    required: true
-}, 
+    type: String,
+    required: true,
+  },
+  correoElectronico: {
+    type: String,
+    required: true,
+  },
   telefono: {
-    type: String, 
-    required: true
-}, 
+    type: String,
+    required: true,
+  },
   puntuacion: {
-    type: String, 
-    
-}, 
+    type: String,
+  },
   estado: {
-    type: String, 
-    required: true
-}, 
-pagos: {
-  type: Number, 
-  required: true
-}, 
+    type: String,
+    enum: ["activo", "en viaje", "inactivo"],
+    required: true,
+  },
+  vehiculo: {
+    type: String,
+    enum: ["auto", "utilitario"],
+    required: true,
+  },
+  pagos: {
+    type: Number,
+    required: true,
+  },
 });
 
-const Conductor = mongoose.model('Conductor', conductorSchema);
+const Conductor = mongoose.model("Conductor", conductorSchema);
 
 export default Conductor;
