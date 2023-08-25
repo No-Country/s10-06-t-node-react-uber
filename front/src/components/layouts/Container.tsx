@@ -2,7 +2,7 @@ import type React from "react";
 
 const Container = ({ children }: { children: React.ReactNode }) => {
     return (
-        <div className="w-11/12 m-auto">
+        <div className="w-11/12 m-auto py-3">
             {children}
         </div>
     );
