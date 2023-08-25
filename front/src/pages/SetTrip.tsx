@@ -1,5 +1,11 @@
-export default function SetTrip() {
+import { BiArrowBack } from "react-icons/bi"
+
+const SetTrip = () => {
     return (
-        <h1>SetTrip</h1>
+        <main>
+            <div><BiArrowBack clasName="text-12" /></div>
+        </main>
     );
 }
+
+export default SetTrip
