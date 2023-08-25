@@ -1,8 +1,8 @@
-import Ticket from "../models/ticketModels.js";
-import dotenv from "dotenv";
-import mercadopago from "mercadopago";
-import Conductor from "../models/conductorModels.js";
-import mongoose from "mongoose";
+import Ticket from '../models/ticketModels.js';
+import dotenv from 'dotenv';
+import mercadopago from 'mercadopago';
+import Conductor from '../models/conductorModels.js';
+import mongoose from 'mongoose';
 dotenv.config();
 mercadopago.configure({
   access_token: process.env.ACCESS_TOKEN,
@@ -32,7 +32,7 @@ export const PayCard = async (req, res) => {
 
   try {
     if (amount <= 0) {
-      res.status(400).json({ amount: "Invalid" });
+      res.status(400).json({ amount: 'Invalid' });
       return;
     }
     const newTicket = new Ticket({
@@ -43,7 +43,7 @@ export const PayCard = async (req, res) => {
       type: metodo,
       fecha: new Date(fecha),
     });
-    console.log("hola");
+    console.log('hola');
 
     const conductor = await Conductor.findById(id_conductor);
     conductor.pagos += parseInt(amount);
@@ -55,17 +55,17 @@ export const PayCard = async (req, res) => {
       items: [
         {
           id: newTicket.id_viaje,
-          title: "Pago por viaje en Uber",
+          title: 'Pago por viaje en Uber',
           unit_price: newTicket.costo,
           quantity: 1,
         },
       ],
       back_urls: {
         success: process.env.URL + id_conductor,
-        failure: "URL_DE_FALLA",
-        pending: "URL_DE_PENDIENTE",
+        failure: 'URL_DE_FALLA',
+        pending: 'URL_DE_PENDIENTE',
       },
-      auto_return: "approved",
+      auto_return: 'approved',
     };
 
     mercadopago.preferences
@@ -81,4 +81,3 @@ export const PayCard = async (req, res) => {
     res.status(500).json(error);
   }
 };
-
