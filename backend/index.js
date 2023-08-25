@@ -1,6 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import server from './src/routes/serverRoute.js';
+
+import conductor from './src/routes/conductorRoutes.js'
 import { initDBConnection } from './src/data/dbConnection.js';
 import login from './src/routes/loginRoute.js';
 import registerUser from './src/routes/registerRoute.js';
@@ -10,6 +12,7 @@ import cors from 'cors';
 
 dotenv.config();
 const app = express();
+app.use(express.json());
 
 const PORT = process.env.PORT || 3001;
 
@@ -23,10 +26,12 @@ app.use(
 );
 
 app.use('/', server);
+app.use('/conductor', conductor);
 app.use(express.json());
 app.use('/', login);
 app.use('/', registerUser);
 app.use('/', emailVerification);
+
 
 app.listen(PORT, () => {
   initDBConnection();
