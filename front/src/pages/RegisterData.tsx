@@ -9,8 +9,8 @@ import * as apiAuth from '../utils/apiAuth'
 export const RegisterData: React.FC = () => {
   const navigate = useNavigate()
   const location = useLocation()
-  const email = location.state.email
-  const verificationCode = location.state.verificationCode
+  const email = location.state?.email
+  const verificationCode = location.state?.verificationCode
   console.log('email:', email)
   console.log('verificationCode:', verificationCode)
   const [registerData, setRegisterData] = useState({
