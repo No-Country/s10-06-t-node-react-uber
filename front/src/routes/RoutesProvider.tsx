@@ -6,7 +6,8 @@ import { Login } from '@/pages/Login'
 import { Register } from '@/pages/Register'
 import { RegisterCodigo } from '@/pages/RegisterCodigo'
 import { RegisterData } from '@/pages/RegisterData'
-
+import { LoginGoogleButton } from '../components/LoginGoogleButton'
+import { ProtectedRoute } from '@/routes'
 const RoutesProvider: FC = () => {
   return (
     <BrowserRouter>
@@ -18,6 +19,10 @@ const RoutesProvider: FC = () => {
         <Route path='/register' element={<Register />} />
         <Route path='/register-codigo' element={<RegisterCodigo />} />
         <Route path='/register-data' element={<RegisterData />} />
+        <Route path='/google' element={<LoginGoogleButton />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path='/profile' element={<h1>Profile</h1>} />
+        </Route>
       </Routes>
     </BrowserRouter>
   )

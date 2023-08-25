@@ -3,6 +3,8 @@ import { HeaderAuth } from '@/components/HeaderAuth'
 import { FormEvent, useState } from 'react'
 import 'react-toastify/dist/ReactToastify.css'
 import { toast } from 'react-toastify'
+import { LoginGoogleButton } from '@/components/LoginGoogleButton'
+
 interface Errors {
   email?: string
   password?: string
@@ -43,7 +45,8 @@ export const Login: React.FC = () => {
           const data = await response.json()
           await setErrors(data)
           if (response.status === 200) {
-            console.log('iniciaste sesion correctamente')
+            const token = data.token
+            localStorage.setItem('token', token)
             {
               toast.success('Inicio de sesión exitoso!', {
                 position: 'top-right',
@@ -74,6 +77,7 @@ export const Login: React.FC = () => {
           className='z-20 mx-auto mt-[-25px] flex max-w-sm flex-col flex-nowrap items-center justify-center gap-5 rounded-[33px] bg-white px-[37px] py-5 shadow-[0px_2px_6px_0px_rgba(0,0,0,0.25)] max-[410px]:mx-3'
         >
           <div className='items-center justify-center pb-3 pt-5'>
+            <Link to='/profile'>Profile</Link>
             <Link
               to='/login'
               className='relative left-3 z-10 rounded-full border border-[#29103A] bg-[#29103A] px-[35px] py-[10px] text-[10px] font-semibold text-white shadow-lg'
@@ -127,31 +131,11 @@ export const Login: React.FC = () => {
             <button className='my-3 h-[33px] w-[160px] rounded-full bg-[#29103A] text-[12px] font-medium text-white shadow-lg'>
               Iniciar sesión
             </button>
-            <span className='text-12 font-medium text-[#B1B1B1]'>
-              Seguir con
+            <span className='flex w-full items-center justify-center gap-4 px-3 text-12 '>
+              o puedes
             </span>
-            <div className='flex gap-5 [&>div>img]:rounded-full [&>div>img]:shadow-xl [&>div]:h-9 [&>div]:w-9 [&>div]:rounded-full'>
-              <div>
-                <img
-                  src='https://cdn.iconscout.com/icon/free/png-256/free-google-1772223-1507807.png'
-                  alt='google'
-                  className='p-2'
-                />
-              </div>
-              <div>
-                <img
-                  src='https://cdn.iconscout.com/icon/free/png-256/free-facebook-logo-2019-1597680-1350125.png'
-                  alt='facebook'
-                  className='p-2'
-                />
-              </div>
-              <div>
-                <img
-                  src='https://images.freeimages.com/fic/images/icons/2795/office_2013_hd/2000/outlook.png'
-                  alt='outlook'
-                  className='p-2'
-                />
-              </div>
+            <div className=''>
+              <LoginGoogleButton />
             </div>
           </div>
         </form>
