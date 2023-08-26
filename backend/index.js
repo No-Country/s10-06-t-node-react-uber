@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import server from './src/routes/serverRoute.js';
+import user from './src/routes/userRoute.js';
 import paymentRoute from './src/routes/paymentRoutes.js';
 import conductor from './src/routes/conductorRoutes.js';
 import { initDBConnection } from './src/data/dbConnection.js';
@@ -34,6 +35,10 @@ app.use(
 );
 
 app.use('/', server);
+app.use(express.json());
+app.use('/users', user);
+
+app.use(login);
 app.use('/conductor', conductor);
 app.use('/', login);
 app.use('/', registerUser);
