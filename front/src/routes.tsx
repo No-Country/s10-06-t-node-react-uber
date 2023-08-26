@@ -17,7 +17,7 @@ export const ProtectedRoute = () => {
       }
 
       try {
-        const res = await fetch('http://localhost:1237/protectedRoute', {
+        const res = await fetch('http://localhost:1237/protected-route', {
           method: 'POST',
           body: JSON.stringify({
             token: token,
