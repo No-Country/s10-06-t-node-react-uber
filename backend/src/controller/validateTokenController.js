@@ -15,7 +15,9 @@ export const validateTokenController = (req, res, next) => {
       return res.status(403).json({ message: 'Invalid token' });
     }
 
-    res.status(200).json({ message: 'Validated token' });
+    // Llamada a next() después de la verificación exitosa del token
     next();
+
+    // Mover esta línea después de next()
   });
 };
