@@ -36,18 +36,18 @@ export const useAuthStore = create<AuthState>((set) => ({
         }
 
         //mandar al backend el usuario
-        const res = await fetch('endpoint', {
+        const res = await fetch('http://localhost:1237/api/registerLogin', {
           method: 'POST',
           body: JSON.stringify({
             email: user.email,
             name: name,
             lastName: lastName,
           }),
-          headers: {
-            'Content-Type': 'application/json',
-          },
         })
-        console.log(res)
+        const data = await res.json()
+        console.log(data)
+        const token = data.token
+        localStorage.setItem('token', token)
       }
 
       set(() => ({ user }))
