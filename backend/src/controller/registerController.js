@@ -118,7 +118,6 @@ export const emailVerification = async (req, res) => {
       .status(500)
       .json({ error: 'An internal server error occurred.' });
   }
-
 };
 
 export const registerLogin = async (req, res) => {
@@ -136,8 +135,6 @@ export const registerLogin = async (req, res) => {
       });
 
       await user.save();
-
-};    
 
       // crate a token to be send in correct response
       const token = await createToken({
