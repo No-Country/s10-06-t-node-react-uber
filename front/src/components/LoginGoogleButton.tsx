@@ -1,4 +1,4 @@
-import { useAuthStore } from '@/context/AuthContext'
+import { useAuthStore } from '@/context/GoogleAuthContext'
 
 export const LoginGoogleButton: React.FC = () => {
   const { signInWithGoogle } = useAuthStore()

@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from 'react-router-dom'
-import { useAuthStore } from '@/context/AuthContext'
+import { useAuthStore } from '@/context/GoogleAuthContext'
 import { useEffect, useState } from 'react'
 
 export const ProtectedRoute = () => {
