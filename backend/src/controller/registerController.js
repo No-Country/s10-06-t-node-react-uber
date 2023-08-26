@@ -118,54 +118,55 @@ export const emailVerification = async (req, res) => {
     console.error('Error during email verification:', error);
     return res.status(500).json({ error: 'An internal server error occurred.' });
   }
-};
-    
+};    
   
 export const registerLogin = async (req, res) => {
-    const {firstName, lastName , email} = req.body;
-  
-    try {
-      let user = await Users.findOne({email});
-     
-      // User doesn´t exit save it´s basic data
-      if(!user) {
-        user = new Users({
-          firstName: req.body.firstName,
-          lastName: req.body.lastName,
-          email: req.body.email
+  const {firstName, lastName , email} = req.body;
+
+  try {
+    let user = await Users.findOne({email});
+   
+    // User doesn´t exit save it´s basic data
+    if(!user) {
+      user = new Users({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email
+    });
+
+      await user.save();
+
+      // crate a token to be send in correct response
+      const token = await createToken({
+        id: user._id,
       });
 
-        await user.save();
-
-        // crate a token to be send in correct response
-        const token = await createToken({
-          id: user._id,
-        });
-
-        // send token by coockie
-        res.cookie('token', token, {
-          httpOnly: process.env.NODE_ENV !== 'development',
-          secure: true,
-          sameSite: 'none',
-        });
-      }
-      else {
-        // crate a token to be send in correct response
-        const token = await createToken({
-          id: user._id,
-        });
-
-        // send token by coockie
-        res.cookie('token', token, {
-          httpOnly: process.env.NODE_ENV !== 'development',
-          secure: true,
-          sameSite: 'none',
-        });
-      }
-      res.status(200).send({ message: 'logged sucessfully' });
-    } catch (error) {
-      return res.status(500).json({ error: 'An internal server error occurred.' });
+      // send token by coockie
+      res.cookie('token', token, {
+        httpOnly: process.env.NODE_ENV !== 'development',
+        secure: true,
+        sameSite: 'none',
+      });
+      res.status(200).json({ message: 'logged sucessfully', token})
     }
+    else {
+      // crate a token to be send in correct response
+      const token = await createToken({
+        id: user._id,
+      });
+
+      // send token by coockie
+      res.cookie('token', token, {
+        httpOnly: process.env.NODE_ENV !== 'development',
+        secure: true,
+        sameSite: 'none',
+      });
+      res.status(200).json({ message: 'logged sucessfully', token})
+    }
+   
+  } catch (error) {
+    return res.status(500).json({ error: 'An internal server error occurred.' });
+  }
 };
 
 
