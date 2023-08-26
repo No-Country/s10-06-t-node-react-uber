@@ -5,8 +5,10 @@ import { initDBConnection } from './src/data/dbConnection.js';
 import login from './src/routes/loginRoute.js';
 import registerUser from './src/routes/registerRoute.js';
 import emailVerification from './src/routes/registerRoute.js';
+import { registerLogin } from './src/controller/registerController.js';
 
 import cors from 'cors';
+
 
 dotenv.config();
 const app = express();
@@ -27,6 +29,7 @@ app.use(express.json());
 app.use('/', login);
 app.use('/', registerUser);
 app.use('/', emailVerification);
+app.use('/', registerLogin);
 
 app.listen(PORT, () => {
   initDBConnection();
