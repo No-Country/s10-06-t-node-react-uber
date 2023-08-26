@@ -3,8 +3,8 @@ import { sendVerificationEmail } from '../services/emailConfig.js';
 import generateRandomCode from '../utils/verificationCode.js';
 import { hashPassword } from '../utils/encriptation.js';
 import { login } from '../controller/loginController.js';
-
 import { createToken } from '../utils/jwt.js';
+
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -118,6 +118,7 @@ export const emailVerification = async (req, res) => {
       .status(500)
       .json({ error: 'An internal server error occurred.' });
   }
+
 };
 
 export const registerLogin = async (req, res) => {
@@ -135,6 +136,8 @@ export const registerLogin = async (req, res) => {
       });
 
       await user.save();
+
+};    
 
       // crate a token to be send in correct response
       const token = await createToken({
