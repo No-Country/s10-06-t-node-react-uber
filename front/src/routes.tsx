@@ -19,15 +19,18 @@ export const ProtectedRoute = () => {
       try {
         //Validate Token
 
-        const res = await fetch('http://localhost:1237/protected-route', {
-          method: 'POST',
-          body: JSON.stringify({
-            token: token,
-          }),
-          headers: {
-            'Content-Type': 'application/json',
+        const res = await fetch(
+          'https://s10-06-t-node-react-uber-production.up.railway.app/protected-route',
+          {
+            method: 'POST',
+            body: JSON.stringify({
+              token: token,
+            }),
+            headers: {
+              'Content-Type': 'application/json',
+            },
           },
-        })
+        )
         if (res.status !== 200) {
           setIsAuthenticated(false)
           return setLoading(false)
@@ -37,15 +40,18 @@ export const ProtectedRoute = () => {
 
         //Get user info
 
-        const userData = await fetch('http://localhost:1237/users/id', {
-          method: 'POST',
-          body: JSON.stringify({
-            token: token,
-          }),
-          headers: {
-            'Content-Type': 'application/json',
+        const userData = await fetch(
+          'https://s10-06-t-node-react-uber-production.up.railway.app/users/id',
+          {
+            method: 'POST',
+            body: JSON.stringify({
+              token: token,
+            }),
+            headers: {
+              'Content-Type': 'application/json',
+            },
           },
-        })
+        )
         const userInfo = await userData.json()
         setUser(userInfo)
       } catch (error) {

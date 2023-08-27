@@ -31,16 +31,19 @@ export const Login: React.FC = () => {
 
       if (regex.test(email)) {
         const authLogin = async (email: string, password: string) => {
-          const response = await fetch('http://localhost:1237/api/login', {
-            method: 'POST',
-            body: JSON.stringify({
-              email: email,
-              password: password,
-            }),
-            headers: {
-              'Content-Type': 'application/json',
+          const response = await fetch(
+            'https://s10-06-t-node-react-uber-production.up.railway.app/api/login',
+            {
+              method: 'POST',
+              body: JSON.stringify({
+                email: email,
+                password: password,
+              }),
+              headers: {
+                'Content-Type': 'application/json',
+              },
             },
-          })
+          )
           const data = await response.json()
           await setErrors(data)
           if (response.status === 200) {

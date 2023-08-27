@@ -34,17 +34,20 @@ export const useAuthStore = create<AuthState>((set) => ({
         }
 
         //mandar al backend el usuario
-        const res = await fetch('http://localhost:1237/api/registerLogin', {
-          method: 'POST',
-          body: JSON.stringify({
-            email: user.email,
-            name: name,
-            lastName: lastName,
-          }),
-          headers: {
-            'Content-Type': 'application/json',
+        const res = await fetch(
+          'https://s10-06-t-node-react-uber-production.up.railway.app/api/registerLogin',
+          {
+            method: 'POST',
+            body: JSON.stringify({
+              email: user.email,
+              name: name,
+              lastName: lastName,
+            }),
+            headers: {
+              'Content-Type': 'application/json',
+            },
           },
-        })
+        )
         const data = await res.json()
         const token = data.token
         localStorage.setItem('token', token)
