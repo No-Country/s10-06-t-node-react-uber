@@ -8,7 +8,8 @@ import { RegisterCodigo } from '@/pages/RegisterCodigo'
 import { RegisterData } from '@/pages/RegisterData'
 import { ProtectedRoute } from '@/routes'
 import Payment from '@/pages/Payment'
-import { UserProfile } from '@/pages/userProfile'
+import { UserProfile } from '@/pages/UserProfile'
+
 const RoutesProvider: FC = () => {
   return (
     <BrowserRouter>
