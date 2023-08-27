@@ -8,6 +8,7 @@ import { RegisterCodigo } from '@/pages/RegisterCodigo'
 import { RegisterData } from '@/pages/RegisterData'
 import { ProtectedRoute } from '@/routes'
 import Payment from '@/pages/Payment'
+import { UserProfile } from '@/pages/userProfile'
 const RoutesProvider: FC = () => {
   return (
     <BrowserRouter>
@@ -20,7 +21,7 @@ const RoutesProvider: FC = () => {
         <Route path='/register-codigo' element={<RegisterCodigo />} />
         <Route path='/register-data' element={<RegisterData />} />
         <Route element={<ProtectedRoute />}>
-          <Route path='/profile' element={<h1>Profile</h1>} />
+          <Route path='/profile' element={<UserProfile />} />
         </Route>
         <Route path='/payment' element={<Payment />} />
       </Routes>

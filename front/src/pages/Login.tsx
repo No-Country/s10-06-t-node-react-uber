@@ -1,8 +1,7 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { HeaderAuth } from '@/components/HeaderAuth'
 import { FormEvent, useState } from 'react'
 import 'react-toastify/dist/ReactToastify.css'
-import { toast } from 'react-toastify'
 import { LoginGoogleButton } from '@/components/LoginGoogleButton'
 
 interface Errors {
@@ -13,7 +12,7 @@ export const Login: React.FC = () => {
   const [errors, setErrors] = useState<Errors>({})
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
+  const navigate = useNavigate()
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setEmail(e.target.value)
     setErrors({})
@@ -47,18 +46,7 @@ export const Login: React.FC = () => {
           if (response.status === 200) {
             const token = data.token
             localStorage.setItem('token', token)
-            {
-              toast.success('Inicio de sesión exitoso!', {
-                position: 'top-right',
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: 'light',
-              })
-            }
+            navigate('/profile')
           }
         }
         authLogin(email, password)
@@ -77,7 +65,6 @@ export const Login: React.FC = () => {
           className='z-20 mx-auto mt-[-25px] flex max-w-sm flex-col flex-nowrap items-center justify-center gap-5 rounded-[33px] bg-white px-[37px] py-5 shadow-[0px_2px_6px_0px_rgba(0,0,0,0.25)] max-[410px]:mx-3'
         >
           <div className='items-center justify-center pb-3 pt-5'>
-            <Link to='/profile'>Profile</Link>
             <Link
               to='/login'
               className='relative left-3 z-10 rounded-full border border-[#29103A] bg-[#29103A] px-[35px] py-[10px] text-[10px] font-semibold text-white shadow-lg'

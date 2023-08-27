@@ -17,6 +17,8 @@ export const ProtectedRoute = () => {
       }
 
       try {
+        //Validate Token
+
         const res = await fetch('http://localhost:1237/protected-route', {
           method: 'POST',
           body: JSON.stringify({
@@ -25,16 +27,27 @@ export const ProtectedRoute = () => {
           headers: {
             'Content-Type': 'application/json',
           },
-        }) //fetch para validar el token
-        const data = await res.json()
-        console.log(data)
+        })
         if (res.status !== 200) {
           setIsAuthenticated(false)
           return setLoading(false)
         }
         setIsAuthenticated(true)
         setLoading(false)
-        // setUser(res.data) //fetch para obtener los datos del usuario y guardarlos en user
+
+        //Get user info
+
+        const userData = await fetch('http://localhost:1237/users/id', {
+          method: 'POST',
+          body: JSON.stringify({
+            token: token,
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+        const userInfo = await userData.json()
+        setUser(userInfo)
       } catch (error) {
         setIsAuthenticated(false)
         setLoading(false)

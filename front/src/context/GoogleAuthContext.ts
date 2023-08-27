@@ -1,14 +1,12 @@
 import { create } from 'zustand'
 import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
 import { auth } from '../services/firebase.config'
-
 interface AuthState {
   user: any
   setUser: (user: any) => void
   signInWithGoogle: () => Promise<void>
   signOut: () => Promise<void>
 }
-
 export const useAuthStore = create<AuthState>((set) => ({
   user: null,
   setUser: (user) => set(() => ({ user })),
@@ -43,11 +41,14 @@ export const useAuthStore = create<AuthState>((set) => ({
             name: name,
             lastName: lastName,
           }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
         })
         const data = await res.json()
-        console.log(data)
         const token = data.token
         localStorage.setItem('token', token)
+        window.location.href = '/profile'
       }
 
       set(() => ({ user }))
@@ -59,6 +60,8 @@ export const useAuthStore = create<AuthState>((set) => ({
     try {
       await signOut(auth)
       set(() => ({ user: null }))
+      localStorage.clear()
+      window.location.reload()
     } catch (error) {
       console.error('Error signing out:', error)
     }
