@@ -6,7 +6,7 @@ export default {
       fontFamily: {
         graduate: ['Graduate', 'sanserif'], // Use the correct font name
       },
-    
+
       colors: {
         primary: '#29103A',
         dark: '#1C1C1C',

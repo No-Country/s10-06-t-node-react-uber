@@ -1,12 +1,15 @@
 import { Link } from 'react-router-dom'
 import '../styles/index.css'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import * as apiAuth from '../utils/apiAuth'
 
 interface Errors {
   email?: string
 }
 
-export const Register: React.FC = () => {
+export const Register: React.FC = ({}) => {
+  const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [errors, setErrors] = useState<Errors>({})
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -15,26 +18,22 @@ export const Register: React.FC = () => {
   }
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
+    console.log('handleSubmit:', e)
 
     const validateEmail = (email: string) => {
       const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 
       if (regex.test(email)) {
-        const registerEmail = async (email: string) => {
-          const response = await fetch('http://localhost:4000/login', {
-            method: 'POST',
-            body: JSON.stringify({
-              email: email,
-            }),
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          })
-          const data = await response.json()
-          await setErrors(data)
-          if (response.status === 200) {
-            console.log('iniciaste sesion correctamente')
-          }
+        const registerEmail = (email: string) => {
+          return apiAuth
+            .register({ email })
+            .then(() => {
+              console.log('iniciaste sesion correctamente')
+              navigate('/register-codigo', { state: { email } })
+            })
+            .catch((err) => {
+              console.log('err:', err)
+            })
         }
         registerEmail(email)
       } else {
@@ -112,11 +111,9 @@ export const Register: React.FC = () => {
             </div>
           </div>
           <div className='flex w-full flex-col items-center justify-center gap-2'>
-            <Link to='/register-codigo'>
-              <button className='my-3 h-[33px] w-[160px] rounded-full bg-[#29103A] text-[10px] font-semibold text-white shadow-lg'>
-                Siguiente
-              </button>
-            </Link>
+            <button className='my-3 h-[33px] w-[160px] rounded-full bg-[#29103A] text-[10px] font-semibold text-white shadow-lg'>
+              Siguiente
+            </button>
           </div>
         </form>
       </div>

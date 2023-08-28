@@ -8,6 +8,8 @@ import { RegisterCodigo } from '@/pages/RegisterCodigo'
 import { RegisterData } from '@/pages/RegisterData'
 import { InvoiceModal } from '@/components/InvoiceModal'
 import { LogInWithFacebook } from '@/components/LogInWithFacebook'
+import { ProtectedRoute } from '@/routes'
+import Payment from '@/pages/Payment'
 
 const RoutesProvider: FC = () => {
   return (
@@ -20,6 +22,10 @@ const RoutesProvider: FC = () => {
         <Route path='/register' element={<Register />} />
         <Route path='/register-codigo' element={<RegisterCodigo />} />
         <Route path='/register-data' element={<RegisterData />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path='/profile' element={<h1>Profile</h1>} />
+        </Route>
+        <Route path='/payment' element={<Payment />} />
         <Route path='/modal' element={<InvoiceModal />} />
         <Route path='/facebook' element={<LogInWithFacebook />} />
       </Routes>

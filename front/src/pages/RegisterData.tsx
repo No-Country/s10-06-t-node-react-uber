@@ -1,44 +1,66 @@
 import { Link } from 'react-router-dom'
 import '../styles/index.css'
+import { HeaderAuth } from '@/components/HeaderAuth'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+import * as apiAuth from '../utils/apiAuth'
 
 export const RegisterData: React.FC = () => {
+  const navigate = useNavigate()
+  const location = useLocation()
+  const email = location.state?.email
+  const verificationCode = location.state?.verificationCode
+  console.log('email:', email)
+  console.log('verificationCode:', verificationCode)
+  const [registerData, setRegisterData] = useState({
+    email: email,
+    verificationCode: verificationCode,
+    firstName: '',
+    lastName: '',
+    cellNumber: '',
+    password: '',
+  })
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+    setRegisterData({
+      ...registerData,
+      [name]: value,
+    })
+  }
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault()
+    console.log('handleSubmit:', e)
+    const submitFormData = () => {
+      return apiAuth
+        .submitData({
+          email: email,
+          verificationCode: verificationCode,
+          firstName: registerData.firstName,
+          lastName: registerData.lastName,
+          cellNumber: registerData.cellNumber,
+          password: registerData.password,
+        })
+        .then(() => {
+          console.log('data submitted', registerData)
+          navigate('/login')
+        })
+        .catch((err) => {
+          console.log('err:', err)
+        })
+    }
+    submitFormData()
+  }
+
   return (
     <>
       <div className='flex h-screen flex-col items-center text-sm'>
-        <div className='align-center relative flex items-center bg-center'>
-          <div className='h-[284px] w-[360px] text-white'>
-            <img
-              className='absolute left-0 top-0 h-[360px] w-[360px]'
-              alt='Ellipse'
-              src='https://generation-sessions.s3.amazonaws.com/4312a83e34b65680c6affa9f9593c406/img/ellipse-28.svg'
-            />
-            <img
-              className='absolute left-[74px] top-[62px] h-[76px] w-52 object-cover'
-              alt='Logo'
-              src='https://generation-sessions.s3.amazonaws.com/4312a83e34b65680c6affa9f9593c406/img/logo@2x.png'
-            />
-            <div className='relative'>
-              <div className='font-graduate jtext-center absolute left-[79px] top-[138px] flex h-[100px] w-[211px] flex-col gap-[6px] text-[17px]'>
-                CONECTANDO CIUDADES
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  width='206'
-                  height='6'
-                  viewBox='0 0 206 6'
-                  fill='none'
-                >
-                  <path
-                    d='M1 2.5C0.723858 2.5 0.5 2.72386 0.5 3C0.5 3.27614 0.723858 3.5 1 3.5L1 2.5ZM206 2.99998L201 0.113231L201 5.88673L206 2.99998ZM1 3.5L201.5 3.49998L201.5 2.49998L1 2.5L1 3.5Z'
-                    fill='white'
-                  />
-                </svg>
-                <span className='text-center'>ACERCANDO DESTINOS</span>
-              </div>
-            </div>
-          </div>
-          <div className='z-10 flex flex-col items-center justify-center text-white'></div>
-        </div>
-        <form className='z-20 mx-auto mt-[-25px] flex max-w-sm flex-col flex-nowrap items-center justify-center gap-5 rounded-[33px] border bg-white px-[37px] py-5 shadow-[0px_2px_6px_0px_rgba(0,0,0,0.25)] max-[410px]:mx-3'>
+        <HeaderAuth />
+        <form
+          onSubmit={handleSubmit}
+          className='z-20 mx-auto mt-[-25px] flex max-w-sm flex-col flex-nowrap items-center justify-center gap-5 rounded-[33px] bg-white px-[37px] py-5 shadow-[0px_2px_6px_0px_rgba(0,0,0,0.25)] max-[410px]:mx-3'
+        >
           <div className='items-center justify-center pb-3 pt-5'>
             <Link
               to='/login'
@@ -56,46 +78,58 @@ export const RegisterData: React.FC = () => {
           <div className='flex flex-col gap-5'>
             <div className='flex flex-col'>
               <input
+                onChange={handleChange}
+                value={registerData.lastName}
+                name='lastName'
                 type='text'
                 placeholder='Apellido'
-                className='w-[251px] border-b-[1px] border-[#CFCFCF] text-[10px]'
+                className='w-[251px] border-b-[1px] border-[#CFCFCF] text-[11px] outline-none'
               />
             </div>
             <div className='flex flex-col'>
               <input
+                onChange={handleChange}
+                value={registerData.firstName}
+                name='firstName'
                 type='text'
                 placeholder='Nombre'
-                className='w-[251px] border-b-[1px] border-[#CFCFCF] text-[10px]'
+                className='w-[251px] border-b-[1px] border-[#CFCFCF] text-[11px] outline-none'
               />
             </div>
             <div className='flex flex-col'>
               <input
+                onChange={handleChange}
+                value={registerData.cellNumber}
+                name='cellNumber'
                 type='text'
                 placeholder='Número de teléfono'
-                className='w-[251px] border-b-[1px] border-[#CFCFCF] text-[10px]'
+                className='w-[251px] border-b-[1px] border-[#CFCFCF] text-[11px] outline-none'
               />
             </div>
             <div className='flex flex-col'>
               <input
+                onChange={handleChange}
+                value={registerData.password}
                 type='text'
+                name='password'
                 placeholder='Contraseña'
-                className='w-[251px] border-b-[1px] border-[#CFCFCF] text-[10px]'
+                className='w-[251px] border-b-[1px] border-[#CFCFCF] text-[11px] outline-none'
               />
             </div>
-            <div className='flex flex-col'>
+            {/* <div className='flex flex-col'>
               <input
+                onChange={handleChange}
+                value={registerData.password}
                 type='text'
                 placeholder='Confirmar contraseña'
-                className='w-[251px] border-b-[1px] border-[#CFCFCF] text-[10px]'
+                className='w-[251px] border-b-[1px] border-[#CFCFCF] text-[11px] outline-none'
               />
-            </div>
+            </div> */}
           </div>
           <div className='flex w-full flex-col items-center justify-center gap-2'>
-            <Link to='/login'>
-              <button className='my-3 h-[33px] w-[160px] rounded-full bg-[#29103A] text-[10px] font-semibold text-white shadow-lg'>
-                Siguiente
-              </button>
-            </Link>
+            <button className='my-3 h-[33px] w-[160px] rounded-full bg-[#29103A] text-[10px] font-semibold text-white shadow-lg'>
+              Siguiente
+            </button>
           </div>
         </form>
       </div>

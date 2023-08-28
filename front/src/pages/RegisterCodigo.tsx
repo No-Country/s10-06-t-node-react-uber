@@ -1,7 +1,43 @@
 import { Link } from 'react-router-dom'
 import '../styles/index.css'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
-export const RegisterCodigo: React.FC = () => {
+import * as apiAuth from '../utils/apiAuth'
+
+export const RegisterCodigo: React.FC = ({}) => {
+  const navigate = useNavigate()
+  const location = useLocation()
+  const email = location.state?.email
+
+  console.log('email:', email)
+  const [verificationCode, setVerificationCode] = useState('')
+  const handleVerificationCodeChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ): void => {
+    setVerificationCode(e.target.value)
+  }
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault()
+    console.log('handleSubmit:', e)
+    const registerCodigo = (verificationCode: string) => {
+      return apiAuth
+        .verifyCodigo({
+          email: email,
+          verificationCode: verificationCode,
+        })
+        .then(() => {
+          console.log('codigo correctamente')
+          navigate('/register-data', { state: { email, verificationCode } })
+        })
+        .catch((err) => {
+          console.log('err:', err)
+        })
+    }
+    registerCodigo(verificationCode)
+  }
+
   return (
     <>
       <div className='flex h-screen flex-col items-center text-sm'>
@@ -38,7 +74,10 @@ export const RegisterCodigo: React.FC = () => {
           </div>
           <div className='z-10 flex flex-col items-center justify-center text-white'></div>
         </div>
-        <form className='z-20 mx-auto mt-[-25px] flex max-w-sm flex-col flex-nowrap items-center justify-center gap-5 rounded-[33px] border bg-white px-[37px] py-5 shadow-[0px_2px_6px_0px_rgba(0,0,0,0.25)] max-[410px]:mx-3'>
+        <form
+          onSubmit={handleSubmit}
+          className='z-20 mx-auto mt-[-25px] flex max-w-sm flex-col flex-nowrap items-center justify-center gap-5 rounded-[33px] border bg-white px-[37px] py-5 shadow-[0px_2px_6px_0px_rgba(0,0,0,0.25)] max-[410px]:mx-3'
+        >
           <div className='items-center justify-center pb-3 pt-5'>
             <Link
               to='/login'
@@ -59,17 +98,17 @@ export const RegisterCodigo: React.FC = () => {
             </p>
             <div className='flex flex-col'>
               <input
+                value={verificationCode}
+                onChange={handleVerificationCodeChange}
                 type='number'
                 className='w-[251px] border-b-[1px] border-[#CFCFCF] text-[10px]'
               />
             </div>
           </div>
           <div className='flex w-full flex-col items-center justify-center gap-2'>
-            <Link to='/register-data'>
-              <button className='my-3 h-[33px] w-[160px] rounded-full bg-[#29103A] text-[10px] font-semibold text-white shadow-lg'>
-                Siguiente
-              </button>
-            </Link>
+            <button className='my-3 h-[33px] w-[160px] rounded-full bg-[#29103A] text-[10px] font-semibold text-white shadow-lg'>
+              Siguiente
+            </button>
           </div>
         </form>
       </div>
