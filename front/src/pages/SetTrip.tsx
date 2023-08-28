@@ -2,6 +2,7 @@ import Container from "../components/layouts/Container"
 import { BiArrowBack, BiTime } from "react-icons/bi"
 import { TbPointFilled } from "react-icons/tb"
 import { GoTriangleDown } from "react-icons/go"
+import React from "react"
 
 const SetTrip: React.FC = () => {
     return (
@@ -27,14 +28,28 @@ const SetTrip: React.FC = () => {
             </main>
         </Container>
     );
+    
+    function LocationAutocompleteItems() {
+        return(
+            <></>
+        );   
+    }
+    // Esté componente, se utiliza para estilizar el contenedor de los items. 
+    function ItemsContainer({ children }: { children: React.ReactNode }) {
+        return (
+            <div className="rounded-full items-center py-[6px] px-[12px] bg-[#f8f8f8] grid grid-cols-[max-content_minmax(min-content,_max-content)_minmax(max-content,_1fr)] text grid-rows-1 font-light shadow-setTripItems mt-3">
+                {children}
+            </div>
+        );
+    }
 
     function RecentTripsItem({ finishLocation, km }: { finishLocation: string, km: number } ) {
         return (
-            <div className="rounded-full items-center py-[6px] px-[12px] bg-[#f8f8f8] grid grid-cols-[max-content_minmax(min-content,_max-content)_minmax(max-content,_1fr)] text grid-rows-1 font-light shadow-setTripItems mt-3">
+            <ItemsContainer>
                 <BiTime className="mr-3 text-24" /> 
                 { finishLocation } 
                 <span className="font-bold justify-self-end">{km} km</span>
-            </div>
+            </ItemsContainer>
         );
     }
 
