@@ -10,12 +10,24 @@ type typeSetTripState = {
     locationAutocomplete: boolean;
     activeLocationAutocomplete: () => void;
 }
-
 const useSetTripStore = create<typeSetTripState>()((set) => ({
     locationAutocomplete: false,
     activeLocationAutocomplete: () => {
         set(() => ({locationAutocomplete: true}))
     }
+}));
+
+type typeSetTripInputsState = {
+    inputStartLocationValue: string;
+    inputFinishLocationValue: string;
+    setInputStartLocationValue: (e) => void;
+    setInputFinishLocationValue: (e) => void;
+}
+const useSetTripInputsStore = create<typeSetTripInputsState>()((set) => ({
+    inputStartLocationValue: "",
+    inputFinishLocationValue: "",
+    setInputStartLocationValue: (e) => {set(() => ({inputFinishLocationValue: e.target.value}))},
+    setInputFinishLocationValue: (e) => {set(() => ({inputFinishLocationValue: e.target.value}))}
 }));
 
 const SetTrip: React.FC = () => {
