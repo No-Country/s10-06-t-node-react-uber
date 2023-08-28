@@ -2,7 +2,8 @@ import Container from "../components/layouts/Container"
 import { BiArrowBack, BiTime } from "react-icons/bi"
 import { TbPointFilled } from "react-icons/tb"
 import { GoTriangleDown } from "react-icons/go"
-import React from "react"
+import { FaLocationDot } from "react-icons/fa"
+import type React from "react"
 
 const SetTrip: React.FC = () => {
     return (
@@ -29,9 +30,16 @@ const SetTrip: React.FC = () => {
         </Container>
     );
     
-    function LocationAutocompleteItems() {
+    function LocationAutocompleteItems({ locationName, location, km } : { locationName: string, location: string, km: number }) {
         return(
-            <></>
+            <ItemsContainer>
+                <FaLocationDot className="mr-3 text-24" />
+                <p>
+                    <span className="font-bold">{locationName}</span>
+                    <span>{location}</span>
+                </p>
+                <span className="font-bold justify-self-end">{km} km</span>
+            </ItemsContainer>
         );   
     }
     // Esté componente, se utiliza para estilizar el contenedor de los items. 
