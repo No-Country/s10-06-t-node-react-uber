@@ -13,6 +13,7 @@ import {
 
 import { Layout } from '@/components/layouts/Layout'
 import { AuthGuard } from './guard'
+import SetTrip from '@/pages/SetTrip'
 
 const RoutesProvider: FC = () => {
   return (
@@ -29,6 +30,7 @@ const RoutesProvider: FC = () => {
         <Route path='/register-codigo' element={<RegisterCodigo />} />
         <Route path='/register-data' element={<RegisterData />} />
         <Route path='/payment' element={<Payment />} />
+        <Route path='/settrip' element={<SetTrip />} />
       </Routes>
     </BrowserRouter>
   )
