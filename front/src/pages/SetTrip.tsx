@@ -10,11 +10,11 @@ const SetTrip: React.FC = () => {
                 <h2 className="flex text-24 items-center"><BiArrowBack className="text-primary mr-3" /> Solicitar un viaje</h2>
                 <form className="my-7 relative">
                     <div className="flex items-center mb-5">    
-                        <TbPointFilled className="text-24 mr-[4px]" />
+                        <TbPointFilled className="text-24 mr-[4px] text-primary" />
                         <Input inputType="text" inputPlaceholder="¿De dónde salís?" />
                     </div>
                     <div className="flex items-center">    
-                        <GoTriangleDown className="text-24 mr-[4px]" />
+                        <GoTriangleDown className="text-24 mr-[4px] text-darkGray" />
                         <Input inputType="text" inputPlaceholder="¿A dónde te llevamos?" />
                     </div>
                 </form>
@@ -39,9 +39,8 @@ const SetTrip: React.FC = () => {
     }
 
     function Input({ inputType, inputPlaceholder, className = "" }: { inputType: string, inputPlaceholder: string, className?: string }) {
-        const nameClass = `w-full focus:outline-none rounded-full py-[6px] px-[12px] border-solid border-dark border-2 placeholder-dark ${className}`
         return (
-            <input className={nameClass} type={inputType} placeholder={inputPlaceholder} /> 
+            <input className={`w-full focus:outline-none rounded-full py-[6px] px-[12px] border-solid border-dark border-2 placeholder-dark shadow-setTripItems ${className}`} type={inputType} placeholder={inputPlaceholder} /> 
         );
     }
 }
