@@ -3,6 +3,8 @@ import { HeaderAuth } from '@/components/HeaderAuth'
 import { type FormEvent, useState } from 'react'
 import { LoginGoogleButton } from '@/components/LoginGoogleButton'
 
+import { BASE_URL } from '@/utils/api'
+
 interface Errors {
   email?: string
   password?: string
@@ -36,19 +38,16 @@ export const Login: React.FC = () => {
           email: string,
           password: string,
         ): Promise<void> => {
-          const response = await fetch(
-            'https://s10-06-t-node-react-uber-production.up.railway.app/api/login',
-            {
-              method: 'POST',
-              body: JSON.stringify({
-                email,
-                password,
-              }),
-              headers: {
-                'Content-Type': 'application/json',
-              },
+          const response = await fetch(`${BASE_URL}/login`, {
+            method: 'POST',
+            body: JSON.stringify({
+              email,
+              password,
+            }),
+            headers: {
+              'Content-Type': 'application/json',
             },
-          )
+          })
 
           const data = await response.json()
           setErrors(data)
