@@ -3,15 +3,15 @@ import { BiArrowBack } from "react-icons/bi"
 import { TbPointFilled } from "react-icons/tb"
 import { GoTriangleDown } from "react-icons/go"
 
-const SetTrip: () => React.ReactNode = () => {
+const SetTrip: React.FC = () => {
     return (
         <Container>
             <main className="text-20">
                 <h2 className="flex"><BiArrowBack /> Solicitar un viaje</h2>
-                <form className="my-7">
-                    <div className="flex items-center">    
+                <form className="my-7 relative">
+                    <div className="flex items-center mb-5">    
                         <TbPointFilled className="text-24 mr-[4px]" />
-                        <Input className="mb-5" inputType="text" inputPlaceholder="¿De dónde salís?" />
+                        <Input inputType="text" inputPlaceholder="¿De dónde salís?" />
                     </div>
                     <div className="flex items-center">    
                         <GoTriangleDown className="text-24 mr-[4px]" />
