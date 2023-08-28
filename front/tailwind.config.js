@@ -6,7 +6,9 @@ export default {
       fontFamily: {
         graduate: ['Graduate', 'sanserif'], // Use the correct font name
       },
-
+      boxShadow: {
+        'setTripItems': '0px 6px 5px 0px rgb(0 0 0 / 0.15)',
+      },
       colors: {
         primary: '#29103A',
         dark: '#1C1C1C',
