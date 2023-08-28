@@ -4,8 +4,23 @@ import { TbPointFilled } from "react-icons/tb"
 import { GoTriangleDown } from "react-icons/go"
 import { HiLocationMarker } from "react-icons/hi"
 import type React from "react"
+import { create } from "zustand"
+
+type typeSetTripState = {
+    locationAutocomplete: boolean;
+    activeLocationAutocomplete: () => void;
+}
+
+const useSetTripStore = create<typeSetTripState>()((set) => ({
+    locationAutocomplete: false,
+    activeLocationAutocomplete: () => {
+        set(() => ({locationAutocomplete: true}))
+    }
+}));
 
 const SetTrip: React.FC = () => {
+    const { locationAutocomplete, activeLocationAutocomplete } = useSetTripStore(state => state);
+
     return (
         <Container>
             <main className="text-20">
