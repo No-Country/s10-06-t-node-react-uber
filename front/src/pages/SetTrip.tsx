@@ -36,14 +36,29 @@ const SetTrip: React.FC = () => {
                     </div>
                 </form>
                 <section>
-                    <h5>Resultados</h5>
-                    <LocationAutocompleteItems locationName="Banco Galicia" location="Av Rafael Nuñez 3254, Córdoba" km={3} />
+                    {
+                        locationAutocomplete ? 
+                        <>
+                            <h5>Resultados</h5>
+                            <LocationAutocompleteItems locationName="Banco Galicia" location="Av Rafael Nuñez 3254, Córdoba" km={3} />
+                            <LocationAutocompleteItems locationName="Banco Galicia" location="Av Rafael Nuñez 3254, Córdoba" km={3} />
+                            <LocationAutocompleteItems locationName="Banco Galicia" location="Av Rafael Nuñez 3254, Córdoba" km={3} />
+                        </>
+                        : 
+                        <>
+                            <h5>Recientes</h5>
+                            <RecentTripsItem finishLocation="Av Colón 3240" km={5} />
+                            <RecentTripsItem finishLocation="Av Colón 3240" km={5} />
+                            <RecentTripsItem finishLocation="Av Colón 3240" km={5} />
+                        </>
+                    }
                 </section>
             </main>
         </Container>
     );
 
     function handlerSetLocationInput() {
+        console.log(locationAutocomplete)
         activeLocationAutocomplete();
     }
     
@@ -80,7 +95,7 @@ const SetTrip: React.FC = () => {
 
     function Input({ inputType, inputPlaceholder, className = "" }: { inputType: string, inputPlaceholder: string, className?: string }) {
         return (
-            <input className={`w-full focus:outline-none rounded-full py-[6px] px-[12px] border-solid border-dark border-2 placeholder-dark shadow-setTripItems ${className}`} type={inputType} placeholder={inputPlaceholder} /> 
+            <input onChange={() => {handlerSetLocationInput()}} className={`w-full focus:outline-none rounded-full py-[6px] px-[12px] border-solid border-dark border-2 placeholder-dark shadow-setTripItems ${className}`} type={inputType} placeholder={inputPlaceholder} /> 
         );
     }
 }
