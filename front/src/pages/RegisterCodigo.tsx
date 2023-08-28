@@ -1,11 +1,9 @@
-import { Link } from 'react-router-dom'
-import '../styles/index.css'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useLocation } from 'react-router-dom'
 import { HeaderAuth } from '@/components/HeaderAuth'
 import * as apiAuth from '../utils/apiAuth'
-export const RegisterCodigo: React.FC = ({}) => {
+
+export const RegisterCodigo: React.FC = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const email = location.state?.email
@@ -20,11 +18,11 @@ export const RegisterCodigo: React.FC = ({}) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
     console.log('handleSubmit:', e)
-    const registerCodigo = (verificationCode: string) => {
-      return apiAuth
+    const registerCodigo = async (verificationCode: string): Promise<void> => {
+      await apiAuth
         .verifyCodigo({
-          email: email,
-          verificationCode: verificationCode,
+          email,
+          verificationCode,
         })
         .then(() => {
           console.log('codigo correctamente')
@@ -34,7 +32,7 @@ export const RegisterCodigo: React.FC = ({}) => {
           console.log('err:', err)
         })
     }
-    registerCodigo(verificationCode)
+    void registerCodigo(verificationCode)
   }
 
   return (

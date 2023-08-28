@@ -1,14 +1,14 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import '../styles/index.css'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+
 import * as apiAuth from '../utils/apiAuth'
 import { HeaderAuth } from '@/components/HeaderAuth'
 interface Errors {
   email?: string
 }
 
-export const Register: React.FC = ({}) => {
+export const Register: React.FC = () => {
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [errors, setErrors] = useState<Errors>({})
@@ -20,12 +20,12 @@ export const Register: React.FC = ({}) => {
     e.preventDefault()
     console.log('handleSubmit:', e)
 
-    const validateEmail = (email: string) => {
+    const validateEmail = async (email: string): Promise<void> => {
       const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 
       if (regex.test(email)) {
-        const registerEmail = (email: string) => {
-          return apiAuth
+        const registerEmail = async (email: string): Promise<void> => {
+          await apiAuth
             .register({ email })
             .then(() => {
               console.log('iniciaste sesion correctamente')
@@ -35,12 +35,12 @@ export const Register: React.FC = ({}) => {
               console.log('err:', err)
             })
         }
-        registerEmail(email)
+        void registerEmail(email)
       } else {
-        return setErrors({ email: 'Ingrese un correo válido.' })
+        setErrors({ email: 'Ingrese un correo válido.' })
       }
     }
-    validateEmail(email)
+    void validateEmail(email)
   }
 
   return (
@@ -73,7 +73,7 @@ export const Register: React.FC = ({}) => {
                 type='text'
                 placeholder='Ingresar correo'
                 className={`w-[251px] border-b-[1px] border-[#CFCFCF] text-[10px] ${
-                  errors?.email && 'border-red-500'
+                  Boolean(errors?.email) && 'border-red-500'
                 }`}
               />
             </div>

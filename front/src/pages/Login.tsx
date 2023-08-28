@@ -1,7 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { HeaderAuth } from '@/components/HeaderAuth'
-import { FormEvent, useState } from 'react'
-import 'react-toastify/dist/ReactToastify.css'
+import { type FormEvent, useState } from 'react'
 import { LoginGoogleButton } from '@/components/LoginGoogleButton'
 
 interface Errors {
@@ -13,48 +12,56 @@ export const Login: React.FC = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
+
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setEmail(e.target.value)
     setErrors({})
   }
+
   const handlePasswordChange = (
     e: React.ChangeEvent<HTMLInputElement>,
   ): void => {
     setPassword(e.target.value)
     setErrors({})
   }
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
 
-    const validateEmail = (email: string) => {
+    const validateEmail = (email: string): void => {
       const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 
       if (regex.test(email)) {
-        const authLogin = async (email: string, password: string) => {
+        const authLogin = async (
+          email: string,
+          password: string,
+        ): Promise<void> => {
           const response = await fetch(
             'https://s10-06-t-node-react-uber-production.up.railway.app/api/login',
             {
               method: 'POST',
               body: JSON.stringify({
-                email: email,
-                password: password,
+                email,
+                password,
               }),
               headers: {
                 'Content-Type': 'application/json',
               },
             },
           )
+
           const data = await response.json()
-          await setErrors(data)
+          setErrors(data)
+
           if (response.status === 200) {
             const token = data.token
             localStorage.setItem('token', token)
             navigate('/profile')
           }
         }
-        authLogin(email, password)
+        void authLogin(email, password)
       } else {
-        return setErrors({ email: 'Ingrese un correo válido.' })
+        setErrors({ email: 'Ingrese un correo válido.' })
       }
     }
     validateEmail(email)
@@ -87,12 +94,12 @@ export const Login: React.FC = () => {
                 type='text'
                 placeholder='Ingresar correo electronico'
                 className={`w-[251px] border-b-[1px] border-[#CFCFCF] text-[11px] outline-none ${
-                  errors.email && 'border-b-[1px] border-red-500'
+                  Boolean(errors.email) && 'border-b-[1px] border-red-500'
                 }`}
                 value={email}
                 onChange={handleEmailChange}
               />
-              {errors?.email && (
+              {Boolean(errors?.email) && (
                 <p className='text-xs text-red-500'>{errors.email}</p>
               )}
             </div>
@@ -101,12 +108,12 @@ export const Login: React.FC = () => {
                 type='text'
                 placeholder='Contraseña'
                 className={`w-[251px] border-b-[1px] border-[#CFCFCF] text-[11px] outline-none ${
-                  errors.password && 'border-b-[1px] border-red-500'
+                  Boolean(errors.password) && 'border-b-[1px] border-red-500'
                 }`}
                 value={password}
                 onChange={handlePasswordChange}
               />
-              {errors?.password && (
+              {Boolean(errors?.password) && (
                 <p className='text-xs text-red-500'>{errors.password}</p>
               )}
               <Link
