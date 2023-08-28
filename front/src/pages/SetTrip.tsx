@@ -42,6 +42,10 @@ const SetTrip: React.FC = () => {
             </main>
         </Container>
     );
+
+    function handlerSetLocationInput() {
+        activeLocationAutocomplete();
+    }
     
     function LocationAutocompleteItems({ locationName, location, km } : { locationName: string, location: string, km: number }) {
         return(
