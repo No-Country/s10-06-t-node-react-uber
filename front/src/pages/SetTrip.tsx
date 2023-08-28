@@ -30,12 +30,16 @@ const SetTrip: React.FC = () => {
 
     function RecentTripsItem({ finishLocation, km }: { finishLocation: string, km: number } ) {
         return (
-            <div><BiTime /> { finishLocation } <span>{km} km</span></div>
+            <div className="rounded-full items-center py-[6px] px-[12px] bg-gray grid grid-cols-[max-content_max-content_1fr] text grid-rows-1 font-light">
+                <BiTime className="mr-3" /> 
+                { finishLocation } 
+                <span className="font-bold justify-self-end">{km} km</span>
+            </div>
         );
     }
 
     function Input({ inputType, inputPlaceholder, className = "" }: { inputType: string, inputPlaceholder: string, className?: string }) {
-        const nameClass = `w-full focus:outline-none rounded-full p-[6px] border-solid border-dark border-2 placeholder-dark ${className}`
+        const nameClass = `w-full focus:outline-none rounded-full py-[6px] px-[12px] border-solid border-dark border-2 placeholder-dark ${className}`
         return (
             <input className={nameClass} type={inputType} placeholder={inputPlaceholder} /> 
         );
