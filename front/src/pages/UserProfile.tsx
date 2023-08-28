@@ -5,18 +5,18 @@ export const UserProfile: React.FC = () => {
 
   return (
     <div className='flex items-center justify-between p-5'>
-      {user?.firstName ? `Welcome ${user.firstName} ${user.lastName}` : ''}
-      {user?.firstName ? (
-        <button
-          className='rounded border px-5 py-1'
-          onClick={(): void => {
-            void signOut()
-          }}
-        >
-          Cerrar sesión
-        </button>
-      ) : (
-        ''
+      {user && (
+        <>
+          Welcome ${user.displayName}
+          <button
+            className='rounded border px-5 py-1'
+            onClick={(): void => {
+              void signOut()
+            }}
+          >
+            Cerrar sesión
+          </button>
+        </>
       )}
     </div>
   )
