@@ -1,10 +1,17 @@
 import { create } from 'zustand'
-import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+  type User,
+} from 'firebase/auth'
 import { auth } from '../services/firebase.config'
 
+import { BASE_URL } from '@/utils/api'
+
 interface AuthState {
-  user: unknown
-  setUser: (user: unknown) => void
+  user: User | null
+  setUser: (user: User | null) => void
   signInWithGoogle: () => Promise<void>
   signOut: () => Promise<void>
 }
@@ -38,20 +45,17 @@ export const useAuthStore = create<AuthState>((set) => ({
         }
 
         // mandar al backend el usuario
-        const res = await fetch(
-          'https://s10-06-t-node-react-uber-production.up.railway.app/api/registerLogin',
-          {
-            method: 'POST',
-            body: JSON.stringify({
-              email: user.email,
-              name,
-              lastName,
-            }),
-            headers: {
-              'Content-Type': 'application/json',
-            },
+        const res = await fetch(`${BASE_URL}/registerLogin`, {
+          method: 'POST',
+          body: JSON.stringify({
+            email: user.email,
+            name,
+            lastName,
+          }),
+          headers: {
+            'Content-Type': 'application/json',
           },
-        )
+        })
         const data = await res.json()
         const token = data.token
         localStorage.setItem('token', token)
