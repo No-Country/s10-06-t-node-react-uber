@@ -30,8 +30,8 @@ const SetTrip: React.FC = () => {
 
     function RecentTripsItem({ finishLocation, km }: { finishLocation: string, km: number } ) {
         return (
-            <div className="rounded-full items-center py-[6px] px-[12px] bg-gray grid grid-cols-[max-content_max-content_1fr] text grid-rows-1 font-light">
-                <BiTime className="mr-3" /> 
+            <div className="rounded-full items-center py-[6px] px-[12px] bg-[#f8f8f8] grid grid-cols-[max-content_minmax(min-content,_max-content)_minmax(max-content,_1fr)] text grid-rows-1 font-light shadow-setTripItems mt-3">
+                <BiTime className="mr-3 text-24" /> 
                 { finishLocation } 
                 <span className="font-bold justify-self-end">{km} km</span>
             </div>
