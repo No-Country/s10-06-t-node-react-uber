@@ -3,7 +3,6 @@ import { HeaderAuth } from '@/components/HeaderAuth'
 import { type FormEvent, useState } from 'react'
 import { LoginGoogleButton } from '@/components/LoginGoogleButton'
 import { LoginFacebookButton } from '@/components/LoginFacebookButton'
-
 import { BASE_URL } from '@/utils/api'
 
 interface Errors {
@@ -39,7 +38,7 @@ export const Login: React.FC = () => {
           email: string,
           password: string,
         ): Promise<void> => {
-          const response = await fetch(`${BASE_URL}/login`, {
+          const response = await fetch(`${BASE_URL}/api/login`, {
             method: 'POST',
             body: JSON.stringify({
               email,
@@ -133,7 +132,7 @@ export const Login: React.FC = () => {
             </span>
             <div className='flex flex-col gap-2'>
               <LoginGoogleButton />
-              <LoginFacebookButton/>
+              <LoginFacebookButton />
             </div>
           </div>
         </form>
