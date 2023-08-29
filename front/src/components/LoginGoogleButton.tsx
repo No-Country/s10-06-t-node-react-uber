@@ -1,11 +1,13 @@
-import { useAuthStore } from '@/context/AuthContext'
+import { useAuthStore } from '@/context/GoogleAuthContext'
 
 export const LoginGoogleButton: React.FC = () => {
   const { signInWithGoogle } = useAuthStore()
 
   return (
     <div
-      onClick={signInWithGoogle}
+      onClick={(): void => {
+        void signInWithGoogle()
+      }}
       className='flex cursor-pointer items-center justify-center gap-5 rounded border border-zinc-200 px-5 py-2 text-12 text-zinc-500 shadow hover:bg-slate-100'
     >
       <img

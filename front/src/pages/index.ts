@@ -1,0 +1,7 @@
+export * from './Landing'
+export * from './Login'
+export { default as Payment } from './Payment'
+export * from './Register'
+export * from './RegisterCodigo'
+export * from './RegisterData'
+export * from './UserProfile'
