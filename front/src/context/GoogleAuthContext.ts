@@ -6,7 +6,6 @@ import {
   type User,
 } from 'firebase/auth'
 import { auth } from '../services/firebase.config'
-
 import { BASE_URL } from '@/utils/api'
 
 interface AuthState {
@@ -45,7 +44,7 @@ export const useAuthStore = create<AuthState>((set) => ({
         }
 
         // mandar al backend el usuario
-        const res = await fetch(`${BASE_URL}/registerLogin`, {
+        const res = await fetch(`${BASE_URL}/api/registerLogin`, {
           method: 'POST',
           body: JSON.stringify({
             email: user.email,
@@ -56,10 +55,13 @@ export const useAuthStore = create<AuthState>((set) => ({
             'Content-Type': 'application/json',
           },
         })
-        const data = await res.json()
-        const token = data.token
-        localStorage.setItem('token', token)
-        window.location.href = '/profile'
+        if (res.status === 200) {
+          const data = await res.json()
+          const token = data.token
+          localStorage.setItem('token', token)
+          window.location.href = `http://localhost:3000/profile`
+        }
+        return
       }
 
       set(() => ({ user }))
