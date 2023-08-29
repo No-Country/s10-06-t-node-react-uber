@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
 import '../styles/index.css'
 import { HeaderAuth } from '@/components/HeaderAuth'
 import { useState } from 'react'
@@ -6,7 +7,21 @@ import { useNavigate } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 import * as apiAuth from '../utils/apiAuth'
 
+interface FormData {
+  firstName: string
+  lastName: string
+  cellNumber: string
+  password: string
+}
+
 export const RegisterData: React.FC = () => {
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { isDirty, isValid, errors, ...formState },
+  } = useForm<FormData>({ mode: 'onChange' })
+
   const navigate = useNavigate()
   const location = useLocation()
   const email = location.state?.email
@@ -21,36 +36,24 @@ export const RegisterData: React.FC = () => {
     cellNumber: '',
     password: '',
   })
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setRegisterData({
-      ...registerData,
-      [name]: value,
-    })
-  }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault()
-    console.log('handleSubmit:', e)
-    const submitFormData = () => {
-      return apiAuth
-        .submitData({
-          email: email,
-          verificationCode: verificationCode,
-          firstName: registerData.firstName,
-          lastName: registerData.lastName,
-          cellNumber: registerData.cellNumber,
-          password: registerData.password,
-        })
-        .then(() => {
-          console.log('data submitted', registerData)
-          navigate('/login')
-        })
-        .catch((err) => {
-          console.log('err:', err)
-        })
-    }
-    submitFormData()
+  const handleRegister = (data: FormData) => {
+    apiAuth
+      .submitData({
+        email: email,
+        verificationCode: verificationCode,
+        firstName: registerData.firstName,
+        lastName: registerData.lastName,
+        cellNumber: registerData.cellNumber,
+        password: registerData.password,
+      })
+      .then(() => {
+        console.log('data submitted', registerData)
+        navigate('/login')
+      })
+      .catch((err) => {
+        console.log('err:', err)
+      })
   }
 
   return (
@@ -58,7 +61,11 @@ export const RegisterData: React.FC = () => {
       <div className='flex h-screen flex-col items-center text-sm'>
         <HeaderAuth />
         <form
-          onSubmit={handleSubmit}
+          autoComplete='off'
+          onSubmit={handleSubmit((data) => {
+            handleRegister(data)
+            reset()
+          })}
           className='z-20 mx-auto mt-[-25px] flex max-w-sm flex-col flex-nowrap items-center justify-center gap-5 rounded-[33px] bg-white px-[37px] py-5 shadow-[0px_2px_6px_0px_rgba(0,0,0,0.25)] max-[410px]:mx-3'
         >
           <div className='items-center justify-center pb-3 pt-5'>
@@ -78,56 +85,81 @@ export const RegisterData: React.FC = () => {
           <div className='flex flex-col gap-5'>
             <div className='flex flex-col'>
               <input
-                onChange={handleChange}
-                value={registerData.lastName}
-                name='lastName'
-                type='text'
+                {...register('lastName', {
+                  required: 'Este es un campo obligatorio',
+                  pattern: {
+                    value: /^[a-zа-яё -]+$/i,
+                    message: 'Por favor introduzca apellido válido',
+                  },
+                })}
+                autoComplete='off'
                 placeholder='Apellido'
-                className='w-[251px] border-b-[1px] border-[#CFCFCF] text-[11px] outline-none'
+                className={`outline-none' w-[251px] border-b-[1px] border-[#CFCFCF] text-[11px]
+                ${errors?.lastName?.message ? 'text-red-500' : ''}`}
               />
+              <p className='text-[10px] text-red-500'>
+                {errors.lastName?.message}
+              </p>
             </div>
             <div className='flex flex-col'>
               <input
-                onChange={handleChange}
-                value={registerData.firstName}
-                name='firstName'
-                type='text'
+                {...register('firstName', {
+                  required: 'Este es un campo obligatorio',
+                  pattern: {
+                    value: /^[a-zа-яё -]+$/i,
+                    message: 'Por favor introduzca nombre válido',
+                  },
+                })}
+                autoComplete='off'
                 placeholder='Nombre'
-                className='w-[251px] border-b-[1px] border-[#CFCFCF] text-[11px] outline-none'
+                className={`outline-none' w-[251px] border-b-[1px] border-[#CFCFCF] text-[11px]
+                ${errors?.firstName?.message ? 'text-red-500' : ''}`}
               />
+              <p className='text-[10px] text-red-500'>
+                {errors.firstName?.message}
+              </p>
             </div>
             <div className='flex flex-col'>
               <input
-                onChange={handleChange}
-                value={registerData.cellNumber}
-                name='cellNumber'
-                type='text'
+                {...register('cellNumber', {
+                  required: 'Este es un campo obligatorio',
+                  pattern: {
+                    value: /^(?:\+?\d{1,3}[ -]?)?\d{1,16}$/,
+                    message: 'Por favor introduzca cellNumber válido',
+                  },
+                })}
+                autoComplete='off'
                 placeholder='Número de teléfono'
-                className='w-[251px] border-b-[1px] border-[#CFCFCF] text-[11px] outline-none'
+                className={`outline-none' w-[251px] border-b-[1px] border-[#CFCFCF] text-[11px]
+                ${errors?.cellNumber?.message ? 'text-red-500' : ''}`}
               />
+              <p className='text-[10px] text-red-500'>
+                {errors.cellNumber?.message}
+              </p>
             </div>
             <div className='flex flex-col'>
               <input
-                onChange={handleChange}
-                value={registerData.password}
-                type='text'
-                name='password'
+                {...register('password', {
+                  required: 'Este es un campo obligatorio',
+                  pattern: {
+                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                    message: 'Por favor introduzca contraseña válida',
+                  },
+                })}
                 placeholder='Contraseña'
-                className='w-[251px] border-b-[1px] border-[#CFCFCF] text-[11px] outline-none'
+                className={`'w-[251px] outline-none' border-b-[1px] border-[#CFCFCF] text-[11px]
+                ${errors?.password?.message ? 'text-red-500' : ''}`}
               />
+              <p className='text-[10px] text-red-500'>
+                {errors.password?.message}
+              </p>
             </div>
-            {/* <div className='flex flex-col'>
-              <input
-                onChange={handleChange}
-                value={registerData.password}
-                type='text'
-                placeholder='Confirmar contraseña'
-                className='w-[251px] border-b-[1px] border-[#CFCFCF] text-[11px] outline-none'
-              />
-            </div> */}
           </div>
           <div className='flex w-full flex-col items-center justify-center gap-2'>
-            <button className='my-3 h-[33px] w-[160px] rounded-full bg-[#29103A] text-[10px] font-semibold text-white shadow-lg'>
+            <button
+              disabled={!isDirty || !isValid}
+              className='my-3 h-[33px] w-[160px] rounded-full bg-[#29103A] text-[10px] font-semibold text-white shadow-lg disabled:opacity-75'
+            >
               Siguiente
             </button>
           </div>

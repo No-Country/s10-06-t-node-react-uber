@@ -25,9 +25,9 @@ interface RegisterCode {
 interface RegisterData {
   email: string
   verificationCode: string
-  firstName: string,
-  lastName: string,
-  cellNumber: string,
+  firstName: string
+  lastName: string
+  cellNumber: string
   password: string
 }
 
@@ -47,10 +47,24 @@ export const verifyCodigo = ({ email, verificationCode }: RegisterCode) => {
   }).then((res) => checkServerResponse(res))
 }
 
-export const submitData = ({ email, verificationCode,firstName, lastName, cellNumber, password}: RegisterData) => {
+export const submitData = ({
+  email,
+  verificationCode,
+  firstName,
+  lastName,
+  cellNumber,
+  password,
+}: RegisterData) => {
   return fetch(`${BASE_URL}/register`, {
     method: 'POST',
     headers,
-    body: JSON.stringify({ email, verificationCode,firstName, lastName, cellNumber, password }),
+    body: JSON.stringify({
+      email,
+      verificationCode,
+      firstName,
+      lastName,
+      cellNumber,
+      password,
+    }),
   }).then((res) => checkServerResponse(res))
 }
