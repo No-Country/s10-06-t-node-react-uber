@@ -75,13 +75,15 @@ export const RegisterCodigo: React.FC = () => {
                   required: 'Este es un campo obligatorio',
                   pattern: {
                     value: /^\d{4}$/,
-                    message: 'Por favor ingresa el código',
+                    message: 'Por favor ingresa el código válido',
                   },
                 })}
                 autoComplete='off'
                 placeholder='Por favor ingresa el código válido'
-                className={`w-[251px] border-b-[1px] border-[#CFCFCF] text-[10px] ${
-                  ((errors?.verificationCode?.message) != null) ? 'text-red-500' : ''
+                className={`w-[251px] border-b-[1px] border-[#CFCFCF] pl-1 text-[10px] ${
+                  errors?.verificationCode?.message != null
+                    ? 'text-red-500'
+                    : ''
                 }`}
               />
               <p className='text-[10px] text-red-500'>

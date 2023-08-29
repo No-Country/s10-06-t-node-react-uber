@@ -90,11 +90,20 @@ export const RegisterData: React.FC = () => {
                     value: /^[a-zа-яё -]+$/i,
                     message: 'Por favor introduzca apellido válido',
                   },
+                  minLength: {
+                    value: 2,
+                    message: 'Muy pocos caracteres',
+                  },
+                  maxLength: {
+                    value: 30,
+                    message: 'Demasiados caracteres',
+                  },
                 })}
                 autoComplete='off'
+                type='text'
                 placeholder='Apellido'
-                className={`outline-none' w-[251px] border-b-[1px] border-[#CFCFCF] text-[11px]
-                ${((errors?.lastName?.message) != null) ? 'text-red-500' : ''}`}
+                className={`outline-none' w-[251px] border-b-[1px] border-[#CFCFCF] pl-1 text-[11px]
+                ${errors?.lastName?.message != null ? 'text-red-500' : ''}`}
               />
               <p className='text-[10px] text-red-500'>
                 {errors.lastName?.message}
@@ -108,11 +117,20 @@ export const RegisterData: React.FC = () => {
                     value: /^[a-zа-яё -]+$/i,
                     message: 'Por favor introduzca nombre válido',
                   },
+                  minLength: {
+                    value: 2,
+                    message: 'Muy pocos caracteres',
+                  },
+                  maxLength: {
+                    value: 30,
+                    message: 'Demasiados caracteres',
+                  },
                 })}
                 autoComplete='off'
+                type='text'
                 placeholder='Nombre'
-                className={`outline-none' w-[251px] border-b-[1px] border-[#CFCFCF] text-[11px]
-                ${((errors?.firstName?.message) != null) ? 'text-red-500' : ''}`}
+                className={`outline-none' w-[251px] border-b-[1px] border-[#CFCFCF] pl-1 text-[11px]
+                ${errors?.firstName?.message != null ? 'text-red-500' : ''}`}
               />
               <p className='text-[10px] text-red-500'>
                 {errors.firstName?.message}
@@ -124,13 +142,14 @@ export const RegisterData: React.FC = () => {
                   required: 'Este es un campo obligatorio',
                   pattern: {
                     value: /^(?:\+?\d{1,3}[ -]?)?\d{1,16}$/,
-                    message: 'Por favor introduzca cellNumber válido',
+                    message:
+                      'Por favor introduzca el número de teléfono válido',
                   },
                 })}
                 autoComplete='off'
                 placeholder='Número de teléfono'
-                className={`outline-none' w-[251px] border-b-[1px] border-[#CFCFCF] text-[11px]
-                ${((errors?.cellNumber?.message) != null) ? 'text-red-500' : ''}`}
+                className={`outline-none' w-[251px] border-b-[1px] border-[#CFCFCF] pl-1 text-[11px]
+                ${errors?.cellNumber?.message != null ? 'text-red-500' : ''}`}
               />
               <p className='text-[10px] text-red-500'>
                 {errors.cellNumber?.message}
@@ -141,13 +160,14 @@ export const RegisterData: React.FC = () => {
                 {...register('password', {
                   required: 'Este es un campo obligatorio',
                   pattern: {
-                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                    value: /^.{4,}$/,
                     message: 'Por favor introduzca contraseña válida',
                   },
                 })}
+                type='password'
                 placeholder='Contraseña'
-                className={`'w-[251px] outline-none' border-b-[1px] border-[#CFCFCF] text-[11px]
-                ${((errors?.password?.message) != null) ? 'text-red-500' : ''}`}
+                className={`outline-none' w-[251px] border-b-[1px] border-[#CFCFCF] pl-1 text-[11px]
+                ${errors?.password?.message != null ? 'text-red-500' : ''}`}
               />
               <p className='text-[10px] text-red-500'>
                 {errors.password?.message}
