@@ -1,10 +1,8 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import '../styles/index.css'
 import { HeaderAuth } from '@/components/HeaderAuth'
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useLocation } from 'react-router-dom'
+// import { useState } from 'react'
 import * as apiAuth from '../utils/apiAuth'
 
 interface FormData {
@@ -19,7 +17,7 @@ export const RegisterData: React.FC = () => {
     register,
     reset,
     handleSubmit,
-    formState: { isDirty, isValid, errors, ...formState },
+    formState: { isDirty, isValid, errors },
   } = useForm<FormData>({ mode: 'onChange' })
 
   const navigate = useNavigate()
@@ -28,27 +26,28 @@ export const RegisterData: React.FC = () => {
   const verificationCode = location.state?.verificationCode
   console.log('email:', email)
   console.log('verificationCode:', verificationCode)
-  const [registerData, setRegisterData] = useState({
-    email: email,
-    verificationCode: verificationCode,
-    firstName: '',
-    lastName: '',
-    cellNumber: '',
-    password: '',
-  })
+  // const [registerData, setRegisterData] = useState({
+  //   email,
+  //   verificationCode,
+  //   firstName: '',
+  //   lastName: '',
+  //   cellNumber: '',
+  //   password: '',
+  // })
 
-  const handleRegister = (data: FormData) => {
+  const handleRegister = (data: FormData): void => {
     apiAuth
       .submitData({
-        email: email,
-        verificationCode: verificationCode,
-        firstName: registerData.firstName,
-        lastName: registerData.lastName,
-        cellNumber: registerData.cellNumber,
-        password: registerData.password,
+        email,
+        verificationCode,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        cellNumber: data.cellNumber,
+        password: data.password,
       })
       .then(() => {
-        console.log('data submitted', registerData)
+        console.log('data submitted', data)
+        reset()
         navigate('/login')
       })
       .catch((err) => {
@@ -62,9 +61,9 @@ export const RegisterData: React.FC = () => {
         <HeaderAuth />
         <form
           autoComplete='off'
+          // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onSubmit={handleSubmit((data) => {
             handleRegister(data)
-            reset()
           })}
           className='z-20 mx-auto mt-[-25px] flex max-w-sm flex-col flex-nowrap items-center justify-center gap-5 rounded-[33px] bg-white px-[37px] py-5 shadow-[0px_2px_6px_0px_rgba(0,0,0,0.25)] max-[410px]:mx-3'
         >
@@ -95,7 +94,7 @@ export const RegisterData: React.FC = () => {
                 autoComplete='off'
                 placeholder='Apellido'
                 className={`outline-none' w-[251px] border-b-[1px] border-[#CFCFCF] text-[11px]
-                ${errors?.lastName?.message ? 'text-red-500' : ''}`}
+                ${((errors?.lastName?.message) != null) ? 'text-red-500' : ''}`}
               />
               <p className='text-[10px] text-red-500'>
                 {errors.lastName?.message}
@@ -113,7 +112,7 @@ export const RegisterData: React.FC = () => {
                 autoComplete='off'
                 placeholder='Nombre'
                 className={`outline-none' w-[251px] border-b-[1px] border-[#CFCFCF] text-[11px]
-                ${errors?.firstName?.message ? 'text-red-500' : ''}`}
+                ${((errors?.firstName?.message) != null) ? 'text-red-500' : ''}`}
               />
               <p className='text-[10px] text-red-500'>
                 {errors.firstName?.message}
@@ -131,7 +130,7 @@ export const RegisterData: React.FC = () => {
                 autoComplete='off'
                 placeholder='Número de teléfono'
                 className={`outline-none' w-[251px] border-b-[1px] border-[#CFCFCF] text-[11px]
-                ${errors?.cellNumber?.message ? 'text-red-500' : ''}`}
+                ${((errors?.cellNumber?.message) != null) ? 'text-red-500' : ''}`}
               />
               <p className='text-[10px] text-red-500'>
                 {errors.cellNumber?.message}
@@ -148,7 +147,7 @@ export const RegisterData: React.FC = () => {
                 })}
                 placeholder='Contraseña'
                 className={`'w-[251px] outline-none' border-b-[1px] border-[#CFCFCF] text-[11px]
-                ${errors?.password?.message ? 'text-red-500' : ''}`}
+                ${((errors?.password?.message) != null) ? 'text-red-500' : ''}`}
               />
               <p className='text-[10px] text-red-500'>
                 {errors.password?.message}

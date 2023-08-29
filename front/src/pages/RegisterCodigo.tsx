@@ -1,37 +1,36 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import '../styles/index.css'
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useLocation } from 'react-router-dom'
+// import { useState } from 'react'
 import * as apiAuth from '../utils/apiAuth'
 
 interface FormData {
   verificationCode: string
 }
 
-export const RegisterCodigo: React.FC = ({}) => {
+export const RegisterCodigo: React.FC = () => {
   const {
     register,
     reset,
     handleSubmit,
-    formState: { isDirty, isValid, errors, ...formState },
+    formState: { isDirty, isValid, errors },
   } = useForm<FormData>({ mode: 'onChange' })
   const navigate = useNavigate()
   const location = useLocation()
   const email = location.state?.email
 
   console.log('email:', email)
-  const [verificationCode, setVerificationCode] = useState('')
+  // const [verificationCode, setVerificationCode] = useState('')
 
-  const handleRegister = (verificationCode: string) => {
+  const handleRegister = (verificationCode: string): void => {
     apiAuth
       .verifyCodigo({
-        email: email,
-        verificationCode: verificationCode,
+        email,
+        verificationCode,
       })
       .then(() => {
         console.log('codigo correctamente')
+        reset()
         navigate('/register-data', { state: { email, verificationCode } })
       })
       .catch((err) => {
@@ -77,9 +76,9 @@ export const RegisterCodigo: React.FC = ({}) => {
         </div>
         <form
           autoComplete='off'
+          // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onSubmit={handleSubmit((data) => {
             handleRegister(data.verificationCode)
-            reset()
           })}
           className='z-20 mx-auto mt-[-25px] flex max-w-sm flex-col flex-nowrap items-center justify-center gap-5 rounded-[33px] border bg-white px-[37px] py-5 shadow-[0px_2px_6px_0px_rgba(0,0,0,0.25)] max-[410px]:mx-3'
         >
@@ -113,7 +112,7 @@ export const RegisterCodigo: React.FC = ({}) => {
                 autoComplete='off'
                 placeholder='Por favor ingresa el código válido'
                 className={`w-[251px] border-b-[1px] border-[#CFCFCF] text-[10px] ${
-                  errors?.verificationCode?.message ? 'text-red-500' : ''
+                  ((errors?.verificationCode?.message) != null) ? 'text-red-500' : ''
                 }`}
               />
               <p className='text-[10px] text-red-500'>

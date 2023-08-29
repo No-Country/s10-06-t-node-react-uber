@@ -1,29 +1,30 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import '../styles/index.css'
-import { useState } from 'react'
+// import { useState } from 'react'
 import * as apiAuth from '../utils/apiAuth'
 
 interface FormData {
   email: string
 }
 
-export const Register: React.FC = ({}) => {
+export const Register: React.FC = () => {
   const {
     register,
     reset,
     handleSubmit,
-    formState: { isDirty, isValid, errors, ...formState },
+    formState: { isDirty, isValid, errors },
   } = useForm<FormData>({ mode: 'onChange' })
 
   const navigate = useNavigate()
-  const [email, setEmail] = useState('')
+  // const [email, setEmail] = useState('')
 
-  const handleRegister = (email: string) => {
+  const handleRegister = (email: string): void => {
     apiAuth
       .register({ email })
       .then(() => {
         console.log('iniciaste sesion correctamente')
+        reset()
         navigate('/register-codigo', { state: { email } })
       })
       .catch((err) => {
@@ -69,9 +70,9 @@ export const Register: React.FC = ({}) => {
         </div>
         <form
           autoComplete='off'
+          // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onSubmit={handleSubmit((data) => {
-            handleRegister(data.email)
-            reset()
+             handleRegister(data.email)
           })}
           className='z-20 mx-auto mt-[-25px] flex max-w-sm flex-col flex-nowrap items-center justify-center gap-5 rounded-[33px] border bg-white px-[37px] py-5 shadow-[0px_2px_6px_0px_rgba(0,0,0,0.25)] max-[410px]:mx-3'
         >
@@ -102,7 +103,7 @@ export const Register: React.FC = ({}) => {
                 })}
                 placeholder='Ingresar correo'
                 className={`w-[251px] border-b-[1px] border-[#CFCFCF] text-[10px] ${
-                  errors?.email?.message ? 'text-red-500' : ''
+                  ((errors?.email?.message) != null) ? 'text-red-500' : ''
                 }`}
                 autoComplete='off'
               />
