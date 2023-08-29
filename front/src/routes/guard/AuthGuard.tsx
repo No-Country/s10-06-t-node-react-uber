@@ -12,14 +12,14 @@ export const AuthGuard: React.FC = () => {
   useEffect(() => {
     const checkLogin = async (): Promise<void> => {
       const token = localStorage.getItem('token')
-      if (token !== null) {
+      if (!token) {
         setIsAuthenticated(false)
         setLoading(false)
         return
       }
 
       try {
-        const res = await fetch(`${BASE_URL}/api/protected-route`, {
+        const res = await fetch(`${BASE_URL}/protected-route`, {
           method: 'POST',
           body: JSON.stringify({
             token,
@@ -59,6 +59,6 @@ export const AuthGuard: React.FC = () => {
   }, [setUser])
 
   if (loading) return <h1>Loading...</h1>
-  if (!isAuthenticated && !loading) return <Navigate to='/login' replace />
+  if (!isAuthenticated) return <Navigate to='/login' replace />
   return <Outlet />
 }
