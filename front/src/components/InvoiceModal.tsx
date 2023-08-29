@@ -3,6 +3,8 @@ import logo from '@/assets/logo.png'
 import { BsCashCoin } from "react-icons/bs";
 import { AiFillCloseCircle } from "react-icons/ai";
 
+//SOLO ES UN PROTOTIPO, EN ESPERA DEL REAL.
+
 export const InvoiceModal: FC = () => {
     return (
         <div className='h-screen'>

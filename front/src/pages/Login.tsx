@@ -4,6 +4,7 @@ import { FormEvent, useState } from 'react'
 import 'react-toastify/dist/ReactToastify.css'
 import { toast } from 'react-toastify'
 import { LoginGoogleButton } from '@/components/LoginGoogleButton'
+import { LoginFacebookButton } from '@/components/LoginFacebookButton'
 
 interface Errors {
   email?: string
@@ -134,8 +135,9 @@ export const Login: React.FC = () => {
             <span className='flex w-full items-center justify-center gap-4 px-3 text-12 '>
               o puedes
             </span>
-            <div className=''>
+            <div className='flex flex-col gap-2'>
               <LoginGoogleButton />
+              <LoginFacebookButton/>
             </div>
           </div>
         </form>
