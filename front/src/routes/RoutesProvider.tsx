@@ -1,5 +1,4 @@
 import { type FC } from 'react'
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import {
   LandingPage,
@@ -10,8 +9,9 @@ import {
   UserProfile,
   Payment,
 } from '@/pages'
-
 import { Layout } from '@/components/layouts/Layout'
+import { ProtectedRoutes } from '@/routes/ProtectedRoutes'
+import { Dashboard } from '@/pages/Dashboard'
 import { AuthGuard } from './guard'
 import SetTrip from '@/pages/SetTrip'
 
@@ -31,6 +31,9 @@ const RoutesProvider: FC = () => {
         <Route path='/register-data' element={<RegisterData />} />
         <Route path='/payment' element={<Payment />} />
         <Route path='/settrip' element={<SetTrip />} />
+        <Route element={<ProtectedRoutes />}>
+          <Route path ='dashboard' element={<Dashboard />}/>
+        </Route>
       </Routes>
     </BrowserRouter>
   )

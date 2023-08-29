@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { HeaderAuth } from '@/components/HeaderAuth'
 import { type FormEvent, useState } from 'react'
 import { LoginGoogleButton } from '@/components/LoginGoogleButton'
+import { LoginFacebookButton } from '@/components/LoginFacebookButton'
 
 import { BASE_URL } from '@/utils/api'
 
@@ -130,8 +131,9 @@ export const Login: React.FC = () => {
             <span className='flex w-full items-center justify-center gap-4 px-3 text-12 '>
               o puedes
             </span>
-            <div className=''>
+            <div className='flex flex-col gap-2'>
               <LoginGoogleButton />
+              <LoginFacebookButton/>
             </div>
           </div>
         </form>

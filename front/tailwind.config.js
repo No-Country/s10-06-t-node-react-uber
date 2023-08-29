@@ -26,6 +26,9 @@ export default {
         36: '2.25rem', // 36px en rem
       },
       fontWeight: {},
+      boxShadow: {
+        '3xl': '0 35px 60px -15px rgba(0, 0, 0, 0.25)',
+      },
     },
   },
   variants: {},
