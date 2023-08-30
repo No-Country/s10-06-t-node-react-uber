@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - front
+      - testing
 
 jobs:
   build-lint-setup:
