@@ -2,8 +2,8 @@ import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import '../styles/index.css'
 import { HeaderAuth } from '@/components/HeaderAuth'
-// import { useState } from 'react'
 import * as apiAuth from '../utils/apiAuth'
+import { useState } from 'react'
 
 interface FormData {
   firstName: string
@@ -13,6 +13,8 @@ interface FormData {
 }
 
 export const RegisterData: React.FC = () => {
+  const [isRegisterFailPopupOpen, setRegisterFailPopupOpen] = useState(false)
+
   const {
     register,
     reset,
@@ -52,6 +54,10 @@ export const RegisterData: React.FC = () => {
       })
       .catch((err) => {
         console.log('err:', err)
+        setRegisterFailPopupOpen(true)
+        setTimeout(() => {
+          setRegisterFailPopupOpen(false)
+        }, 3000)
       })
   }
 
@@ -147,6 +153,7 @@ export const RegisterData: React.FC = () => {
                   },
                 })}
                 autoComplete='off'
+                type='tel'
                 placeholder='Número de teléfono'
                 className={`outline-none' w-[251px] border-b-[1px] border-[#CFCFCF] pl-1 text-[11px]
                 ${errors?.cellNumber?.message != null ? 'text-red-500' : ''}`}
@@ -183,6 +190,26 @@ export const RegisterData: React.FC = () => {
             </button>
           </div>
         </form>
+        {isRegisterFailPopupOpen && (
+          <div className='absolute top-0 flex rounded-md bg-red-100 p-3'>
+            <svg
+              className='mr-2 h-8 w-8 flex-shrink-0 stroke-current stroke-2 text-red-600'
+              viewBox='0 0 24 24'
+              fill='none'
+              strokeLinecap='round'
+              strokeLinejoin='round'
+            >
+              <path d='M0 0h24v24H0z' stroke='none' />
+              <circle cx='12' cy='12' r='9' />
+              <path d='M9 12l2 2 4-4' />
+            </svg>
+
+            <div className='text-red-700'>
+              <div className='text-xl font-bold'>error de registro!</div>
+              <div>inténtelo de nuevo</div>
+            </div>
+          </div>
+        )}
       </div>
     </>
   )
