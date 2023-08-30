@@ -1,11 +1,9 @@
-import type React from "react";
+interface ContainerProps {
+  children: React.ReactNode
+}
 
-const Container = ({ children }: { children: React.ReactNode }) => {
-    return (
-        <div className="w-11/12 m-auto py-3">
-            {children}
-        </div>
-    );
+const Container: React.FC<ContainerProps> = ({ children }) => {
+  return <div className='m-auto w-11/12 py-3'>{children}</div>
 }
 
 export default Container
