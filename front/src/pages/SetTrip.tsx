@@ -36,7 +36,8 @@ const SetTrip: React.FC = () => {
     const { inputFinishLocationValue, inputStartLocationValue, setInputFinishLocationValue, setInputStartLocationValue } = useSetTripInputsStore(state => state);
 
     function handlerInputStartLocation(e: React.ChangeEvent<HTMLInputElement>): void {
-        setInputStartLocationValue(e.target.value)
+        setInputStartLocationValue(e.target.value);
+        activeLocationAutocomplete();
     }
     
     function LocationAutocompleteItems({ locationName, location, km } : { locationName: string, location: string, km: number }) {
