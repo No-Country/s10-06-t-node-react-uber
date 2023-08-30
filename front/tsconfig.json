@@ -24,14 +24,19 @@
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+
+    /* Types */
+    "types": ["vitest/globals"]
   },
   "include": [
     "src",
     "vite.config.ts",
     "tailwind.config.js",
     "postcss.config.js",
-    ".eslintrc.cjs"
+    ".eslintrc.cjs",
+    "vitest.config.ts",
+    "tests"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
