@@ -7,7 +7,7 @@ export const UserProfile: React.FC = () => {
     <div className='flex items-center justify-between p-5'>
       {user && (
         <>
-          {`Welcome ${user.firstName} ${user.lastName}`}
+          Welcome {user.firstName} {user.lastName}
           <button
             className='rounded border px-5 py-1'
             onClick={(): void => {
