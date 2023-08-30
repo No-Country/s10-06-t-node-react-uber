@@ -1,5 +1,5 @@
-export default function Payment() {
-    return (
-        <></>
-    );
+const Payment: React.FC = () => {
+  return <></>
 }
+
+export default Payment
