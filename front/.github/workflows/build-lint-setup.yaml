@@ -10,9 +10,11 @@ jobs:
   build-lint-setup:
     name: Build, Lint and Setup
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
         node-version: [18.x]
+
     steps:
       # Clones the repository
       - uses: actions/checkout@v3
