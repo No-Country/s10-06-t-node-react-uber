@@ -1,9 +1,8 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import '../styles/index.css'
 import { HeaderAuth } from '@/components/HeaderAuth'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useLocation } from 'react-router-dom'
+
 import * as apiAuth from '../utils/apiAuth'
 
 export const RegisterData: React.FC = () => {
@@ -14,14 +13,14 @@ export const RegisterData: React.FC = () => {
   console.log('email:', email)
   console.log('verificationCode:', verificationCode)
   const [registerData, setRegisterData] = useState({
-    email: email,
-    verificationCode: verificationCode,
+    email,
+    verificationCode,
     firstName: '',
     lastName: '',
     cellNumber: '',
     password: '',
   })
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target
     setRegisterData({
       ...registerData,
@@ -32,11 +31,11 @@ export const RegisterData: React.FC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
     console.log('handleSubmit:', e)
-    const submitFormData = () => {
-      return apiAuth
+    const submitFormData = async (): Promise<void> => {
+      await apiAuth
         .submitData({
-          email: email,
-          verificationCode: verificationCode,
+          email,
+          verificationCode,
           firstName: registerData.firstName,
           lastName: registerData.lastName,
           cellNumber: registerData.cellNumber,
@@ -50,7 +49,7 @@ export const RegisterData: React.FC = () => {
           console.log('err:', err)
         })
     }
-    submitFormData()
+    void submitFormData()
   }
 
   return (

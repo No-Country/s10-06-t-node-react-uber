@@ -6,7 +6,6 @@ export default {
       fontFamily: {
         graduate: ['Graduate', 'sanserif'], // Use the correct font name
       },
-
       colors: {
         primary: '#29103A',
         dark: '#1C1C1C',
@@ -14,7 +13,6 @@ export default {
         gray: '#DADADA',
         lightGray: '#F6F6F6',
       },
-      fontFamily: {},
       fontSize: {
         12: '0.75rem', // 12px en rem
         14: '0.875rem', // 14px en rem

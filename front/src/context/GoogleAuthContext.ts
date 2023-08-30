@@ -1,15 +1,26 @@
 import { create } from 'zustand'
-import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+  type User,
+} from 'firebase/auth'
 import { auth } from '../services/firebase.config'
+
+import { BASE_URL } from '@/utils/api'
+
 interface AuthState {
-  user: any
-  setUser: (user: any) => void
+  user: User | null
+  setUser: (user: User | null) => void
   signInWithGoogle: () => Promise<void>
   signOut: () => Promise<void>
 }
+
 export const useAuthStore = create<AuthState>((set) => ({
   user: null,
-  setUser: (user) => set(() => ({ user })),
+  setUser: (user) => {
+    set(() => ({ user }))
+  },
   signInWithGoogle: async () => {
     const provider = new GoogleAuthProvider()
     try {
@@ -33,13 +44,13 @@ export const useAuthStore = create<AuthState>((set) => ({
           name = names[0]
         }
 
-        //mandar al backend el usuario
-        const res = await fetch('http://localhost:1237/api/registerLogin', {
+        // mandar al backend el usuario
+        const res = await fetch(`${BASE_URL}/registerLogin`, {
           method: 'POST',
           body: JSON.stringify({
             email: user.email,
-            name: name,
-            lastName: lastName,
+            name,
+            lastName,
           }),
           headers: {
             'Content-Type': 'application/json',

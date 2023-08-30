@@ -1,11 +1,11 @@
-export const BASE_URL =
-  'https://uber-project-nocountry-backend-production.up.railway.app/api'
+import { BASE_URL } from './api'
 
-const checkServerResponse = (res: Response) => {
+const checkServerResponse = async (res: Response): Promise<void> => {
   if (res.ok) {
-    return res.json()
+    return await res.json()
   }
-  return Promise.reject('Возникла ошибка')
+  const error = await res.json()
+  throw new Error(error.message)
 }
 
 const headers = {
@@ -25,32 +25,55 @@ interface RegisterCode {
 interface RegisterData {
   email: string
   verificationCode: string
-  firstName: string,
-  lastName: string,
-  cellNumber: string,
+  firstName: string
+  lastName: string
+  cellNumber: string
   password: string
 }
 
-export const register = ({ email }: RegisterEmail) => {
-  return fetch(`${BASE_URL}/register`, {
+export const register = async ({ email }: RegisterEmail): Promise<void> => {
+  await fetch(`${BASE_URL}/register`, {
     method: 'POST',
     headers,
     body: JSON.stringify({ email }),
-  }).then((res) => checkServerResponse(res))
+  }).then(async (res) => {
+    await checkServerResponse(res)
+  })
 }
 
-export const verifyCodigo = ({ email, verificationCode }: RegisterCode) => {
-  return fetch(`${BASE_URL}/emailVerification`, {
+export const verifyCodigo = async ({
+  email,
+  verificationCode,
+}: RegisterCode): Promise<void> => {
+  await fetch(`${BASE_URL}/emailVerification`, {
     method: 'PATCH',
     headers,
     body: JSON.stringify({ email, verificationCode }),
-  }).then((res) => checkServerResponse(res))
+  }).then(async (res) => {
+    await checkServerResponse(res)
+  })
 }
 
-export const submitData = ({ email, verificationCode,firstName, lastName, cellNumber, password}: RegisterData) => {
-  return fetch(`${BASE_URL}/register`, {
+export const submitData = async ({
+  email,
+  verificationCode,
+  firstName,
+  lastName,
+  cellNumber,
+  password,
+}: RegisterData): Promise<void> => {
+  await fetch(`${BASE_URL}/register`, {
     method: 'POST',
     headers,
-    body: JSON.stringify({ email, verificationCode,firstName, lastName, cellNumber, password }),
-  }).then((res) => checkServerResponse(res))
+    body: JSON.stringify({
+      email,
+      verificationCode,
+      firstName,
+      lastName,
+      cellNumber,
+      password,
+    }),
+  }).then(async (res) => {
+    await checkServerResponse(res)
+  })
 }
