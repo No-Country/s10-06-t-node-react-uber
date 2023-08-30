@@ -28,15 +28,18 @@ jobs:
         uses: borales/actions-yarn@v4
         with:
           cmd: install
+          dir: front
 
-        # Runs lint using yarn
+      # Runs lint using yarn
       - name: Run Lint
         uses: borales/actions-yarn@v4
         with:
           cmd: lint
+          dir: front
 
       # Builds the project using yarn
       - name: Build
         uses: borales/actions-yarn@v4
         with:
           cmd: build
+          dir: front
