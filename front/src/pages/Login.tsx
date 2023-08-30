@@ -1,8 +1,10 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { HeaderAuth } from '@/components/HeaderAuth'
-import { FormEvent, useState } from 'react'
-import 'react-toastify/dist/ReactToastify.css'
-import { toast } from 'react-toastify'
+import { type FormEvent, useState } from 'react'
+import { LoginGoogleButton } from '@/components/LoginGoogleButton'
+import { LoginFacebookButton } from '@/components/LoginFacebookButton'
+import { BASE_URL } from '@/utils/api'
+
 interface Errors {
   email?: string
   password?: string
@@ -11,56 +13,54 @@ export const Login: React.FC = () => {
   const [errors, setErrors] = useState<Errors>({})
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const navigate = useNavigate()
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setEmail(e.target.value)
     setErrors({})
   }
+
   const handlePasswordChange = (
     e: React.ChangeEvent<HTMLInputElement>,
   ): void => {
     setPassword(e.target.value)
     setErrors({})
   }
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
 
-    const validateEmail = (email: string) => {
+    const validateEmail = (email: string): void => {
       const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 
       if (regex.test(email)) {
-        const authLogin = async (email: string, password: string) => {
-          const response = await fetch('http://localhost:1237/api/login', {
+        const authLogin = async (
+          email: string,
+          password: string,
+        ): Promise<void> => {
+          const response = await fetch(`${BASE_URL}/api/login`, {
             method: 'POST',
             body: JSON.stringify({
-              email: email,
-              password: password,
+              email,
+              password,
             }),
             headers: {
               'Content-Type': 'application/json',
             },
           })
+
           const data = await response.json()
-          await setErrors(data)
+          setErrors(data)
+
           if (response.status === 200) {
-            console.log('iniciaste sesion correctamente')
-            {
-              toast.success('Inicio de sesión exitoso!', {
-                position: 'top-right',
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: 'light',
-              })
-            }
+            const token = data.token
+            localStorage.setItem('token', token)
+            navigate('/profile')
           }
         }
-        authLogin(email, password)
+        void authLogin(email, password)
       } else {
-        return setErrors({ email: 'Ingrese un correo válido.' })
+        setErrors({ email: 'Ingrese un correo válido.' })
       }
     }
     validateEmail(email)
@@ -93,12 +93,12 @@ export const Login: React.FC = () => {
                 type='text'
                 placeholder='Ingresar correo electronico'
                 className={`w-[251px] border-b-[1px] border-[#CFCFCF] text-[11px] outline-none ${
-                  errors.email && 'border-b-[1px] border-red-500'
+                  Boolean(errors.email) && 'border-b-[1px] border-red-500'
                 }`}
                 value={email}
                 onChange={handleEmailChange}
               />
-              {errors?.email && (
+              {Boolean(errors?.email) && (
                 <p className='text-xs text-red-500'>{errors.email}</p>
               )}
             </div>
@@ -107,12 +107,12 @@ export const Login: React.FC = () => {
                 type='text'
                 placeholder='Contraseña'
                 className={`w-[251px] border-b-[1px] border-[#CFCFCF] text-[11px] outline-none ${
-                  errors.password && 'border-b-[1px] border-red-500'
+                  Boolean(errors.password) && 'border-b-[1px] border-red-500'
                 }`}
                 value={password}
                 onChange={handlePasswordChange}
               />
-              {errors?.password && (
+              {Boolean(errors?.password) && (
                 <p className='text-xs text-red-500'>{errors.password}</p>
               )}
               <Link
@@ -127,31 +127,12 @@ export const Login: React.FC = () => {
             <button className='my-3 h-[33px] w-[160px] rounded-full bg-[#29103A] text-[12px] font-medium text-white shadow-lg'>
               Iniciar sesión
             </button>
-            <span className='text-12 font-medium text-[#B1B1B1]'>
-              Seguir con
+            <span className='flex w-full items-center justify-center gap-4 px-3 text-12 '>
+              o puedes
             </span>
-            <div className='flex gap-5 [&>div>img]:rounded-full [&>div>img]:shadow-xl [&>div]:h-9 [&>div]:w-9 [&>div]:rounded-full'>
-              <div>
-                <img
-                  src='https://cdn.iconscout.com/icon/free/png-256/free-google-1772223-1507807.png'
-                  alt='google'
-                  className='p-2'
-                />
-              </div>
-              <div>
-                <img
-                  src='https://cdn.iconscout.com/icon/free/png-256/free-facebook-logo-2019-1597680-1350125.png'
-                  alt='facebook'
-                  className='p-2'
-                />
-              </div>
-              <div>
-                <img
-                  src='https://images.freeimages.com/fic/images/icons/2795/office_2013_hd/2000/outlook.png'
-                  alt='outlook'
-                  className='p-2'
-                />
-              </div>
+            <div className='flex flex-col gap-2'>
+              <LoginGoogleButton />
+              <LoginFacebookButton />
             </div>
           </div>
         </form>

@@ -6,7 +6,9 @@ export default {
       fontFamily: {
         graduate: ['Graduate', 'sanserif'], // Use the correct font name
       },
-
+      boxShadow: {
+        'setTripItems': '0px 6px 5px 0px rgb(0 0 0 / 0.15)',
+      },
       colors: {
         primary: '#29103A',
         dark: '#1C1C1C',
@@ -14,7 +16,6 @@ export default {
         gray: '#DADADA',
         lightGray: '#F6F6F6',
       },
-      fontFamily: {},
       fontSize: {
         12: '0.75rem', // 12px en rem
         14: '0.875rem', // 14px en rem
@@ -25,6 +26,9 @@ export default {
         36: '2.25rem', // 36px en rem
       },
       fontWeight: {},
+      boxShadow: {
+        '3xl': '0 35px 60px -15px rgba(0, 0, 0, 0.25)',
+      },
     },
   },
   variants: {},

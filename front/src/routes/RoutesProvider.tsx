@@ -1,11 +1,18 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { type FC } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import {
+  LandingPage,
+  Login,
+  Register,
+  RegisterCodigo,
+  RegisterData,
+  UserProfile,
+  Payment,
+} from '@/pages'
 import { Layout } from '@/components/layouts/Layout'
-import { LandingPage } from '@/pages/Landing'
-import { Login } from '@/pages/Login'
-import { Register } from '@/pages/Register'
-import { RegisterCodigo } from '@/pages/RegisterCodigo'
-import { RegisterData } from '@/pages/RegisterData'
+import { Dashboard } from '@/pages/Dashboard'
+import SetTrip from '@/pages/SetTrip'
+import { AuthGuard } from './guard/AuthGuard'
 
 const RoutesProvider: FC = () => {
   return (
@@ -13,6 +20,12 @@ const RoutesProvider: FC = () => {
       <Routes>
         <Route element={<Layout />}>
           <Route path='/' element={<LandingPage />} />
+        </Route>
+        <Route element={<AuthGuard />}>
+          <Route path='/profile' element={<UserProfile />} />
+          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/payment' element={<Payment />} />
+          <Route path='/settrip' element={<SetTrip />} />
         </Route>
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
