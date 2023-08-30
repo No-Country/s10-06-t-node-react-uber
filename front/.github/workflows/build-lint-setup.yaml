@@ -1,0 +1,41 @@
+name: Build, Lint and Setup
+
+on:
+  push:
+    branches:
+      - front
+
+jobs:
+  build-lint-setup:
+    name: Build, Lint and Setup
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
+      # Clones the repository
+      - uses: actions/checkout@v3
+
+      # Sets up Node.js
+      - name: Use Node.js ${{matrix.node-version}}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{matrix.node-version}}
+
+      # Installs dependencies using yarn
+      - name: Setup yarn
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install
+
+        # Runs lint using yarn
+      - name: Run Lint
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: lint
+
+      # Builds the project using yarn
+      - name: Build
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: build
