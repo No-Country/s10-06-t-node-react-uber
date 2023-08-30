@@ -1,6 +1,6 @@
 import { firebaseConfig } from '@/services/firebase.config'
 
-describe('firebase.config.ts', () => {
+describe('Tests on services/firebase.config.ts', () => {
   it('should have a apiKey', () => {
     expect(firebaseConfig.apiKey.length).toBeGreaterThan(0)
   })
