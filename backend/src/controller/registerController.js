@@ -17,7 +17,7 @@ export const registerUser = async (req, res) => {
 
     // registered user with google
 
-    if (user && user.verificationCode === undefined) {
+    if (user && user.verificationCode === undefined || user && user.cellNumber) {
       return res.status(401).json({ message: 'Email registrado' });
     }
 
