@@ -5,7 +5,7 @@ import { BiSearch } from "react-icons/bi";
 
 export const Home: FC = () => {
     return (
-        <div className="h-[85%] w-full bg-center bg-cover bg-[url('../assets/img/map.jpg')] relative">
+        <div className="h-full w-full bg-center bg-cover bg-[url('../assets/img/map.jpg')] relative">
             <div className='flex justify-between relative top-20 px-5'>
                 <AccessHomeButtons icon={'MENU'} />
                 <div className='flex gap-3'>

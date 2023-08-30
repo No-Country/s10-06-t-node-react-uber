@@ -60,7 +60,7 @@ export const useAuthStore = create<AuthState>((set) => ({
           const data = await res.json()
           const token = data.token
           localStorage.setItem('token', token)
-          window.location.href = `http://localhost:3000/profile`
+          window.location.href = `http://localhost:3000/dashboard`
         }
       }
     } catch (error) {

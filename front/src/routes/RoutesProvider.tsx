@@ -23,9 +23,9 @@ const RoutesProvider: FC = () => {
         </Route>
         <Route element={<AuthGuard />}>
           <Route path='/profile' element={<UserProfile />} />
-          <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/payment' element={<Payment />} />
           <Route path='/settrip' element={<SetTrip />} />
+          <Route path='/dashboard/*' element={<Dashboard />} />
         </Route>
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
