@@ -20,58 +20,23 @@ const useSetTripStore = create<typeSetTripState>()((set) => ({
 type typeSetTripInputsState = {
     inputStartLocationValue: string;
     inputFinishLocationValue: string;
-    setInputStartLocationValue: (e) => void;
-    setInputFinishLocationValue: (e) => void;
+    setInputStartLocationValue: (newValue: string) => void;
+    setInputFinishLocationValue: (newValue: string) => void;
 }
 const useSetTripInputsStore = create<typeSetTripInputsState>()((set) => ({
     inputStartLocationValue: "",
     inputFinishLocationValue: "",
-    setInputStartLocationValue: (e) => {set(() => ({inputFinishLocationValue: e.target.value}))},
-    setInputFinishLocationValue: (e) => {set(() => ({inputFinishLocationValue: e.target.value}))}
+    setInputStartLocationValue: (newValue) => {set(() => ({inputFinishLocationValue: newValue}))},
+    setInputFinishLocationValue: (newValue) => {set(() => ({inputFinishLocationValue: newValue}))}
 }));
 
 const SetTrip: React.FC = () => {
     const { locationAutocomplete, activeLocationAutocomplete } = useSetTripStore(state => state);
 
-    return (
-        <Container>
-            <main className="text-20">
-                <h2 className="flex text-24 items-center"><BiArrowBack className="text-primary mr-3" /> Solicitar un viaje</h2>
-                <form className="my-7 relative">
-                    <div className="flex items-center mb-5">    
-                        <TbPointFilled className="text-24 mr-[4px] text-primary" />
-                        <Input inputType="text" inputPlaceholder="¿De dónde salís?" />
-                    </div>
-                    <div className="flex items-center">    
-                        <GoTriangleDown className="text-24 mr-[4px] text-darkGray" />
-                        <Input inputType="text" inputPlaceholder="¿A dónde te llevamos?" />
-                    </div>
-                </form>
-                <section>
-                    {
-                        locationAutocomplete ? 
-                        <>
-                            <h5>Resultados</h5>
-                            <LocationAutocompleteItems locationName="Banco Galicia" location="Av Rafael Nuñez 3254, Córdoba" km={3} />
-                            <LocationAutocompleteItems locationName="Banco Galicia" location="Av Rafael Nuñez 3254, Córdoba" km={3} />
-                            <LocationAutocompleteItems locationName="Banco Galicia" location="Av Rafael Nuñez 3254, Córdoba" km={3} />
-                        </>
-                        : 
-                        <>
-                            <h5>Recientes</h5>
-                            <RecentTripsItem finishLocation="Av Colón 3240" km={5} />
-                            <RecentTripsItem finishLocation="Av Colón 3240" km={5} />
-                            <RecentTripsItem finishLocation="Av Colón 3240" km={5} />
-                        </>
-                    }
-                </section>
-            </main>
-        </Container>
-    );
+    const { inputFinishLocationValue, inputStartLocationValue, setInputFinishLocationValue, setInputStartLocationValue } = useSetTripInputsStore(state => state);
 
-    function handlerSetLocationInput() {
-        console.log(locationAutocomplete)
-        activeLocationAutocomplete();
+    function handlerInputStartLocation(e) {
+        console.log(e.target.value)
     }
     
     function LocationAutocompleteItems({ locationName, location, km } : { locationName: string, location: string, km: number }) {
@@ -105,11 +70,55 @@ const SetTrip: React.FC = () => {
         );
     }
 
-    function Input({ inputType, inputPlaceholder, className = "" }: { inputType: string, inputPlaceholder: string, className?: string }) {
-        return (
-            <input onChange={() => {handlerSetLocationInput()}} className={`w-full focus:outline-none rounded-full py-[6px] px-[12px] border-solid border-dark border-2 placeholder-dark shadow-setTripItems ${className}`} type={inputType} placeholder={inputPlaceholder} /> 
-        );
+    interface InputProps { 
+        inputType: string;
+        inputPlaceholder: string; 
+        className?: string; 
+        handler: (event: any) => void; 
+        value: string
     }
+
+    const Input: React.FC<InputProps> = ({ inputType, inputPlaceholder, className = "", handler, value }) => {
+        return (
+            <input onChange={(event) => {handler(event)}} value={value} className={`w-full focus:outline-none rounded-full py-[6px] px-[12px] border-solid border-dark border-2 placeholder-dark shadow-setTripItems ${className}`} type={inputType} placeholder={inputPlaceholder} />
+        )
+    }
+
+    return (
+        <Container>
+            <main className="text-20">
+                <h2 className="flex text-24 items-center"><BiArrowBack className="text-primary mr-3" /> Solicitar un viaje</h2>
+                <form className="my-7 relative">
+                    <div className="flex items-center mb-5">    
+                        <TbPointFilled className="text-24 mr-[4px] text-primary" />
+                        <Input value={inputStartLocationValue} handler={handlerInputStartLocation} inputType="text" inputPlaceholder="¿De dónde salís?" />
+                    </div>
+                    <div className="flex items-center">    
+                        <GoTriangleDown className="text-24 mr-[4px] text-darkGray" />
+                        <Input inputType="text" inputPlaceholder="¿A dónde te llevamos?" />
+                    </div>
+                </form>
+                <section>
+                    {
+                        locationAutocomplete ? 
+                        <>
+                            <h5>Resultados</h5>
+                            <LocationAutocompleteItems locationName="Banco Galicia" location="Av Rafael Nuñez 3254, Córdoba" km={3} />
+                            <LocationAutocompleteItems locationName="Banco Galicia" location="Av Rafael Nuñez 3254, Córdoba" km={3} />
+                            <LocationAutocompleteItems locationName="Banco Galicia" location="Av Rafael Nuñez 3254, Córdoba" km={3} />
+                        </>
+                        : 
+                        <>
+                            <h5>Recientes</h5>
+                            <RecentTripsItem finishLocation="Av Colón 3240" km={5} />
+                            <RecentTripsItem finishLocation="Av Colón 3240" km={5} />
+                            <RecentTripsItem finishLocation="Av Colón 3240" km={5} />
+                        </>
+                    }
+                </section>
+            </main>
+        </Container>
+    );
 }
 
 export default SetTrip
