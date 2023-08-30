@@ -39,6 +39,11 @@ const SetTrip: React.FC = () => {
         setInputStartLocationValue(e.target.value);
         activeLocationAutocomplete();
     }
+
+    function handlerInputFinishLocation(e: React.ChangeEvent<HTMLInputElement>): void {
+        setInputFinishLocationValue(e.target.value);
+        activeLocationAutocomplete();
+    }
     
     function LocationAutocompleteItems({ locationName, location, km } : { locationName: string, location: string, km: number }) {
         return(
@@ -96,7 +101,7 @@ const SetTrip: React.FC = () => {
                     </div>
                     <div className="flex items-center">    
                         <GoTriangleDown className="text-24 mr-[4px] text-darkGray" />
-                        <Input value={inputFinishLocationValue} handler={handlerInputStartLocation} inputType="text" inputPlaceholder="¿A dónde te llevamos?" />
+                        <Input value={inputFinishLocationValue} handler={handlerInputFinishLocation} inputType="text" inputPlaceholder="¿A dónde te llevamos?" />
                     </div>
                 </form>
                 <section>
