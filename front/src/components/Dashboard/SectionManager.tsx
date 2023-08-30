@@ -7,8 +7,7 @@ import { RiAccountCircleFill } from "react-icons/ri";
 
 export const SectionManager: FC = () => {
 
-    const [ nameSection, setNameSection ] = useState('inicio');
-
+    const [ nameSection, setNameSection ] = useState('inicio') 
     const navigate = useNavigate();
 
     const sectionButtons = [

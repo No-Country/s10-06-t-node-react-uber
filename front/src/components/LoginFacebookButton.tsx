@@ -1,6 +1,6 @@
-import { type FC } from 'react';
-import FacebookLogin, { ReactFacebookLoginInfo } from 'react-facebook-login';
-import { BiLogoFacebookCircle } from "react-icons/bi";
+import { type FC } from 'react'
+import FacebookLogin, { type ReactFacebookLoginInfo } from 'react-facebook-login'
+import { BiLogoFacebookCircle } from 'react-icons/bi'
 
 export const LoginFacebookButton: FC = ()=> {
 
