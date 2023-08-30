@@ -1,28 +1,30 @@
-import { type FC, useState } from 'react';
+import { type FC } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import { Home } from './Home';
 import { SectionManager } from '@/components/Dashboard/SectionManager';
 import { ActivityHistory } from './ActivityHistory';
 import { Chat } from './Chat';
 import { AccountManager } from './AccountManager';
+import { EditProfile } from './EditProfile';
+import { MyAddresses } from './MyAddresses';
 
 export const Dashboard: FC = () => {
-
-    const [ currentSection, setCurrentSection ] = useState<React.ReactNode>(<Home />);
-
-    const sectionComponents: Record<string, React.ReactNode> = {
-        Home: <Home />,
-        ActivityHistory: <ActivityHistory />,
-        Chat: <Chat />,
-        AccountManager: <AccountManager />,
-    };
-
-    const handleSection = (nameSection: string) => {
-        setCurrentSection(sectionComponents[nameSection] || <Home />);
-    };
     return (
         <div className='h-screen w-screen'>
-            {currentSection}
-            <SectionManager handleSection={handleSection}/>
+            <div className='h-[85%]'>
+                <Routes>
+                    <Route path='/' element={<Home />} />
+                    <Route path='/activity-history' element={<ActivityHistory />} />
+                    <Route path='/chat' element={<Chat />} />
+                    <Route path='/account-manager' element={<AccountManager />} />
+                    <Route path='/account-manager/edit-profile' element={<EditProfile />} />
+                    <Route path='/account-manager/my-directions' element={<MyAddresses />} />
+                </Routes>
+            </div>
+            <div className='h-[15%]'>
+                <SectionManager />
+            </div>
         </div>
     );
 };
+
