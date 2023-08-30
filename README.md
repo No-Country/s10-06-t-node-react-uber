@@ -24,7 +24,7 @@
 
 ###  Tecnologías 
 ![React](https://img.shields.io/badge/React-149eca?style=for-the-badge&logo=react&logoColor=fff)
-![TypeScript](https://img.shields.io/badge/JavaScript-%23323330.svg?style=for-the-badge&logo=Javascript&logoColor=%23F7DF1E)
+![TypeScript](https://img.shields.io/badge/Typescript-0074C2?style=for-the-badge&logo=Typescript&logoColor=white)
 ![React Router](https://img.shields.io/badge/React_Router-000?style=for-the-badge&logo=reactrouter&logoColor=fff) 
 ![NodeJS](https://img.shields.io/badge/Node.js-6DA55F?style=for-the-badge&logo=Node.js&logoColor=white)
 ![Express.js](https://img.shields.io/badge/Express.js-%23404d59.svg?style=for-the-badge&logo=Express&logoColor=%2361DAFB) 
@@ -45,13 +45,13 @@
 | <img src="https://ca.slack-edge.com/T032Y55Q6VC-U05KG404K61-g1fcf772bc4d-512" width=80>| <img src="https://ca.slack-edge.com/T032Y55Q6VC-U05KG4BHG1K-78388deeab55-512" width=80>| <img src="https://ca.slack-edge.com/T032Y55Q6VC-U05E935DWJC-009d06664a2b-512" width=80>|
 |:-:|:-:|:-:|
 | **Luca Valentín Vitorino**| **Luis Osio**| **Pablo Gonzalez** | 
-| <a href="https://github.com/vitorinoluca"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://ar.linkedin.com/in/luca-vitorino"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://github.com/LOsioChico"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/losiochico/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/><a> | <a href="https://github.com/ThePabloRevengeance"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/PabloGonzalez/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/><a>
+| <a href="https://github.com/vitorinoluca"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://ar.linkedin.com/in/luca-vitorino"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://github.com/LOsioChico"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/losiochico/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/><a> | <a href="https://github.com/ThePabloRevengeance"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/pablo-julian-gonzalez/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/><a>
 
 
 | <img src="https://ca.slack-edge.com/T032Y55Q6VC-U05K4FPPKRV-8a419621a6dc-512" width=80>| <img src="https://ca.slack-edge.com/T032Y55Q6VC-U05K4FV1ACX-02b4e7cc5404-512" width=80> 
 |:-:|:-:|
 | **Victor Ayala Santacruz**| **Yein España**|  
-| <a href="https://github.com/vicdeveloperr"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/victorsantacruz/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://github.com/yeinwillie"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/YeinE/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/><a> |
+| <a href="https://github.com/vicdeveloperr"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://py.linkedin.com/in/victor-ayala-santacruz-3243b623a"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://github.com/yeinwillie"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/yein-e-734a7a233"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/><a> |
 
 
 <hr/>
@@ -60,7 +60,7 @@
 | <img src="https://ca.slack-edge.com/T032Y55Q6VC-U05L8P00JG0-efbdc2d26f3b-512" width=80>| <img src="https://ca.slack-edge.com/T032Y55Q6VC-U05C53LSLF5-7739e8089894-512" width=80> 
 |:-:|:-:|
 | **Leandro Sebastián Soletta** |  **Manuel Quiroga**|  
-|<a href="https://Behance.com"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://ar.linkedin.com/in/leandro-soletta-1a5b62261"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://github.com/yeinwillie"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/YeinE/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/><a> |
+|<a href="https://www.behance.net/leandrosoletta1"><img src="https://img.shields.io/badge/Behance-1769ff?style=for-the-badge&logo=behance&logoColor=white"></a> <a href="https://ar.linkedin.com/in/leandro-soletta-1a5b62261"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://github.com/yeinwillie"><img src="https://img.shields.io/badge/Behance-1769ff?style=for-the-badge&logo=behance&logoColor=white"></a> <a href="https://www.linkedin.com/in/YeinE/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/><a> |
 
 <hr/>
 
@@ -74,7 +74,7 @@
 | <img src="https://ca.slack-edge.com/T032Y55Q6VC-U05L8NQDAP2-9bdc7c1d854c-512" width=80>|
 |:-:|
 | **Jerlib Gonzalez**|
-|<a href="https://github.com/Jerlib"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/Jerlib/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> ||
+|<a href="https://github.com/JerlibGnzlz"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/jerlibgnzlz/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> ||
 
 <hr/>
 
