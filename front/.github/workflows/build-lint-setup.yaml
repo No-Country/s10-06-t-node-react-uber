@@ -2,9 +2,9 @@ name: Build, Lint and Setup
 
 on:
   push:
-    branches:
-      - front
-      - testing
+    branches: [front]
+  pull_request:
+    branches: [front]
 
 jobs:
   build-lint-setup:
