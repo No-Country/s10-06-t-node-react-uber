@@ -1,13 +1,13 @@
 import { create } from 'zustand'
-import {
-  GoogleAuthProvider,
-  signInWithPopup,
-  signOut,
-  type User,
-} from 'firebase/auth'
+import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
 import { auth } from '../services/firebase.config'
 import { BASE_URL } from '@/utils/api'
 
+interface User {
+  firstName: string
+  lastName: string
+  email: string
+}
 interface AuthState {
   user: User | null
   setUser: (user: User | null) => void
@@ -55,16 +55,14 @@ export const useAuthStore = create<AuthState>((set) => ({
             'Content-Type': 'application/json',
           },
         })
+
         if (res.status === 200) {
           const data = await res.json()
           const token = data.token
           localStorage.setItem('token', token)
           window.location.href = `http://localhost:3000/profile`
         }
-        return
       }
-
-      set(() => ({ user }))
     } catch (error) {
       console.error('Error signing in with Google:', error)
     }
