@@ -26,7 +26,7 @@ type typeSetTripInputsState = {
 const useSetTripInputsStore = create<typeSetTripInputsState>()((set) => ({
     inputStartLocationValue: "",
     inputFinishLocationValue: "",
-    setInputStartLocationValue: (newValue) => {set(() => ({inputFinishLocationValue: newValue}))},
+    setInputStartLocationValue: (newValue) => {set(() => ({inputStartLocationValue: newValue}))},
     setInputFinishLocationValue: (newValue) => {set(() => ({inputFinishLocationValue: newValue}))}
 }));
 
@@ -36,7 +36,7 @@ const SetTrip: React.FC = () => {
     const { inputFinishLocationValue, inputStartLocationValue, setInputFinishLocationValue, setInputStartLocationValue } = useSetTripInputsStore(state => state);
 
     function handlerInputStartLocation(e: React.ChangeEvent<HTMLInputElement>): void {
-        console.log(e.target.value)
+        setInputStartLocationValue(e.target.value)
     }
     
     function LocationAutocompleteItems({ locationName, location, km } : { locationName: string, location: string, km: number }) {
