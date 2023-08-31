@@ -32,7 +32,7 @@ interface RegisterData {
 }
 
 export const register = async ({ email }: RegisterEmail): Promise<void> => {
-  await fetch(`${BASE_URL}/register`, {
+  await fetch(`${BASE_URL}/api/register`, {
     method: 'POST',
     headers,
     body: JSON.stringify({ email }),
@@ -45,7 +45,7 @@ export const verifyCodigo = async ({
   email,
   verificationCode,
 }: RegisterCode): Promise<void> => {
-  await fetch(`${BASE_URL}/emailVerification`, {
+  await fetch(`${BASE_URL}/api/emailVerification`, {
     method: 'PATCH',
     headers,
     body: JSON.stringify({ email, verificationCode }),
@@ -62,7 +62,7 @@ export const submitData = async ({
   cellNumber,
   password,
 }: RegisterData): Promise<void> => {
-  await fetch(`${BASE_URL}/register`, {
+  await fetch(`${BASE_URL}/api/register`, {
     method: 'POST',
     headers,
     body: JSON.stringify({
