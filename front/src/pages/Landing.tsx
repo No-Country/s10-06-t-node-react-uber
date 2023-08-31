@@ -1,9 +1,7 @@
-import { type FC } from 'react'
-
 import { PiUserListFill } from 'react-icons/pi'
 import { BsFillCarFrontFill, BsArrowUpRight } from 'react-icons/bs'
 
-export const LandingPage: FC = () => {
+export const LandingPage: React.FC = () => {
   return (
     <main>
       <section className='relative h-[850px] select-none'>
@@ -12,8 +10,11 @@ export const LandingPage: FC = () => {
           alt='Landing'
           className='h-full w-full bg-no-repeat object-cover object-top'
         />
-        <div className='absolute right-24 top-24 flex h-[617px] w-[660px] flex-col items-center rounded-3xl bg-[#FCFCFD] shadow-md'>
-          <div className='flex w-full items-center justify-between rounded-3xl border-b border-b-[#E4E7EC] bg-[#F9FAFB] px-20 py-8'>
+        <div className='absolute left-0 right-0 top-24 mx-6 flex flex-col items-center rounded-3xl border-2 border-lightGray border-opacity-60 shadow-md backdrop-blur-[50px] transition-all md:left-auto md:right-16 md:mx-0 md:h-[617px] md:w-[660px] lg:right-24'>
+          <div
+            className='flex w-full items-center justify-between rounded-3xl 
+          px-16 py-8 backdrop-blur-2xl sm:px-20'
+          >
             <button className='flex w-32 flex-col items-center gap-2 font-medium leading-4 text-primary'>
               <PiUserListFill className='text-4xl' />
               Registrarse como conductor
@@ -25,12 +26,12 @@ export const LandingPage: FC = () => {
           </div>
 
           <div className='w-full px-14 py-12'>
-            <h3 className='text-36 font-bold leading-[64px]'>
+            <h3 className='pb-3 text-24 font-bold sm:pb-0 sm:text-36 md:leading-[64px]'>
               Toma el asiento del conductor y comienza a convertir kilómetros en
               efectivo
             </h3>
 
-            <span className='leading-[64px]'>
+            <span className='leading-[40px] md:leading-[64px]'>
               Únete a la plataforma líder con vasta red de pasajeros activos.
             </span>
 
@@ -38,7 +39,7 @@ export const LandingPage: FC = () => {
               <button className='mt-5 rounded-3xl bg-primary px-6 py-3 text-white duration-500 hover:bg-darkGray'>
                 Seguir como conductor
               </button>
-              <button className='flex items-center justify-start gap-1 border-b-2 border-neutral-300 text-sm text-darkGray duration-500 hover:border-dark'>
+              <button className='flex items-center justify-start gap-1 border-b-2 border-neutral-300 text-sm duration-500 hover:border-dark'>
                 Para más información <BsArrowUpRight />
               </button>
             </div>
@@ -51,21 +52,19 @@ export const LandingPage: FC = () => {
           alt='Landing'
           className='h-full w-full object-cover'
         />
-        <div className='absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 transform flex-col items-center'>
+        <div className='absolute left-1/2 top-1/2 flex w-full -translate-x-1/2 -translate-y-1/2 transform flex-col items-center px-6'>
           <h1
-            className='text-5xl font-bold text-white'
+            className='text-5xl font-bold leading-[64px] text-white'
             style={{
               fontFamily: 'Accia Moderato',
-              lineHeight: '64px',
             }}
           >
             URBAN MOVE
           </h1>
           <p
-            className='text-24 text-white'
+            className='text-center text-18 leading-10 text-white md:text-24 md:leading-[64px]'
             style={{
               fontFamily: 'Montserrat',
-              lineHeight: '64px',
             }}
           >
             Una plataforma para gestionar viajes y entregas locales para su
