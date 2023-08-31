@@ -7,15 +7,15 @@ import { GrFormNext } from "react-icons/gr";
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '@/context/GoogleAuthContext';
 
-type Profile = {
+interface Profile {
     name: string,
     icon: React.ReactNode,
-    link?: string | undefined
+    link: string | null
 }
 
 export const AccountManager: FC = () => {
 
-    const { user, signOut } = useAuthStore();
+    const { user , signOut } = useAuthStore();
     const navigate = useNavigate();
 
     const profileButtonData: Profile[] = [
@@ -37,12 +37,17 @@ export const AccountManager: FC = () => {
         {
             name: 'salir',
             icon: <RxExit color='#E10000' size='25'/>,
+            link: null
         },
     ];
 
-    const handleProfileButtons = (link: string | undefined, sectionName: string)=>{
-        link && navigate(link);
-        sectionName === 'salir' && signOut();
+    const handleProfileButtons = (link: string | null, sectionName: string): void =>{
+        if (link !== null) {
+            navigate(link);
+        }
+        if (sectionName === 'salir') {
+            void signOut();
+        }
     }
 
     return (

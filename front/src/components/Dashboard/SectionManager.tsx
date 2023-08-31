@@ -33,7 +33,7 @@ export const SectionManager: FC = () => {
         }
     ];
 
-    const sectionButtonManager = (name: string, link: string)=>{
+    const sectionButtonManager = (name: string, link: string): void =>{
         setNameSection(name);
         navigate(link);
     }
