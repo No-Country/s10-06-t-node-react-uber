@@ -32,7 +32,7 @@ export const AccountManager: FC = () => {
         {
             name: 'medios de pago',
             icon: <BsCreditCard2Back color='#29103A' size='25'/>,
-            link: ''
+            link: 'payment-methods'
         },
         {
             name: 'salir',
@@ -53,8 +53,9 @@ export const AccountManager: FC = () => {
     return (
         <div className='h-full px-5 pt-16'>
             <h1 className='text-[24px] font-semibold'>Perfil</h1>
-            <div className='flex items-center justify-center'>
-                <img className='w-[90px] h-[97px] rounded-full bg-slate-300' src="" alt="" />
+            <div className='flex items-center justify-center rounded-full'>
+                {/*<img className='w-[90px] h-[97px] rounded-full bg-slate-300' src="" alt="" />*/}
+                <HiUserCircle color='#718096' size='100'/>
             </div>
             <h2 className='border-b-[1px] border-[#29103A] 
                 text-[24px] text-center 
