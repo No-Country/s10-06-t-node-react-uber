@@ -11,7 +11,7 @@ router.post('/id', validateTokenMiddleware, usersGetById);
 
 router.patch('/editarUsuario',validateTokenMiddleware,usersPut);
 
-router.patch('/recuperarPassword',validateTokenMiddleware,recoverypassword);
+router.post('/recuperarPassword',validateTokenMiddleware,recoverypassword);
 
 router.delete('/:id', validateTokenMiddleware, usersDelete);
 
