@@ -7,6 +7,7 @@ import { Chat } from './Chat';
 import { AccountManager } from './AccountManager';
 import { EditProfile } from './EditProfile';
 import { MyAddresses } from './MyAddresses';
+import { PaymentMethods } from './PaymentMethods';
 
 export const Dashboard: FC = () => {
     return (
@@ -19,6 +20,7 @@ export const Dashboard: FC = () => {
                     <Route path='/account-manager' element={<AccountManager />} />
                     <Route path='/account-manager/edit-profile' element={<EditProfile />} />
                     <Route path='/account-manager/my-directions' element={<MyAddresses />} />
+                    <Route path='/account-manager/payment-methods' element={<PaymentMethods />} />
                 </Routes>
             </div>
             <div className='h-[15%]'>

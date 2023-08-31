@@ -15,6 +15,12 @@ export const registerUser = async (req, res) => {
   try {
     let user = await Users.findOne({ email });
 
+    // registered user with google
+
+    if (user && user.verificationCode === undefined || user && user.cellNumber) {
+      return res.status(401).json({ message: 'Email registrado' });
+    }
+
     if (!user) {
       // User is not registered, generate a 4-digit verification code
       const verificationCode = generateRandomCode(4);
@@ -37,7 +43,7 @@ export const registerUser = async (req, res) => {
       // Send the verification code to the user (e.g., via email)
       await sendVerificationEmail(user, verificationCode);
 
-      return res.json({ message: 'Verification code sent.', ...payload });
+      return res.status(200).json({ message: 'Verification code sent.', ...payload });
     } else {
       if (user.emailStatus === 'UNVERIFIED') {
         // User is registered but hasn't verified the code
@@ -96,7 +102,7 @@ export const emailVerification = async (req, res) => {
     }
 
     if (user.emailStatus === 'VERIFIED') {
-      return res.json({ message: 'User is already verified.' });
+      return res.status(400).json({ message: 'User is already verified.' });
     }
 
     if (user.verificationCode !== verificationCode) {
@@ -111,7 +117,7 @@ export const emailVerification = async (req, res) => {
       hasAllData: user.hasAllData,
     };
 
-    return res.json({ message: 'User verified.', ...payload });
+    return res.status(200).json({ message: 'User verified.', ...payload });
   } catch (error) {
     console.error('Error during email verification:', error);
     return res
