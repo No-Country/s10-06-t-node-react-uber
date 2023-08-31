@@ -8,6 +8,8 @@ import { Dropdown } from './Dropdown'
 import { useAuthStore } from '@/context/GoogleAuthContext'
 import { BASE_URL } from '@/utils/api'
 
+import textLogo from '@/assets/textLogo.svg'
+
 export const Header: FC = () => {
   const { setUser, user } = useAuthStore()
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -68,7 +70,7 @@ export const Header: FC = () => {
       <div className='flex w-full items-center justify-between'>
         <nav className='relative flex items-center gap-4'>
           <img
-            src='src/assets/textLogo.svg'
+            src={textLogo}
             alt='Urban Move Logo'
             draggable={false}
             className='mr-10 cursor-pointer'
@@ -94,12 +96,11 @@ export const Header: FC = () => {
               </button>
               {isAuthenticated ? (
                 <img
-                  // https://avatar.oxro.io/avatar.svg?name=John+Smith&background=0693e3&color=000
                   src={`https://avatar.oxro.io/avatar.svg?name=${user?.firstName}+${user?.lastName}&background=0693e3&color=000&length=2`}
                   alt='Profile'
                   className='border-whit h-10 w-10 cursor-pointer rounded-full border-2'
                   onClick={() => {
-                    navigate('/profile')
+                    navigate('/dashboard/account-manager')
                   }}
                 />
               ) : (
