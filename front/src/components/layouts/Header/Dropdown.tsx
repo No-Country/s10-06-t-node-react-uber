@@ -15,7 +15,7 @@ export const Dropdown: FC = () => {
   return (
     <>
       <div
-        className='rounded-f relative flex cursor-pointer items-center gap-2 rounded-full px-2 py-1 duration-300 hover:bg-white hover:bg-opacity-10'
+        className='rounded-f relative hidden cursor-pointer items-center gap-2 rounded-full px-2 py-1 duration-300 hover:bg-white hover:bg-opacity-10 lg:flex'
         onClick={handleClick}
       >
         Más{' '}
@@ -36,7 +36,7 @@ export const Dropdown: FC = () => {
           transition: 'max-height 0.4s ease-in-out, opacity 0.4s',
         }}
       >
-        <div className='flex flex-col gap-4 p-4'>
+        <div className='flex w-40 flex-col gap-4 p-4'>
           {dropdownOptions.map(({ text, link }) => (
             <DropdownChip key={text} link={link}>
               {text}

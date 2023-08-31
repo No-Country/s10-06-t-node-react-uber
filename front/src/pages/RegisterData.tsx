@@ -1,4 +1,4 @@
-import { Link, useNavigate, useLocation } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import '../styles/index.css'
 import { HeaderAuth } from '@/components/HeaderAuth'
@@ -21,38 +21,33 @@ export const RegisterData: React.FC = () => {
   } = useForm<FormData>({ mode: 'onChange' })
 
   const navigate = useNavigate()
-  const location = useLocation()
-  const email = location.state?.email
-  const verificationCode = location.state?.verificationCode
-  console.log('email:', email)
-  console.log('verificationCode:', verificationCode)
-  // const [registerData, setRegisterData] = useState({
-  //   email,
-  //   verificationCode,
-  //   firstName: '',
-  //   lastName: '',
-  //   cellNumber: '',
-  //   password: '',
-  // })
 
   const handleRegister = (data: FormData): void => {
-    apiAuth
-      .submitData({
-        email,
-        verificationCode,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        cellNumber: data.cellNumber,
-        password: data.password,
-      })
-      .then(() => {
-        console.log('data submitted', data)
-        reset()
-        navigate('/login')
-      })
-      .catch((err) => {
-        console.log('err:', err)
-      })
+    const email = localStorage.getItem('email')
+    const verificationCode = localStorage.getItem('verificationCode')
+
+    if (email && verificationCode) {
+      apiAuth
+        .submitData({
+          email,
+          verificationCode,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          cellNumber: data.cellNumber,
+          password: data.password,
+        })
+        .then(() => {
+          reset()
+          localStorage.clear()
+          navigate('/login')
+        })
+        .catch((err) => {
+          console.log('err:', err)
+        })
+    } else {
+      localStorage.clear()
+      navigate('/register')
+    }
   }
 
   return (
@@ -61,10 +56,7 @@ export const RegisterData: React.FC = () => {
         <HeaderAuth />
         <form
           autoComplete='off'
-          // eslint-disable-next-line @typescript-eslint/no-misused-promises
-          onSubmit={handleSubmit((data) => {
-            handleRegister(data)
-          })}
+          onSubmit={handleSubmit(handleRegister)}
           className='z-20 mx-auto mt-[-25px] flex max-w-sm flex-col flex-nowrap items-center justify-center gap-5 rounded-[33px] bg-white px-[37px] py-5 shadow-[0px_2px_6px_0px_rgba(0,0,0,0.25)] max-[410px]:mx-3'
         >
           <div className='items-center justify-center pb-3 pt-5'>

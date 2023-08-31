@@ -1,9 +1,8 @@
-import { Link, useNavigate, useLocation } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import '../styles/index.css'
-// import { useState } from 'react'
-import * as apiAuth from '../utils/apiAuth'
+import { useState } from 'react'
 import { HeaderAuth } from '@/components/HeaderAuth'
+import { BASE_URL } from '@/utils/api'
 
 interface FormData {
   verificationCode: string
@@ -12,31 +11,32 @@ interface FormData {
 export const RegisterCodigo: React.FC = () => {
   const {
     register,
-    reset,
     handleSubmit,
     formState: { isDirty, isValid, errors },
   } = useForm<FormData>({ mode: 'onChange' })
   const navigate = useNavigate()
-  const location = useLocation()
-  const email = location.state?.email
 
-  console.log('email:', email)
-  // const [verificationCode, setVerificationCode] = useState('')
+  const [error, setError] = useState<string>('')
+  const handleRegister = async ({
+    verificationCode,
+  }: FormData): Promise<void> => {
+    const email = localStorage.getItem('email')
 
-  const handleRegister = (verificationCode: string): void => {
-    apiAuth
-      .verifyCodigo({
-        email,
-        verificationCode,
-      })
-      .then(() => {
-        console.log('codigo correctamente')
-        reset()
-        navigate('/register-data', { state: { email, verificationCode } })
-      })
-      .catch((err) => {
-        console.log('err:', err)
-      })
+    const res = await fetch(`${BASE_URL}/api/emailVerification`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, verificationCode }),
+    })
+    const data = await res.json()
+    if (res.status === 200) {
+      localStorage.setItem('verificationCode', verificationCode)
+
+      navigate('/register-data')
+    } else {
+      setError(data)
+    }
   }
 
   return (
@@ -45,10 +45,7 @@ export const RegisterCodigo: React.FC = () => {
         <HeaderAuth />
         <form
           autoComplete='off'
-          // eslint-disable-next-line @typescript-eslint/no-misused-promises
-          onSubmit={handleSubmit((data) => {
-            handleRegister(data.verificationCode)
-          })}
+          onSubmit={handleSubmit(handleRegister)}
           className='z-20 mx-auto mt-[-25px] flex max-w-sm flex-col flex-nowrap items-center justify-center gap-5 rounded-[33px] border bg-white px-[37px] py-5 shadow-[0px_2px_6px_0px_rgba(0,0,0,0.25)] max-[410px]:mx-3'
         >
           <div className='items-center justify-center pb-3 pt-5'>
@@ -81,6 +78,8 @@ export const RegisterCodigo: React.FC = () => {
                 autoComplete='off'
                 placeholder='Por favor ingresa el código válido'
                 className={`w-[251px] border-b-[1px] border-[#CFCFCF] pl-1 text-[10px] ${
+                  error ? 'text-red-500' : ''
+                } ${
                   errors?.verificationCode?.message != null
                     ? 'text-red-500'
                     : ''
@@ -88,6 +87,9 @@ export const RegisterCodigo: React.FC = () => {
               />
               <p className='text-[10px] text-red-500'>
                 {errors.verificationCode?.message}
+              </p>
+              <p className='text-[10px] text-red-500'>
+                {error ? 'el codigo es incorrecto' : ''}
               </p>
             </div>
           </div>

@@ -29,6 +29,7 @@ module.exports = {
     'react/prop-types': 'off',
     '@typescript-eslint/restrict-template-expressions': 'off',
     '@typescript-eslint/strict-boolean-expressions': 'off',
+    '@typescript-eslint/no-misused-promises': 'off',
   },
   settings: {
     react: {
