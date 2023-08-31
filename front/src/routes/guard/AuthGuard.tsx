@@ -1,6 +1,7 @@
 import { Navigate, Outlet } from 'react-router-dom'
 import { useAuthStore } from '@/context/GoogleAuthContext'
 import { useEffect, useState } from 'react'
+import { CgSpinner } from 'react-icons/cg'
 
 import { BASE_URL } from '@/utils/api'
 
@@ -58,7 +59,12 @@ export const AuthGuard: React.FC = () => {
     void checkLogin()
   }, [setUser])
 
-  if (loading) return <h1>Loading...</h1>
+  if (loading)
+    return (
+      <span className='flex h-screen items-center justify-center'>
+        <CgSpinner className='animate-spin text-7xl text-primary' />
+      </span>
+    )
   if (!isAuthenticated) return <Navigate to='/login' replace />
   return <Outlet />
 }
