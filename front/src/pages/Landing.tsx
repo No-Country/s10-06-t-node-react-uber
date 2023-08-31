@@ -10,8 +10,11 @@ export const LandingPage: React.FC = () => {
           alt='Landing'
           className='h-full w-full bg-no-repeat object-cover object-top'
         />
-        <div className='absolute left-0 right-0 top-24 mx-6 flex flex-col items-center rounded-3xl bg-[#FCFCFD] shadow-md transition-all md:left-auto md:right-16 md:mx-0 md:h-[617px] md:w-[660px] lg:right-24'>
-          <div className='flex w-full items-center justify-between rounded-3xl border-b border-b-[#E4E7EC] bg-[#F9FAFB] px-16 py-8 sm:px-20'>
+        <div className='absolute left-0 right-0 top-24 mx-6 flex flex-col items-center rounded-3xl border-2 border-lightGray border-opacity-60 shadow-md backdrop-blur-[50px] transition-all md:left-auto md:right-16 md:mx-0 md:h-[617px] md:w-[660px] lg:right-24'>
+          <div
+            className='flex w-full items-center justify-between rounded-3xl 
+          px-16 py-8 backdrop-blur-2xl sm:px-20'
+          >
             <button className='flex w-32 flex-col items-center gap-2 font-medium leading-4 text-primary'>
               <PiUserListFill className='text-4xl' />
               Registrarse como conductor
@@ -36,7 +39,7 @@ export const LandingPage: React.FC = () => {
               <button className='mt-5 rounded-3xl bg-primary px-6 py-3 text-white duration-500 hover:bg-darkGray'>
                 Seguir como conductor
               </button>
-              <button className='flex items-center justify-start gap-1 border-b-2 border-neutral-300 text-sm text-darkGray duration-500 hover:border-dark'>
+              <button className='flex items-center justify-start gap-1 border-b-2 border-neutral-300 text-sm duration-500 hover:border-dark'>
                 Para más información <BsArrowUpRight />
               </button>
             </div>
