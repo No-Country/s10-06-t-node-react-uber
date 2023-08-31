@@ -55,7 +55,7 @@ export const Login: React.FC = () => {
           if (response.status === 200) {
             const token = data.token
             localStorage.setItem('token', token)
-            navigate('/profile')
+            navigate('/dashboard')
           }
         }
         void authLogin(email, password)
