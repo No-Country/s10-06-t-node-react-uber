@@ -145,20 +145,21 @@ const SetTrip: React.FC = () => {
                 if(event.key === "Enter"){
                   const body = {
                     origen: inputStartLocationValue,
-                    destino: inputFinishLocationValue, 
-                    token: localStorage.getItem("token")
+                    destino: inputFinishLocationValue,
+                    token: localStorage.token
                   }
                   console.log(body)
+                  
                   fetch(`${BASE_URL}/viajes`, {
-                    body: JSON.stringify(body),
-                    method: "POST", 
+                    method: 'POST',
                     headers: {
-                      "Content-Type": "aplication/json"
-                    }
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(body),
                   })
-                    .then(async response => await response.json())
-                    .then(data => { console.log(data); })
-                    .catch(error => { console.log(error); })
+                  .then(async response => await response.json())
+                  .then(data => { console.log(data); })
+                  .catch(error => { console.log(error); })
                 }
               }}
               inputPlaceholder='¿A dónde te llevamos?'
