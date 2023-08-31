@@ -11,7 +11,7 @@ interface Profile {
     name: string,
     icon: React.ReactNode,
     link: string | null
-}
+};
 
 export const AccountManager: FC = () => {
 
@@ -48,7 +48,7 @@ export const AccountManager: FC = () => {
         if (sectionName === 'salir') {
             void signOut();
         }
-    }
+    };
 
     return (
         <div className='h-full px-5 pt-16'>
@@ -56,7 +56,12 @@ export const AccountManager: FC = () => {
             <div className='flex items-center justify-center'>
                 <img className='w-[90px] h-[97px] rounded-full bg-slate-300' src="" alt="" />
             </div>
-            <h2 className='border-b-[1px] border-[#29103A] text-[24px] text-center py-5 font-semibold'>{user.firstName || 'Gonzalo'} {user.lastName || 'Ramirez'}</h2>
+            <h2 className='border-b-[1px] border-[#29103A] 
+                text-[24px] text-center 
+                py-5 font-semibold'
+            >
+                {user?.firstName || 'Gonzalo'} {user?.lastName || 'Ramirez'}
+            </h2>
             <ul>
                 {
                     profileButtonData.map((profileButton, index)=>(
@@ -74,7 +79,6 @@ export const AccountManager: FC = () => {
                     ))
                 }
             </ul>
-            
         </div>
     );
 };
