@@ -3,8 +3,9 @@ import { BiArrowBack, BiTime } from 'react-icons/bi'
 import { TbPointFilled } from 'react-icons/tb'
 import { GoTriangleDown } from 'react-icons/go'
 import { HiLocationMarker } from 'react-icons/hi'
-import type React from 'react'
 import { create } from 'zustand'
+import { Link } from "react-router-dom"
+import Input from "../components/common/Input"
 
 interface typeSetTripState {
   locationAutocomplete: boolean
@@ -114,39 +115,13 @@ const SetTrip: React.FC = () => {
     )
   }
 
-  interface InputProps {
-    inputType: string
-    inputPlaceholder: string
-    className?: string
-    handler: (event: React.ChangeEvent<HTMLInputElement>) => void
-    value: string
-  }
-
-  const Input: React.FC<InputProps> = ({
-    inputType,
-    inputPlaceholder,
-    className = '',
-    handler,
-    value,
-  }) => {
-    return (
-      <input
-        onChange={(event) => {
-          handler(event)
-        }}
-        value={value}
-        className={`w-full rounded-full border-2 border-solid border-dark px-[12px] py-[6px] placeholder-dark shadow-setTripItems focus:outline-none ${className}`}
-        type={inputType}
-        placeholder={inputPlaceholder}
-      />
-    )
-  }
-
   return (
     <Container>
       <main className='text-20'>
         <h2 className='flex items-center text-24'>
-          <BiArrowBack className='mr-3 text-primary' /> Solicitar un viaje
+          <Link to="/dashboard" className="flex">
+            <BiArrowBack className='mr-3 text-primary' /> Solicitar un viaje
+          </Link>
         </h2>
         <form className='relative my-7'>
           <div className='mb-5 flex items-center'>
