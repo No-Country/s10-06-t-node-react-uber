@@ -193,7 +193,8 @@ async function sendrecoveryPasswordEmail(existingUser, recovPassword) {
       from: "uberclonenocountry@gmail.com", // Reemplaza con tu dirección de Gmail
       to: existingUser.email,
       subject: "Recuperacion de contraseña Urbanmove",
-      html: `<a href="https://ibb.co/hgMML36"><img src="https://i.ibb.co/6yZZrjM/Imagen-Email.png" alt="Imagen-Email" border="0"/></a>, <p>Hola ${existingUser.firstName},</p> <p>Tu nueva contraseña es:${recovPassword}</p>,<p>Utiliza esta contraseña para ingresar al sitio <a href="https://pocket-pal.web.app/login">aquí</a>.</p>, <p>¡Muchas Gracias! </p>,`
+      html: `<a href="https://ibb.co/hgMML36"><img src="https://i.ibb.co/6yZZrjM/Imagen-Email.png" alt="Imagen-Email" border="0"/></a>, <p>Hola ${existingUser.firstName},</p> <p>Tu nueva contraseña es:${recovPassword}</p>,<p>Utiliza esta contraseña para ingresar al sitio <a href="
+      https://urbanmove.vercel.app">aquí</a>.</p>, <p>¡Muchas Gracias! </p>,`
 
     };
   console.log("Enviando correo de recuperacion de contraseña..."); // para debuguear
