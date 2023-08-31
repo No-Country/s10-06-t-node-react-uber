@@ -6,6 +6,7 @@ import { HiLocationMarker } from 'react-icons/hi'
 import { create } from 'zustand'
 import { Link } from "react-router-dom"
 import Input from "../components/common/Input"
+import { BASE_URL } from '@/utils/api'
 
 interface typeSetTripState {
   locationAutocomplete: boolean
@@ -139,6 +140,27 @@ const SetTrip: React.FC = () => {
               value={inputFinishLocationValue}
               handler={handlerInputFinishLocation}
               inputType='text'
+              keyDownEventActive={true}
+              handlerKeyDownEvent={(event) => {
+                if(event.key === "Enter"){
+                  const body = {
+                    origen: inputStartLocationValue,
+                    destino: inputFinishLocationValue, 
+                    token: localStorage.getItem("token")
+                  }
+                  console.log(body)
+                  fetch(`${BASE_URL}/viajes`, {
+                    body: JSON.stringify(body),
+                    method: "POST", 
+                    headers: {
+                      "Content-Type": "aplication/json"
+                    }
+                  })
+                    .then(async response => await response.json())
+                    .then(data => { console.log(data); })
+                    .catch(error => { console.log(error); })
+                }
+              }}
               inputPlaceholder='¿A dónde te llevamos?'
             />
           </div>
