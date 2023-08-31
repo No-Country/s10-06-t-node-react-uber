@@ -51,11 +51,13 @@ export const Login: React.FC = () => {
 
           const data = await response.json()
           setErrors(data)
-
           if (response.status === 200) {
             const token = data.token
             localStorage.setItem('token', token)
             navigate('/dashboard')
+          }
+          else {
+            setErrors({ email: "El correo no está registrado" })
           }
         }
         void authLogin(email, password)
@@ -92,9 +94,8 @@ export const Login: React.FC = () => {
               <input
                 type='text'
                 placeholder='Ingresar correo electronico'
-                className={`w-[251px] border-b-[1px] border-[#CFCFCF] text-[11px] outline-none ${
-                  Boolean(errors.email) && 'border-b-[1px] border-red-500'
-                }`}
+                className={`w-[251px] border-b-[1px] border-[#CFCFCF] text-[11px] outline-none ${Boolean(errors.email) && 'border-b-[1px] border-red-500'
+                  }`}
                 value={email}
                 onChange={handleEmailChange}
               />
@@ -106,9 +107,8 @@ export const Login: React.FC = () => {
               <input
                 type='text'
                 placeholder='Contraseña'
-                className={`w-[251px] border-b-[1px] border-[#CFCFCF] text-[11px] outline-none ${
-                  Boolean(errors.password) && 'border-b-[1px] border-red-500'
-                }`}
+                className={`w-[251px] border-b-[1px] border-[#CFCFCF] text-[11px] outline-none ${Boolean(errors.password) && 'border-b-[1px] border-red-500'
+                  }`}
                 value={password}
                 onChange={handlePasswordChange}
               />
