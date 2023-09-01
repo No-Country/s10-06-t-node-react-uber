@@ -50,13 +50,6 @@ const SetTrip: React.FC = () => {
     setInputStartLocationValue,
   } = useSetTripInputsStore((state) => state)
 
-  function handlerInputStartLocation(
-    e: React.ChangeEvent<HTMLInputElement>,
-  ): void {
-    setInputStartLocationValue(e.target.value)
-    activeLocationAutocomplete()
-  }
-
   interface LocationAutocompleteProps {
     locationName: string
     location: string
@@ -124,7 +117,10 @@ const SetTrip: React.FC = () => {
             <TbPointFilled className='mr-[4px] text-24 text-primary' />
             <Input
               value={inputStartLocationValue}
-              handler={handlerInputStartLocation}
+              handler={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setInputStartLocationValue(e.target.value)
+                activeLocationAutocomplete()
+              }}
               inputType='text'
               inputPlaceholder='¿De dónde salís?'
             />
