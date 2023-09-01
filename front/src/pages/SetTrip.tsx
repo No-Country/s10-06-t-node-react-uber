@@ -21,6 +21,11 @@ const useSetTripStore = create<typeSetTripState>()((set) => ({
   },
 }))
 
+interface typePosiblesLocationState {
+  posiblesLocation: object[]
+  setPosiblesLocation: () => void
+}
+
 interface typeSetTripInputsState {
   inputStartLocationValue: string
   inputFinishLocationValue: string
