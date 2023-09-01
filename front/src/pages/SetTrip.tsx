@@ -5,7 +5,7 @@ import { GoTriangleDown } from 'react-icons/go'
 import { create } from 'zustand'
 import { Link } from 'react-router-dom'
 import Input from '../components/common/Input'
-import { BASE_URL } from '@/utils/api'
+// import { BASE_URL } from '@/utils/api'
 import LocationAutocompleteItems from '@/components/common/LocationAutocompleteItems'
 import RecentTripsItem from '@/components/common/RecentTripsItem'
 interface typeSetTripState {
@@ -81,25 +81,25 @@ const SetTrip: React.FC = () => {
               keyDownEventActive={true}
               handlerKeyDownEvent={async (event) => {
                 if (event.key === 'Enter') {
-                  const body = {
-                    origen: inputStartLocationValue,
-                    destino: inputFinishLocationValue,
-                    token: localStorage.token,
-                  }
-                  await fetch(`${BASE_URL}/viajes`, {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(body),
-                  })
-                    .then(async (response) => await response.json())
-                    .then((data) => {
-                      console.log(data)
-                    })
-                    .catch((error) => {
-                      console.log(error)
-                    })
+                  // const body = {
+                  //   origen: inputStartLocationValue,
+                  //   destino: inputFinishLocationValue,
+                  //   token: localStorage.token,
+                  // }
+                  // await fetch(`${BASE_URL}/viajes`, {
+                  //   method: 'POST',
+                  //   headers: {
+                  //     'Content-Type': 'application/json',
+                  //   },
+                  //   body: JSON.stringify(body),
+                  // })
+                  //   .then(async (response) => await response.json())
+                  //   .then((data) => {
+                  //     console.log(data)
+                  //   })
+                  //   .catch((error) => {
+                  //     console.log(error)
+                  //   })
                 }
               }}
               inputPlaceholder='¿A dónde te llevamos?'
