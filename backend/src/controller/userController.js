@@ -101,7 +101,7 @@ const usersPut = async (req, res) => {
     email: req.body.email,
     dateOfBirth: req.body.dateOfBirth,
     nationality: req.body.nationality,
-    cellnumber: req.body.cellNumber,
+    cellNumber: req.body.cellNumber,
   };
 
   try {
