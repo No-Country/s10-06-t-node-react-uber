@@ -8,7 +8,6 @@ import Input from '../components/common/Input'
 import { BASE_URL } from '@/utils/api'
 import LocationAutocompleteItems from '@/components/common/LocationAutocompleteItems'
 import RecentTripsItem from '@/components/common/RecentTripsItem'
-import { OpenStreetMapProvider } from 'leaflet-geosearch'
 interface typeSetTripState {
   locationAutocomplete: boolean
   activeLocationAutocomplete: () => void
@@ -41,8 +40,6 @@ const SetTrip: React.FC = () => {
   const { locationAutocomplete, activeLocationAutocomplete } = useSetTripStore(
     (state) => state,
   )
-
-  const provider = new OpenStreetMapProvider()
 
   const {
     inputFinishLocationValue,
@@ -79,9 +76,6 @@ const SetTrip: React.FC = () => {
               handler={async (e: React.ChangeEvent<HTMLInputElement>) => {
                 setInputFinishLocationValue(e.target.value)
                 activeLocationAutocomplete()
-                const leafletGeosearchProviderResults = await provider.search({
-                  query: inputFinishLocationValue,
-                })
               }}
               inputType='text'
               keyDownEventActive={true}
