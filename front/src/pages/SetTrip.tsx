@@ -4,10 +4,10 @@ import { TbPointFilled } from 'react-icons/tb'
 import { GoTriangleDown } from 'react-icons/go'
 import { HiLocationMarker } from 'react-icons/hi'
 import { create } from 'zustand'
-import { Link } from "react-router-dom"
-import Input from "../components/common/Input"
+import { Link } from 'react-router-dom'
+import Input from '../components/common/Input'
 import { BASE_URL } from '@/utils/api'
-
+import { OpenStreetMapProvider } from 'leaflet-geosearch/dist/providers/index.js'
 interface typeSetTripState {
   locationAutocomplete: boolean
   activeLocationAutocomplete: () => void
@@ -40,6 +40,8 @@ const SetTrip: React.FC = () => {
   const { locationAutocomplete, activeLocationAutocomplete } = useSetTripStore(
     (state) => state,
   )
+
+  const provider = new OpenStreetMapProvider()
 
   const {
     inputFinishLocationValue,
@@ -120,7 +122,7 @@ const SetTrip: React.FC = () => {
     <Container>
       <main className='text-20'>
         <h2 className='flex items-center text-24'>
-          <Link to="/dashboard" className="flex">
+          <Link to='/dashboard' className='flex'>
             <BiArrowBack className='mr-3 text-primary' /> Solicitar un viaje
           </Link>
         </h2>
@@ -142,14 +144,14 @@ const SetTrip: React.FC = () => {
               inputType='text'
               keyDownEventActive={true}
               handlerKeyDownEvent={(event) => {
-                if(event.key === "Enter"){
+                if (event.key === 'Enter') {
                   const body = {
                     origen: inputStartLocationValue,
                     destino: inputFinishLocationValue,
-                    token: localStorage.token
+                    token: localStorage.token,
                   }
                   console.log(body)
-                  
+
                   fetch(`${BASE_URL}/viajes`, {
                     method: 'POST',
                     headers: {
@@ -157,9 +159,13 @@ const SetTrip: React.FC = () => {
                     },
                     body: JSON.stringify(body),
                   })
-                  .then(async response => await response.json())
-                  .then(data => { console.log(data); })
-                  .catch(error => { console.log(error); })
+                    .then(async (response) => await response.json())
+                    .then((data) => {
+                      console.log(data)
+                    })
+                    .catch((error) => {
+                      console.log(error)
+                    })
                 }
               }}
               inputPlaceholder='¿A dónde te llevamos?'
