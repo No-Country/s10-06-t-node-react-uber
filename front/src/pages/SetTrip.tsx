@@ -7,7 +7,7 @@ import { create } from 'zustand'
 import { Link } from 'react-router-dom'
 import Input from '../components/common/Input'
 import { BASE_URL } from '@/utils/api'
-import { OpenStreetMapProvider } from 'leaflet-geosearch/dist/providers/index.js'
+import { OpenStreetMapProvider } from 'leaflet-geosearch'
 interface typeSetTripState {
   locationAutocomplete: boolean
   activeLocationAutocomplete: () => void
@@ -54,13 +54,6 @@ const SetTrip: React.FC = () => {
     e: React.ChangeEvent<HTMLInputElement>,
   ): void {
     setInputStartLocationValue(e.target.value)
-    activeLocationAutocomplete()
-  }
-
-  function handlerInputFinishLocation(
-    e: React.ChangeEvent<HTMLInputElement>,
-  ): void {
-    setInputFinishLocationValue(e.target.value)
     activeLocationAutocomplete()
   }
 
@@ -140,7 +133,13 @@ const SetTrip: React.FC = () => {
             <GoTriangleDown className='mr-[4px] text-24 text-darkGray' />
             <Input
               value={inputFinishLocationValue}
-              handler={handlerInputFinishLocation}
+              handler={async (e: React.ChangeEvent<HTMLInputElement>) => {
+                setInputFinishLocationValue(e.target.value)
+                activeLocationAutocomplete()
+                const leafletGeosearchProviderResults = await provider.search({
+                  query: inputFinishLocationValue,
+                })
+              }}
               inputType='text'
               keyDownEventActive={true}
               handlerKeyDownEvent={async (event) => {
