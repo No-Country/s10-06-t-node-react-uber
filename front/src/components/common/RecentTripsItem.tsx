@@ -1,4 +1,5 @@
 import { BiTime } from 'react-icons/bi'
+import ItemsContainer from './ItemsContainer'
 
 interface RecentTripsProps {
   finishLocation: string
