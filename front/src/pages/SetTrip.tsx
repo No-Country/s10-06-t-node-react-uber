@@ -8,6 +8,8 @@ import Input from '../components/common/Input'
 // import { BASE_URL } from '@/utils/api'
 import LocationAutocompleteItems from '@/components/common/LocationAutocompleteItems'
 import RecentTripsItem from '@/components/common/RecentTripsItem'
+import locationIqApiBaseUrl from '@/utils/locationIqApi'
+import locationIqAccessToken from '@/utils/locationIqAccessToken'
 interface typeSetTripState {
   locationAutocomplete: boolean
   activeLocationAutocomplete: () => void
@@ -81,6 +83,16 @@ const SetTrip: React.FC = () => {
               keyDownEventActive={true}
               handlerKeyDownEvent={async (event) => {
                 if (event.key === 'Enter') {
+                  await fetch(
+                    `${locationIqApiBaseUrl}/autocomplete?key=${locationIqAccessToken}&q=${inputFinishLocationValue}`,
+                  )
+                    .then(async (response) => await response.json())
+                    .then((data) => {
+                      console.log(data)
+                    })
+                    .catch((error) => {
+                      console.log(error)
+                    })
                   // const body = {
                   //   origen: inputStartLocationValue,
                   //   destino: inputFinishLocationValue,
