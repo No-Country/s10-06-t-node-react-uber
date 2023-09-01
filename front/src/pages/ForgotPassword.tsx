@@ -2,6 +2,7 @@ import { HeaderAuth } from '@/components/HeaderAuth'
 import { type FormEvent, useState } from 'react'
 import { CgSpinner } from 'react-icons/cg'
 import { Link } from 'react-router-dom'
+import { BASE_URL } from '@/utils/api'
 
 type emailSentd = boolean | null
 
@@ -13,7 +14,7 @@ export const ForgotPassword: React.FC = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault()
     setIsLoading(true)
-    await fetch('http://localhost:1237/users/recuperarPassword', {
+    await fetch(`${BASE_URL}/users/recuperarPassword`, {
       method: 'POST',
       body: JSON.stringify({
         email,
