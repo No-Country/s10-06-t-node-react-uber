@@ -4,15 +4,20 @@ import { type FormEvent, useState } from 'react'
 import { LoginGoogleButton } from '@/components/LoginGoogleButton'
 import { LoginFacebookButton } from '@/components/LoginFacebookButton'
 import { BASE_URL } from '@/utils/api'
+import eye from '@/assets/eye.svg'
+import eyeSlash from '@/assets/eye-slash.svg'
 
 interface Errors {
   email?: string
   password?: string
 }
+
 export const Login: React.FC = () => {
   const [errors, setErrors] = useState<Errors>({})
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  const [passwordVisible, setPasswordVisible] = useState(false)
+
   const navigate = useNavigate()
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -56,9 +61,6 @@ export const Login: React.FC = () => {
             localStorage.setItem('token', token)
             navigate('/dashboard')
           }
-          else {
-            setErrors({ email: "El correo no está registrado" })
-          }
         }
         void authLogin(email, password)
       } else {
@@ -66,6 +68,12 @@ export const Login: React.FC = () => {
       }
     }
     validateEmail(email)
+  }
+  const togglePasswordVisibility = (e: {
+    preventDefault: () => void
+  }): void => {
+    e.preventDefault()
+    setPasswordVisible(!passwordVisible)
   }
   return (
     <>
@@ -94,8 +102,9 @@ export const Login: React.FC = () => {
               <input
                 type='text'
                 placeholder='Ingresar correo electronico'
-                className={`w-[251px] border-b-[1px] border-[#CFCFCF] text-[11px] outline-none ${Boolean(errors.email) && 'border-b-[1px] border-red-500'
-                  }`}
+                className={`w-[251px] border-b-[1px] border-[#CFCFCF] text-[11px] outline-none ${
+                  Boolean(errors.email) && 'border-b-[1px] border-red-500'
+                }`}
                 value={email}
                 onChange={handleEmailChange}
               />
@@ -103,21 +112,32 @@ export const Login: React.FC = () => {
                 <p className='text-xs text-red-500'>{errors.email}</p>
               )}
             </div>
-            <div className='flex flex-col'>
+            <div className='relative flex flex-col'>
               <input
-                type='text'
+                type={passwordVisible ? 'text' : 'password'}
                 placeholder='Contraseña'
-                className={`w-[251px] border-b-[1px] border-[#CFCFCF] text-[11px] outline-none ${Boolean(errors.password) && 'border-b-[1px] border-red-500'
-                  }`}
+                className={`w-[251px] border-b-[1px] border-[#CFCFCF] text-[11px] outline-none  ${
+                  errors.password ? 'border-red-500 text-red-500' : ''
+                }`}
                 value={password}
                 onChange={handlePasswordChange}
               />
+
+              <button
+                className={`absolute right-2 ${!password && 'hidden'}`}
+                onClick={togglePasswordVisibility}
+              >
+                <img
+                  src={passwordVisible ? eye : eyeSlash}
+                  alt='toggle show password'
+                />
+              </button>
               {Boolean(errors?.password) && (
                 <p className='text-xs text-red-500'>{errors.password}</p>
               )}
               <Link
                 className='ml-auto text-[11px] text-[#8A8A8A] hover:underline'
-                to='/change-password'
+                to='/forgot-password'
               >
                 ¿Has olvidado tu contraseña?
               </Link>
