@@ -1,12 +1,13 @@
 import Container from '../components/layouts/Container'
-import { BiArrowBack, BiTime } from 'react-icons/bi'
+import { BiArrowBack } from 'react-icons/bi'
 import { TbPointFilled } from 'react-icons/tb'
 import { GoTriangleDown } from 'react-icons/go'
-import { HiLocationMarker } from 'react-icons/hi'
 import { create } from 'zustand'
 import { Link } from 'react-router-dom'
 import Input from '../components/common/Input'
 import { BASE_URL } from '@/utils/api'
+import LocationAutocompleteItems from '@/components/common/LocationAutocompleteItems'
+import RecentTripsItem from '@/components/common/RecentTripsItem'
 import { OpenStreetMapProvider } from 'leaflet-geosearch'
 interface typeSetTripState {
   locationAutocomplete: boolean
@@ -49,60 +50,6 @@ const SetTrip: React.FC = () => {
     setInputFinishLocationValue,
     setInputStartLocationValue,
   } = useSetTripInputsStore((state) => state)
-
-  interface LocationAutocompleteProps {
-    locationName: string
-    location: string
-    km: number
-  }
-
-  const LocationAutocompleteItems: React.FC<LocationAutocompleteProps> = ({
-    locationName,
-    location,
-    km,
-  }) => {
-    return (
-      <ItemsContainer>
-        <HiLocationMarker className='mr-3 text-24 text-primary' />
-        <p className='overflow-hidden text-ellipsis font-light'>
-          <span className='block font-bold'>{locationName}</span>
-          <span className='whitespace-nowrap'>{location}</span>
-        </p>
-        <span className='justify-self-end font-bold'>{km} km</span>
-      </ItemsContainer>
-    )
-  }
-  // Esté componente, se utiliza para estilizar el contenedor de los items.
-  interface ItemsContainerProps {
-    children: React.ReactNode
-  }
-
-  // Esté componente, se utiliza para estilizar el contenedor de los items.
-  const ItemsContainer: React.FC<ItemsContainerProps> = ({ children }) => {
-    return (
-      <div className='mt-3 grid grid-flow-col grid-cols-[max-content_minmax(min-content,_max-content)_minmax(min-content)] grid-rows-[min-content] items-center rounded-full bg-[#f8f8f8] px-[12px] py-[6px] font-light shadow-setTripItems'>
-        {children}
-      </div>
-    )
-  }
-
-  interface RecentTripsProps {
-    finishLocation: string
-    km: number
-  }
-
-  const RecentTripsItem: React.FC<RecentTripsProps> = ({
-    finishLocation,
-    km,
-  }) => {
-    return (
-      <ItemsContainer>
-        <BiTime className='mr-3 text-24' />
-        {finishLocation}
-        <span className='justify-self-end font-bold'>{km} km</span>
-      </ItemsContainer>
-    )
-  }
 
   return (
     <Container>
