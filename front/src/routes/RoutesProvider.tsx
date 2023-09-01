@@ -13,6 +13,7 @@ import { Layout } from '@/components/layouts/Layout'
 import { Dashboard } from '@/pages/Dashboard'
 import SetTrip from '@/pages/SetTrip'
 import { AuthGuard } from './guard/AuthGuard'
+import { ForgotPassword } from '@/pages/ForgotPassword'
 
 const RoutesProvider: FC = () => {
   return (
@@ -31,6 +32,7 @@ const RoutesProvider: FC = () => {
         <Route path='/register' element={<Register />} />
         <Route path='/register-codigo' element={<RegisterCodigo />} />
         <Route path='/register-data' element={<RegisterData />} />
+        <Route path='/forgot-password' element={<ForgotPassword />} />
       </Routes>
     </BrowserRouter>
   )
