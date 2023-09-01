@@ -1,4 +1,5 @@
 import { HiLocationMarker } from 'react-icons/hi'
+import ItemsContainer from './ItemsContainer'
 
 interface LocationAutocompleteProps {
   locationName: string
