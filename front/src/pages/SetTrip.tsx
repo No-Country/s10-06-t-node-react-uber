@@ -143,16 +143,14 @@ const SetTrip: React.FC = () => {
               handler={handlerInputFinishLocation}
               inputType='text'
               keyDownEventActive={true}
-              handlerKeyDownEvent={(event) => {
+              handlerKeyDownEvent={async (event) => {
                 if (event.key === 'Enter') {
                   const body = {
                     origen: inputStartLocationValue,
                     destino: inputFinishLocationValue,
                     token: localStorage.token,
                   }
-                  console.log(body)
-
-                  fetch(`${BASE_URL}/viajes`, {
+                  await fetch(`${BASE_URL}/viajes`, {
                     method: 'POST',
                     headers: {
                       'Content-Type': 'application/json',
