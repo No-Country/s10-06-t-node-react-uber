@@ -2,7 +2,7 @@ import { type FC } from 'react';
 import { AccessHomeButtons } from '@/components/Home/AccessHomeButtons';
 import { CustomShortcut } from '@/components/Home/CustomShortcut';
 import { BiSearch } from "react-icons/bi";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 export const Home: FC = () => {
     return (
