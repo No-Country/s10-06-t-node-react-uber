@@ -25,21 +25,21 @@ jobs:
 
       # Installs dependencies using yarn
       - name: Setup yarn
-        uses: borales/actions-yarn@v4
+        uses: borales/actions-yarn@v4.2.0
         with:
           cmd: install
           dir: front
 
       # Runs lint using yarn
       - name: Run Lint
-        uses: borales/actions-yarn@v4
+        uses: borales/actions-yarn@v4.2.0
         with:
           cmd: lint
           dir: front
 
       # Builds the project using yarn
       - name: Build
-        uses: borales/actions-yarn@v4
+        uses: borales/actions-yarn@v4.2.0
         with:
           cmd: build
           dir: front
