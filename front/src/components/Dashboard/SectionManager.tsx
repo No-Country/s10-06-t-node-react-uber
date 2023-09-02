@@ -42,7 +42,7 @@ export const SectionManager: FC = () => {
             {
                 sectionButtons.map((section, index) => (
                 <li className='flex w-2/6 flex-col items-center justify-center'
-                    onClick={() => sectionButtonManager(section.name, section.link)}
+                    onClick={() => {sectionButtonManager(section.name, section.link)}}
                     key={index}
                 >
                     <i className={`${section.name === nameSection && 'bg-slate-300'} 

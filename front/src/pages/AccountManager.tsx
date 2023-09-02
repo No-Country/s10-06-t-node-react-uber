@@ -54,14 +54,13 @@ export const AccountManager: FC = () => {
         <div className='h-full px-5 pt-16'>
             <h1 className='text-[24px] font-semibold'>Perfil</h1>
             <div className='flex items-center justify-center rounded-full'>
-                {/*<img className='w-[90px] h-[97px] rounded-full bg-slate-300' src="" alt="" />*/}
                 <HiUserCircle color='#718096' size='100'/>
             </div>
             <h2 className='border-b-[1px] border-[#29103A] 
                 text-[24px] text-center 
                 py-5 font-semibold'
             >
-                {user?.firstName || 'Gonzalo'} {user?.lastName || 'Ramirez'}
+                {user?.firstName ?? 'Gonzalo'} {user?.lastName ?? 'Ramirez'}
             </h2>
             <ul>
                 {
@@ -69,7 +68,7 @@ export const AccountManager: FC = () => {
                         <li className='h-[34px] flex justify-between items-center 
                             px-2 rounded-3xl shadow-lg mt-5 py-5'
                             key={index}
-                            onClick={()=> handleProfileButtons(profileButton.link, profileButton.name)}
+                            onClick={()=> {handleProfileButtons(profileButton.link, profileButton.name)}}
                         >
                             <div className='flex'>
                                 {profileButton.icon}

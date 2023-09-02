@@ -8,7 +8,7 @@ interface FixedField {
 export const FixedFieldInputs: FC<FixedField> = ({ label, dataUser }) => {
   return (
     <div className='bg-[#CCCCCC] h-[56px] border-b-[1px] 
-      border-[#29103A] mt-5 pt-1 
+      border-[#29103A] mt-5 pt-1 rounded-t-[5px]
       px-5 flex items-center'
     >
       <div className='flex flex-col'>
