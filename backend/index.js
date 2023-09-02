@@ -8,14 +8,12 @@ import { initDBConnection } from './src/data/dbConnection.js';
 import login from './src/routes/loginRoute.js';
 import registerUser from './src/routes/registerRoute.js';
 import emailVerification from './src/routes/registerRoute.js';
-
 import { registerLogin } from './src/controller/registerController.js';
-
 import viajes from './src/routes/viajesRoutes.js';
 import { validateTokenController } from './src/controller/validateTokenController.js';
-
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import ticket from './src/routes/ticketRoutes.js'
 
 dotenv.config();
 const app = express();
@@ -47,6 +45,8 @@ app.use('/protected-route', validateTokenController);
 app.use('/payment', paymentRoute);
 app.use('/viajes', viajes);
 app.use('/', registerLogin);
+app.use('/ticket', ticket);
+
 
 app.listen(PORT, () => {
   initDBConnection();

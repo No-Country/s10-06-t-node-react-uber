@@ -15,17 +15,24 @@ const crearViaje = async (req, res) => {
 
 const obtenerViajes = async (req, res) => {
   try {
-    const viajes = await Viaje.find();
+    const viajes = await Viaje.find()
+      .populate("id_conductor")
+      .populate("id_usuario")
+      .exec();
+
     res.json(viajes);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
-
 const obtenerViajePorId = async (req, res) => {
   try {
-    const viaje = await Viaje.findById(req.params.id);
+    const viaje = await Viaje.findById(req.params.id)
+      .populate("id_conductor")
+      .populate("id_usuario")
+      .exec();
+
     if (viaje) {
       res.json(viaje);
     } else {
@@ -35,6 +42,8 @@ const obtenerViajePorId = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+
 
 const actualizarViaje = async (req, res) => {
   try {
