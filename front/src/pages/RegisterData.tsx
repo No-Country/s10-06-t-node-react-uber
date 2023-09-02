@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import '../styles/index.css'
+import '../styles/index.css' // Esté import, no hace nada :)
 import { HeaderAuth } from '@/components/HeaderAuth'
 // import { useState } from 'react'
 import * as apiAuth from '../utils/apiAuth'

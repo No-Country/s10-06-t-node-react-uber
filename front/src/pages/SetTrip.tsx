@@ -1,11 +1,13 @@
 import Container from '../components/layouts/Container'
-import { BiArrowBack, BiTime } from 'react-icons/bi'
+import { BiArrowBack } from 'react-icons/bi'
 import { TbPointFilled } from 'react-icons/tb'
 import { GoTriangleDown } from 'react-icons/go'
-import { HiLocationMarker } from 'react-icons/hi'
-import type React from 'react'
 import { create } from 'zustand'
-
+import { Link } from 'react-router-dom'
+import Input from '../components/common/Input'
+// import { BASE_URL } from '@/utils/api'
+import LocationAutocompleteItems from '@/components/common/LocationAutocompleteItems'
+import RecentTripsItem from '@/components/common/RecentTripsItem'
 interface typeSetTripState {
   locationAutocomplete: boolean
   activeLocationAutocomplete: () => void
@@ -46,114 +48,23 @@ const SetTrip: React.FC = () => {
     setInputStartLocationValue,
   } = useSetTripInputsStore((state) => state)
 
-  function handlerInputStartLocation(
-    e: React.ChangeEvent<HTMLInputElement>,
-  ): void {
-    setInputStartLocationValue(e.target.value)
-    activeLocationAutocomplete()
-  }
-
-  function handlerInputFinishLocation(
-    e: React.ChangeEvent<HTMLInputElement>,
-  ): void {
-    setInputFinishLocationValue(e.target.value)
-    activeLocationAutocomplete()
-  }
-
-  interface LocationAutocompleteProps {
-    locationName: string
-    location: string
-    km: number
-  }
-
-  const LocationAutocompleteItems: React.FC<LocationAutocompleteProps> = ({
-    locationName,
-    location,
-    km,
-  }) => {
-    return (
-      <ItemsContainer>
-        <HiLocationMarker className='mr-3 text-24 text-primary' />
-        <p className='overflow-hidden text-ellipsis font-light'>
-          <span className='block font-bold'>{locationName}</span>
-          <span className='whitespace-nowrap'>{location}</span>
-        </p>
-        <span className='justify-self-end font-bold'>{km} km</span>
-      </ItemsContainer>
-    )
-  }
-  // Esté componente, se utiliza para estilizar el contenedor de los items.
-  interface ItemsContainerProps {
-    children: React.ReactNode
-  }
-
-  // Esté componente, se utiliza para estilizar el contenedor de los items.
-  const ItemsContainer: React.FC<ItemsContainerProps> = ({ children }) => {
-    return (
-      <div className='mt-3 grid grid-flow-col grid-cols-[max-content_minmax(min-content,_max-content)_minmax(min-content)] grid-rows-[min-content] items-center rounded-full bg-[#f8f8f8] px-[12px] py-[6px] font-light shadow-setTripItems'>
-        {children}
-      </div>
-    )
-  }
-
-  interface RecentTripsProps {
-    finishLocation: string
-    km: number
-  }
-
-  const RecentTripsItem: React.FC<RecentTripsProps> = ({
-    finishLocation,
-    km,
-  }) => {
-    return (
-      <ItemsContainer>
-        <BiTime className='mr-3 text-24' />
-        {finishLocation}
-        <span className='justify-self-end font-bold'>{km} km</span>
-      </ItemsContainer>
-    )
-  }
-
-  interface InputProps {
-    inputType: string
-    inputPlaceholder: string
-    className?: string
-    handler: (event: React.ChangeEvent<HTMLInputElement>) => void
-    value: string
-  }
-
-  const Input: React.FC<InputProps> = ({
-    inputType,
-    inputPlaceholder,
-    className = '',
-    handler,
-    value,
-  }) => {
-    return (
-      <input
-        onChange={(event) => {
-          handler(event)
-        }}
-        value={value}
-        className={`w-full rounded-full border-2 border-solid border-dark px-[12px] py-[6px] placeholder-dark shadow-setTripItems focus:outline-none ${className}`}
-        type={inputType}
-        placeholder={inputPlaceholder}
-      />
-    )
-  }
-
   return (
     <Container>
       <main className='text-20'>
         <h2 className='flex items-center text-24'>
-          <BiArrowBack className='mr-3 text-primary' /> Solicitar un viaje
+          <Link to='/dashboard' className='flex'>
+            <BiArrowBack className='mr-3 text-primary' /> Solicitar un viaje
+          </Link>
         </h2>
         <form className='relative my-7'>
           <div className='mb-5 flex items-center'>
             <TbPointFilled className='mr-[4px] text-24 text-primary' />
             <Input
               value={inputStartLocationValue}
-              handler={handlerInputStartLocation}
+              handler={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setInputStartLocationValue(e.target.value)
+                activeLocationAutocomplete()
+              }}
               inputType='text'
               inputPlaceholder='¿De dónde salís?'
             />
@@ -162,8 +73,35 @@ const SetTrip: React.FC = () => {
             <GoTriangleDown className='mr-[4px] text-24 text-darkGray' />
             <Input
               value={inputFinishLocationValue}
-              handler={handlerInputFinishLocation}
+              handler={async (e: React.ChangeEvent<HTMLInputElement>) => {
+                setInputFinishLocationValue(e.target.value)
+                activeLocationAutocomplete()
+              }}
               inputType='text'
+              keyDownEventActive={true}
+              handlerKeyDownEvent={async (event) => {
+                if (event.key === 'Enter') {
+                  // const body = {
+                  //   origen: inputStartLocationValue,
+                  //   destino: inputFinishLocationValue,
+                  //   token: localStorage.token,
+                  // }
+                  // await fetch(`${BASE_URL}/viajes`, {
+                  //   method: 'POST',
+                  //   headers: {
+                  //     'Content-Type': 'application/json',
+                  //   },
+                  //   body: JSON.stringify(body),
+                  // })
+                  //   .then(async (response) => await response.json())
+                  //   .then((data) => {
+                  //     console.log(data)
+                  //   })
+                  //   .catch((error) => {
+                  //     console.log(error)
+                  //   })
+                }
+              }}
               inputPlaceholder='¿A dónde te llevamos?'
             />
           </div>
