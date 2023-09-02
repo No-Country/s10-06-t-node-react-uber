@@ -21,6 +21,7 @@ const obtenerTickets = async (req, res) => {
   }
 };
 
+
 const obtenerTicketPorId = async (req, res) => {
   try {
     const ticket = await Ticket.findById(req.params.id)
