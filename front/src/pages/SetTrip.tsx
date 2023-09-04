@@ -9,11 +9,9 @@ import Input from '../components/common/Input'
 import RecentTripsItem from '@/components/common/RecentTripsItem'
 import locationIqApiBaseUrl from '@/utils/locationIqApi'
 import locationIqAccessToken from '@/utils/locationIqAccessToken'
-import {
-  LocationAutocomplete,
-  type typeLocationIQAutocompleteData,
-  usePosiblesLocationStore,
-} from '@/components/common/LocationAutocomplete'
+import { LocationAutocomplete } from '@/components/common/LocationAutocomplete'
+import type { typeLocationIQAutocompleteData } from '@/components/common/LocationAutocomplete'
+import usePosiblesLocationStore from '@/stateManagement/usePosiblesLocationStore'
 interface typeSetTripState {
   locationAutocomplete: boolean
   activeLocationAutocomplete: () => void
