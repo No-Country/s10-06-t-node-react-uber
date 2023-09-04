@@ -30,7 +30,7 @@ export type typeLocationIQAutocompleteData = Array<{
 interface typePosiblesLocationState {
   posiblesLocation: typeLocationIQAutocompleteData | undefined
   setPosiblesLocation: (
-    newPosiblesLocation: typeLocationIQAutocompleteData,
+    newPosiblesLocation: typeLocationIQAutocompleteData | undefined,
   ) => void
 }
 export const usePosiblesLocationStore = create<typePosiblesLocationState>()(
