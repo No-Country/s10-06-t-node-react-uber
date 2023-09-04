@@ -8,7 +8,7 @@ type typeLocationIQAutocompleteData = Array<{
   licence: string
   lat: string
   lon: number
-  boundingbox: Array<number>
+  boundingbox: number[]
   class: string
   type: string
   display_name: string
@@ -43,9 +43,7 @@ const usePosiblesLocationStore = create<typePosiblesLocationState>()((set) => ({
 }))
 
 const LocationAutocomplete: React.FC = () => {
-  const { posiblesLocation, setPosiblesLocation } = usePosiblesLocationStore(
-    (state) => state,
-  )
+  const { posiblesLocation } = usePosiblesLocationStore((state) => state)
 
   return (
     <>
