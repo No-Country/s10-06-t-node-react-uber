@@ -2,7 +2,7 @@ import locationIqAccessToken from './locationIqAccessToken'
 import locationIqApiBaseUrl from './locationIqApi'
 import usePosiblesLocationStore from '@/stateManagement/usePosiblesLocationStore'
 
-function locationIqAutocomplete(): Promise<T> {
+async function useLocationIqAutocomplete(): Promise<T> {
   const { setPosiblesLocation } = usePosiblesLocationStore((state) => state)
   await fetch(
     `${locationIqApiBaseUrl}/autocomplete?key=${locationIqAccessToken}&q=${inputFinishLocationValue}`,
@@ -23,4 +23,4 @@ function locationIqAutocomplete(): Promise<T> {
     })
 }
 
-export default locationIqAutocomplete
+export default useLocationIqAutocomplete
