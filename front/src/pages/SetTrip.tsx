@@ -74,6 +74,26 @@ const SetTrip: React.FC = () => {
               }}
               inputType='text'
               inputPlaceholder='¿De dónde salís?'
+              keyDownEventActive={true}
+              handlerKeyDownEvent={async (event) => {
+                await fetch(
+                  `${locationIqApiBaseUrl}/autocomplete?key=${locationIqAccessToken}&q=${inputStartLocationValue}`,
+                )
+                  .then(async (response) => await response.json())
+                  .then((data) => {
+                    if (data.error) {
+                      console.log('error')
+                    } else {
+                      return data
+                    }
+                  })
+                  .then((data: typeLocationIQAutocompleteData) => {
+                    setPosiblesLocation(data)
+                  })
+                  .catch((error) => {
+                    console.log(error)
+                  })
+              }}
             />
           </div>
           <div className='flex items-center'>
@@ -104,27 +124,6 @@ const SetTrip: React.FC = () => {
                   .catch((error) => {
                     console.log(error)
                   })
-                if (event.key === 'Enter') {
-                  // const body = {
-                  //   origen: inputStartLocationValue,
-                  //   destino: inputFinishLocationValue,
-                  //   token: localStorage.token,
-                  // }
-                  // await fetch(`${BASE_URL}/viajes`, {
-                  //   method: 'POST',
-                  //   headers: {
-                  //     'Content-Type': 'application/json',
-                  //   },
-                  //   body: JSON.stringify(body),
-                  // })
-                  //   .then(async (response) => await response.json())
-                  //   .then((data) => {
-                  //     console.log(data)
-                  //   })
-                  //   .catch((error) => {
-                  //     console.log(error)
-                  //   })
-                }
               }}
               inputPlaceholder='¿A dónde te llevamos?'
             />
