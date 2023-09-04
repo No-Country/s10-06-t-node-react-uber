@@ -1,7 +1,7 @@
 import LocationAutocompleteItems from './LocationAutocompleteItems'
 import { create } from 'zustand'
 
-interface typeLocationIQAutocompleteData {
+type typeLocationIQAutocompleteData = Array<{
   place_id: number,
   osm_id: number,
   osm_type: string,
@@ -26,13 +26,13 @@ interface typeLocationIQAutocompleteData {
       country: string,
       country_code: string
   }
-}
+}>
 interface typePosiblesLocationState {
-  posiblesLocation: object[]
-  setPosiblesLocation: (newPosiblesLocation: object[]) => void
+  posiblesLocation: typeLocationIQAutocompleteData
+  setPosiblesLocation: (newPosiblesLocation: typeLocationIQAutocompleteData) => void
 }
 const usePosiblesLocationStore = create<typePosiblesLocationState>()((set) => ({
-  posiblesLocation: [{}],
+  posiblesLocation: [] as typeLocationIQAutocompleteData,
   setPosiblesLocation: (newPosiblesLocation) => {
     set(() => ({
       posiblesLocation: newPosiblesLocation,
@@ -47,7 +47,7 @@ const LocationAutocomplete: React.FC = () => {
 
   posiblesLocation.map((posibleLocation) => {
     return (
-      <LocationAutocompleteItems key= km={5} location='fasd' locationName='fasd' />
+      <LocationAutocompleteItems key={posibleLocation.} km={5} location='fasd' locationName='fasd' />
     )
   })
 }
