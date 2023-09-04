@@ -28,14 +28,14 @@ export type typeLocationIQAutocompleteData = Array<{
   }
 }>
 interface typePosiblesLocationState {
-  posiblesLocation: typeLocationIQAutocompleteData
+  posiblesLocation: typeLocationIQAutocompleteData | undefined
   setPosiblesLocation: (
     newPosiblesLocation: typeLocationIQAutocompleteData,
   ) => void
 }
 export const usePosiblesLocationStore = create<typePosiblesLocationState>()(
   (set) => ({
-    posiblesLocation: [] as typeLocationIQAutocompleteData,
+    posiblesLocation: undefined,
     setPosiblesLocation: (newPosiblesLocation) => {
       set(() => ({
         posiblesLocation: newPosiblesLocation,
@@ -46,19 +46,19 @@ export const usePosiblesLocationStore = create<typePosiblesLocationState>()(
 
 export const LocationAutocomplete: React.FC = () => {
   const { posiblesLocation } = usePosiblesLocationStore((state) => state)
+  if (posiblesLocation) {
+    const posiblesLocationElements = posiblesLocation.map((posibleLocation) => {
+      return (
+        <LocationAutocompleteItems
+          key={posibleLocation.place_id}
+          km={5}
+          location={posibleLocation.display_address}
+          locationName={posibleLocation.display_name}
+        />
+      )
+    })
 
-  return (
-    <>
-      {posiblesLocation.map((posibleLocation) => {
-        return (
-          <LocationAutocompleteItems
-            key={posibleLocation.place_id}
-            km={5}
-            location='fasd'
-            locationName='fasd'
-          />
-        )
-      })}
-    </>
-  )
+    return <>{posiblesLocationElements}</>
+  }
+  return <></>
 }
