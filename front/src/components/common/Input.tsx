@@ -1,48 +1,54 @@
 interface InputProps {
-    inputType: string
-    inputPlaceholder: string
-    className?: string
-    handler: (event: React.ChangeEvent<HTMLInputElement>) => void
-    value: string
-    keyDownEventActive?: boolean
-    handlerKeyDownEvent?: (event: React.KeyboardEvent<HTMLInputElement>) => void
+  inputType: string
+  inputPlaceholder: string
+  className?: string
+  handler: (event: React.ChangeEvent<HTMLInputElement>) => void
+  value: string
+  keyDownEventActive?: boolean
+  handlerKeyDownEvent?: (
+    event: React.KeyboardEvent<HTMLInputElement>,
+  ) => Promise<any>
 }
 
 const Input: React.FC<InputProps> = ({
-    inputType,
-    inputPlaceholder,
-    className = '',
-    handler,
-    value,
-    keyDownEventActive,
-    handlerKeyDownEvent
+  inputType,
+  inputPlaceholder,
+  className = '',
+  handler,
+  value,
+  keyDownEventActive,
+  handlerKeyDownEvent,
 }) => {
-    if(keyDownEventActive){
-        return (
-            <input
-                onChange={(event) => {
-                    handler(event)
-                }}
-                onKeyDown={(event) => {handlerKeyDownEvent ? handlerKeyDownEvent(event) : console.log("Error")}}
-                value={value}
-                className={`w-full rounded-full border-2 border-solid border-dark px-[12px] py-[6px] placeholder-dark shadow-setTripItems focus:outline-none ${className}`}
-                type={inputType}
-                placeholder={inputPlaceholder}
-            />
-        )    
-    }
-
+  if (keyDownEventActive) {
     return (
-        <input
-            onChange={(event) => {
-                handler(event)
-            }}
-            value={value}
-            className={`w-full rounded-full border-2 border-solid border-dark px-[12px] py-[6px] placeholder-dark shadow-setTripItems focus:outline-none ${className}`}
-            type={inputType}
-            placeholder={inputPlaceholder}
-        />
+      <input
+        onChange={(event) => {
+          handler(event)
+        }}
+        onKeyDown={(event) => {
+          handlerKeyDownEvent
+            ? handlerKeyDownEvent(event)
+            : console.log('Error')
+        }}
+        value={value}
+        className={`w-full rounded-full border-2 border-solid border-dark px-[12px] py-[6px] placeholder-dark shadow-setTripItems focus:outline-none ${className}`}
+        type={inputType}
+        placeholder={inputPlaceholder}
+      />
     )
+  }
+
+  return (
+    <input
+      onChange={(event) => {
+        handler(event)
+      }}
+      value={value}
+      className={`w-full rounded-full border-2 border-solid border-dark px-[12px] py-[6px] placeholder-dark shadow-setTripItems focus:outline-none ${className}`}
+      type={inputType}
+      placeholder={inputPlaceholder}
+    />
+  )
 }
 
 export default Input
