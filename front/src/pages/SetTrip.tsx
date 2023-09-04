@@ -9,7 +9,11 @@ import Input from '../components/common/Input'
 import RecentTripsItem from '@/components/common/RecentTripsItem'
 import locationIqApiBaseUrl from '@/utils/locationIqApi'
 import locationIqAccessToken from '@/utils/locationIqAccessToken'
-import LocationAutocomplete from '@/components/common/LocationAutocomplete'
+import {
+  LocationAutocomplete,
+  type typeLocationIQAutocompleteData,
+  usePosiblesLocationStore,
+} from '@/components/common/LocationAutocomplete'
 interface typeSetTripState {
   locationAutocomplete: boolean
   activeLocationAutocomplete: () => void
@@ -39,6 +43,7 @@ const useSetTripInputsStore = create<typeSetTripInputsState>()((set) => ({
 }))
 
 const SetTrip: React.FC = () => {
+  const { setPosiblesLocation } = usePosiblesLocationStore((state) => state)
   const { locationAutocomplete, activeLocationAutocomplete } = useSetTripStore(
     (state) => state,
   )
@@ -82,17 +87,24 @@ const SetTrip: React.FC = () => {
               inputType='text'
               keyDownEventActive={true}
               handlerKeyDownEvent={async (event) => {
+                await fetch(
+                  `${locationIqApiBaseUrl}/autocomplete?key=${locationIqAccessToken}&q=${inputFinishLocationValue}`,
+                )
+                  .then(async (response) => await response.json())
+                  .then((data) => {
+                    if (data.error) {
+                      console.log('error')
+                    } else {
+                      return data
+                    }
+                  })
+                  .then((data: typeLocationIQAutocompleteData) => {
+                    setPosiblesLocation(data)
+                  })
+                  .catch((error) => {
+                    console.log(error)
+                  })
                 if (event.key === 'Enter') {
-                  await fetch(
-                    `${locationIqApiBaseUrl}/autocomplete?key=${locationIqAccessToken}&q=${inputFinishLocationValue}`,
-                  )
-                    .then(async (response) => await response.json())
-                    .then((data) => {
-                      console.log(data)
-                    })
-                    .catch((error) => {
-                      console.log(error)
-                    })
                   // const body = {
                   //   origen: inputStartLocationValue,
                   //   destino: inputFinishLocationValue,
