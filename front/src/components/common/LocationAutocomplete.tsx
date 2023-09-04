@@ -47,16 +47,18 @@ export const usePosiblesLocationStore = create<typePosiblesLocationState>()(
 export const LocationAutocomplete: React.FC = () => {
   const { posiblesLocation } = usePosiblesLocationStore((state) => state)
   if (posiblesLocation) {
-    const posiblesLocationElements = posiblesLocation.map((posibleLocation) => {
-      return (
-        <LocationAutocompleteItems
-          key={posibleLocation.place_id}
-          km={5}
-          location={posibleLocation.display_address}
-          locationName={posibleLocation.display_name}
-        />
-      )
-    })
+    const posiblesLocationElements = posiblesLocation.map(
+      (posibleLocation, index) => {
+        return (
+          <LocationAutocompleteItems
+            key={posibleLocation.place_id + index}
+            km={5}
+            location={posibleLocation.display_address}
+            locationName={posibleLocation.display_name}
+          />
+        )
+      },
+    )
 
     return <>{posiblesLocationElements}</>
   }
