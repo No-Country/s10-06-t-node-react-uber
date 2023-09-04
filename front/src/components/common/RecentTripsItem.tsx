@@ -12,8 +12,8 @@ const RecentTripsItem: React.FC<RecentTripsProps> = ({
   return (
     <ItemsContainer>
       <BiTime className='mr-3 text-24' />
-      {finishLocation}
-      <span className='justify-self-end font-bold'>{km} km</span>
+      <span className='flex-shrink flex-grow'>{finishLocation}</span>
+      <span className='ml-3 justify-self-end font-bold'>{km} km</span>
     </ItemsContainer>
   )
 }
