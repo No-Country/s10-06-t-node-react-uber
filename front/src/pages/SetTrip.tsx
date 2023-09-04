@@ -82,7 +82,7 @@ const SetTrip: React.FC = () => {
                   .then(async (response) => await response.json())
                   .then((data) => {
                     if (data.error) {
-                      console.log('error')
+                      throw data.error
                     } else {
                       return data
                     }
