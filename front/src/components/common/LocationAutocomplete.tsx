@@ -1,5 +1,5 @@
 import LocationAutocompleteItems from './LocationAutocompleteItems'
-import { create } from 'zustand'
+import usePosiblesLocationStore from '@/stateManagement/usePosiblesLocationStore'
 
 export type typeLocationIQAutocompleteData = Array<{
   place_id: number
@@ -27,24 +27,6 @@ export type typeLocationIQAutocompleteData = Array<{
     country_code: string
   }
 }>
-interface typePosiblesLocationState {
-  posiblesLocationFrom: 'inputFinishLocation' | 'inputStartLocation' | undefined
-  posiblesLocation: typeLocationIQAutocompleteData | undefined
-  setPosiblesLocation: (
-    newPosiblesLocation: typeLocationIQAutocompleteData | undefined,
-  ) => void
-}
-export const usePosiblesLocationStore = create<typePosiblesLocationState>()(
-  (set) => ({
-    posiblesLocationFrom: undefined,
-    posiblesLocation: undefined,
-    setPosiblesLocation: (newPosiblesLocation) => {
-      set(() => ({
-        posiblesLocation: newPosiblesLocation,
-      }))
-    },
-  }),
-)
 
 export const LocationAutocomplete: React.FC = () => {
   const { posiblesLocation } = usePosiblesLocationStore((state) => state)
