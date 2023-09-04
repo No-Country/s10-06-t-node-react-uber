@@ -28,6 +28,7 @@ export type typeLocationIQAutocompleteData = Array<{
   }
 }>
 interface typePosiblesLocationState {
+  posiblesLocationFrom: 'inputFinishLocation' | 'inputStartLocation' | undefined
   posiblesLocation: typeLocationIQAutocompleteData | undefined
   setPosiblesLocation: (
     newPosiblesLocation: typeLocationIQAutocompleteData | undefined,
@@ -35,6 +36,7 @@ interface typePosiblesLocationState {
 }
 export const usePosiblesLocationStore = create<typePosiblesLocationState>()(
   (set) => ({
+    posiblesLocationFrom: undefined,
     posiblesLocation: undefined,
     setPosiblesLocation: (newPosiblesLocation) => {
       set(() => ({
