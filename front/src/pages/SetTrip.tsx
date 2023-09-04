@@ -81,13 +81,18 @@ const SetTrip: React.FC = () => {
                 )
                   .then(async (response) => await response.json())
                   .then((data) => {
-                    if (data.error) {
+                    if (
+                      data.error === 'Invalid Request' ||
+                      data.error === 'Unable to geocode'
+                    ) {
+                      return undefined
+                    } else if (data.error) {
                       throw data.error
                     } else {
                       return data
                     }
                   })
-                  .then((data: typeLocationIQAutocompleteData) => {
+                  .then((data: typeLocationIQAutocompleteData | undefined) => {
                     setPosiblesLocation(data)
                   })
                   .catch((error) => {

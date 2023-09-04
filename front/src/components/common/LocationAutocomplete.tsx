@@ -62,5 +62,5 @@ export const LocationAutocomplete: React.FC = () => {
 
     return <>{posiblesLocationElements}</>
   }
-  return <></>
+  return <>Buscando...</>
 }
