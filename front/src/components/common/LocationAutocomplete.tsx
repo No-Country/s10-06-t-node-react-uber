@@ -1,7 +1,7 @@
 import LocationAutocompleteItems from './LocationAutocompleteItems'
 import { create } from 'zustand'
 
-type typeLocationIQAutocompleteData = Array<{
+export type typeLocationIQAutocompleteData = Array<{
   place_id: number
   osm_id: number
   osm_type: string
@@ -42,7 +42,7 @@ const usePosiblesLocationStore = create<typePosiblesLocationState>()((set) => ({
   },
 }))
 
-const LocationAutocomplete: React.FC = () => {
+export const LocationAutocomplete: React.FC = () => {
   const { posiblesLocation } = usePosiblesLocationStore((state) => state)
 
   return (
@@ -60,5 +60,3 @@ const LocationAutocomplete: React.FC = () => {
     </>
   )
 }
-
-export default LocationAutocomplete
