@@ -6,10 +6,10 @@ import { create } from 'zustand'
 import { Link } from 'react-router-dom'
 import Input from '../components/common/Input'
 // import { BASE_URL } from '@/utils/api'
-import LocationAutocompleteItems from '@/components/common/LocationAutocompleteItems'
 import RecentTripsItem from '@/components/common/RecentTripsItem'
 import locationIqApiBaseUrl from '@/utils/locationIqApi'
 import locationIqAccessToken from '@/utils/locationIqAccessToken'
+import LocationAutocomplete from '@/components/common/LocationAutocomplete'
 interface typeSetTripState {
   locationAutocomplete: boolean
   activeLocationAutocomplete: () => void
@@ -122,21 +122,7 @@ const SetTrip: React.FC = () => {
           {locationAutocomplete ? (
             <>
               <h5>Resultados</h5>
-              <LocationAutocompleteItems
-                locationName='Banco Galicia'
-                location='Av Rafael Nuñez 3254, Córdoba'
-                km={3}
-              />
-              <LocationAutocompleteItems
-                locationName='Banco Galicia'
-                location='Av Rafael Nuñez 3254, Córdoba'
-                km={3}
-              />
-              <LocationAutocompleteItems
-                locationName='Banco Galicia'
-                location='Av Rafael Nuñez 3254, Córdoba'
-                km={3}
-              />
+              <LocationAutocomplete />
             </>
           ) : (
             <>
