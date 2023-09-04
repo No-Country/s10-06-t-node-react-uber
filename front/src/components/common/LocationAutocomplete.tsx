@@ -33,14 +33,16 @@ interface typePosiblesLocationState {
     newPosiblesLocation: typeLocationIQAutocompleteData,
   ) => void
 }
-const usePosiblesLocationStore = create<typePosiblesLocationState>()((set) => ({
-  posiblesLocation: [] as typeLocationIQAutocompleteData,
-  setPosiblesLocation: (newPosiblesLocation) => {
-    set(() => ({
-      posiblesLocation: newPosiblesLocation,
-    }))
-  },
-}))
+export const usePosiblesLocationStore = create<typePosiblesLocationState>()(
+  (set) => ({
+    posiblesLocation: [] as typeLocationIQAutocompleteData,
+    setPosiblesLocation: (newPosiblesLocation) => {
+      set(() => ({
+        posiblesLocation: newPosiblesLocation,
+      }))
+    },
+  }),
+)
 
 export const LocationAutocomplete: React.FC = () => {
   const { posiblesLocation } = usePosiblesLocationStore((state) => state)
