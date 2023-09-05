@@ -1,12 +1,10 @@
 import { type FC, useState, useEffect } from 'react';
-import { AiOutlineArrowLeft } from "react-icons/ai";
-import { Link } from 'react-router-dom';
-import { useAuthStore } from '@/context/GoogleAuthContext';
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { CampoInputFieldset } from '@/components/AccountManager/CampoInputFieldset';
 import { FixedFieldInputs } from '@/components/AccountManager/FixedFieldInputs';
 import { BASE_URL } from '@/utils/api';
 import { fetchData } from '@/utils/getUserById';
+import { HeaderTitle } from '@/components/AccountManager/HeaderTitle';
 
 interface Inputs {
     firstName: string,
@@ -38,8 +36,7 @@ export const EditProfile: FC = () => {
         }
         void fetchDataAndSetData();
     }, []);
-    
-    const { user } = useAuthStore();
+
     const { register, handleSubmit } = useForm<Inputs>();
 
     const onSubmit: SubmitHandler<Inputs> = async (formData) => {
@@ -50,9 +47,9 @@ export const EditProfile: FC = () => {
             dateOfBirth: dateOfBirth !== ''? dateOfBirth : data?.dateOfBirthUnformatted,
             nationality: nationality !== ''? nationality : data?.nationality ,
             cellNumber: cellNumber !== ''? Number(cellNumber) : data?.cellNumber,
-            firstName: user?.firstName,
-            lastName: user?.lastName,
-            email: user?.email,
+            firstName: data?.firstName,
+            lastName: data?.lastName,
+            email: data?.email,
             token: localStorage.getItem('token')
         };
        
@@ -81,26 +78,17 @@ export const EditProfile: FC = () => {
 
     return (
         <div className='h-[85%] px-5 pt-16'>
-            <div className='flex items-center gap-5'>
-                <Link to='/dashboard/account-manager'>
-                    <i className='bg-[#CCCCCC] w-[42px] h-[42px] border border-[#29103A]
-                        rounded-full flex items-center justify-center'
-                    >
-                        <AiOutlineArrowLeft color='#29103A' size='20'/>
-                    </i>
-                </Link>
-                <h1 className='text-[24px] font-semibold'>Editar Perfil</h1>
-            </div>
+            <HeaderTitle title='Editar perfil' link='/dashboard/account-manager' />
             <form className='pt-2' onSubmit={handleSubmit(onSubmit)}>
-                <FixedFieldInputs label={'Nombre'} dataUser={user?.firstName ?? data?.firstName ?? ''}/>
-                <FixedFieldInputs label={'Apellido'} dataUser={user?.lastName ?? data?.lastName ?? ''}/>
+                <FixedFieldInputs label={'Nombre'} dataUser={data?.firstName ?? data?.firstName ?? ''}/>
+                <FixedFieldInputs label={'Apellido'} dataUser={data?.lastName ?? data?.lastName ?? ''}/>
                 {
                     data?.dateOfBirth !== null?
                     <FixedFieldInputs label={"Fecha de nacimiento"}  dataUser={data?.dateOfBirth ?? ''}/>
                     :
                     <CampoInputFieldset label={"Fecha de nacimiento"} fieldName={'dateOfBirth'}  type={"date"} register={register} />
                 }
-                <FixedFieldInputs label={'Correo electrónico'} dataUser={user?.email ?? data?.email ?? ''}/>
+                <FixedFieldInputs label={'Correo electrónico'} dataUser={data?.email ?? data?.email ?? ''}/>
                 <FixedFieldInputs label={'Contraseña'} dataUser={'*********'}/>
                 <CampoInputFieldset label={"País"} value={data?.nationality ?? ''} fieldName={'nationality'}  type={"text"} register={register} />
                 <CampoInputFieldset label={"Número de teléfono"} value={data?.cellNumber ?? ''} fieldName={'cellNumber'}  type={"number"} register={register} />
