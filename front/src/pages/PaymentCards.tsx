@@ -1,16 +1,11 @@
-import { useState, type FC } from 'react'
+import { type FC } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import '../styles/index.css'
-import mercadoPagoIcon from '../assets/mercado-pago-icon.svg'
-import moneyIcon from '../assets/money-icon.svg'
-import cardPayIcon from '../assets/tarjeta-pago-icon.svg'
 import { SectionManager } from '@/components/Dashboard/SectionManager'
 import { BsFillPlusCircleFill } from 'react-icons/bs'
 
 export const PaymentCard: FC = () => {
-  const [payment, setPayment] = useState('cash' as string)
-  console.log('payment:', payment)
   const navigate = useNavigate()
 
   return (
@@ -95,7 +90,6 @@ export const PaymentCard: FC = () => {
               <p className='text-12 font-semibold'>1000</p>
             </section>
             <div className='flex justify-center py-6'>
-              {(payment === 'mercado' || payment === 'cash') && (
                 <button
                   type='submit'
                   className='h-[32px] 
@@ -103,7 +97,6 @@ export const PaymentCard: FC = () => {
                 >
                   Confirmar viaje
                 </button>
-              )}
             </div>
           </div>
         </div>

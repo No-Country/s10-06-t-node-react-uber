@@ -9,8 +9,6 @@ import { SectionManager } from '@/components/Dashboard/SectionManager'
 
 export const Payment: FC = () => {
   const [payment, setPayment] = useState('cash' as string)
-  console.log('payment:', payment)
-
   const navigate = useNavigate()
   return (
     <div className='relative h-screen w-screen'>
