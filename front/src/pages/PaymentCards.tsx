@@ -6,12 +6,13 @@ import mercadoPagoIcon from '../assets/mercado-pago-icon.svg'
 import moneyIcon from '../assets/money-icon.svg'
 import cardPayIcon from '../assets/tarjeta-pago-icon.svg'
 import { SectionManager } from '@/components/Dashboard/SectionManager'
+import { BsFillPlusCircleFill } from 'react-icons/bs'
 
-export const Payment: FC = () => {
+export const PaymentCard: FC = () => {
   const [payment, setPayment] = useState('cash' as string)
   console.log('payment:', payment)
-
   const navigate = useNavigate()
+
   return (
     <div className='relative h-screen w-screen'>
       <div className='px-4 pt-16'>
@@ -30,71 +31,17 @@ export const Payment: FC = () => {
         </div>
         <div className='flex h-[609px] flex-col justify-between'>
           <ul className='pt-[31px]'>
-            <li
-              className='mt-4 flex h-[60px] items-center justify-between rounded-[24px] 
-                bg-[#CCCCCC] pl-[18px] pr-[11px]  shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]'
-            >
-              <div className='flex items-center'>
-                <img src={moneyIcon} />
-                <div className='pl-[17px]'>
-                  <h2 className='text-[18px]'>Efectivo</h2>
-                </div>
-              </div>
-              <input
-                id='radio-cash'
-                type='radio'
-                value='cash'
-                name='payment'
-                checked={payment === 'cash'}
-                onChange={(e) => {
-                  setPayment(e.target.value)
+            <li>
+              <button
+                onClick={() => {
+                  navigate('/dashboard/account-manager/payment-methods')
                 }}
-                className='outline-non form-radio appearance-none border-[#29103A] bg-transparent text-[#29103A] accent-black focus:ring-0 focus:ring-current focus:ring-offset-0'
-              ></input>
-            </li>
-            <li
-              className='mt-4 flex h-[60px] items-center justify-between rounded-[24px] 
-                bg-[#CCCCCC] pl-[18px] pr-[11px]  shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]'
-            >
-              <div className='flex items-center'>
-                <img src={mercadoPagoIcon} />
-                <div className='pl-[17px]'>
-                  <h2 className='text-[18px]'>Mercadopago</h2>
-                </div>
-              </div>
-              <input
-                id='radio-mercado'
-                type='radio'
-                value='mercado'
-                name='payment'
-                checked={payment === 'mercado'}
-                onChange={(e) => {
-                  setPayment(e.target.value)
-                }}
-                className='outline-non form-radio appearance-none border-[#29103A] bg-transparent text-[#29103A] accent-black focus:ring-0 focus:ring-current focus:ring-offset-0'
-              ></input>
-            </li>
-            <li
-              className='mt-4 flex h-[60px] items-center justify-between rounded-[24px] 
-                bg-[#CCCCCC] pl-[18px] pr-[11px]  shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]'
-            >
-              <div className='flex items-center'>
-                <img src={cardPayIcon} />
-                <div className='pl-[17px]'>
-                  <h2 className='text-[18px]'>Tarjeta de crédito/débito</h2>
-                </div>
-              </div>
-              <input
-                id='radio-card'
-                type='radio'
-                value='card'
-                name='payment'
-                checked={payment === 'card'}
-                onChange={(e) => {
-                  setPayment(e.target.value)
-                }}
-                className='outline-non form-radio appearance-none border-[#29103A] bg-transparent text-[#29103A] accent-black focus:ring-0 focus:ring-current focus:ring-offset-0'
-              ></input>
+                className='mt-5 flex h-[66px] w-full items-center 
+        rounded-[25px] border border-[#29103A] bg-[#CCCCCC] px-5'
+              >
+                <BsFillPlusCircleFill color='#29103A' size='25' />
+                <p className='pl-2 text-[18px]'>Agregar medio de pago</p>
+              </button>
             </li>
           </ul>
 
@@ -155,18 +102,6 @@ export const Payment: FC = () => {
             w-[193px] rounded-3xl bg-[#29103A] text-[14px] uppercase text-white'
                 >
                   Confirmar viaje
-                </button>
-              )}
-              {payment === 'card' && (
-                <button
-                  onClick={() => {
-                    navigate('/payment/cards')
-                  }}
-                  type='button'
-                  className='h-[32px] 
-            w-[193px] rounded-3xl bg-[#29103A] text-[14px] uppercase text-white'
-                >
-                  Continuar al pago
                 </button>
               )}
             </div>
