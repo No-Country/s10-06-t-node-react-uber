@@ -1,0 +1,3 @@
+const locationIqAccessToken = import.meta.env.VITE_LOCATIONIQ_ACCESS_TOKEN
+
+export default locationIqAccessToken

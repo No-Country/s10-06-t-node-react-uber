@@ -6,8 +6,14 @@ import { create } from 'zustand'
 import { Link } from 'react-router-dom'
 import Input from '../components/common/Input'
 // import { BASE_URL } from '@/utils/api'
-import LocationAutocompleteItems from '@/components/common/LocationAutocompleteItems'
 import RecentTripsItem from '@/components/common/RecentTripsItem'
+import locationIqApiBaseUrl from '@/utils/locationIqApi'
+import locationIqAccessToken from '@/utils/locationIqAccessToken'
+import {
+  LocationAutocomplete,
+  type typeLocationIQAutocompleteData,
+  usePosiblesLocationStore,
+} from '@/components/common/LocationAutocomplete'
 interface typeSetTripState {
   locationAutocomplete: boolean
   activeLocationAutocomplete: () => void
@@ -37,6 +43,7 @@ const useSetTripInputsStore = create<typeSetTripInputsState>()((set) => ({
 }))
 
 const SetTrip: React.FC = () => {
+  const { setPosiblesLocation } = usePosiblesLocationStore((state) => state)
   const { locationAutocomplete, activeLocationAutocomplete } = useSetTripStore(
     (state) => state,
   )
@@ -67,6 +74,26 @@ const SetTrip: React.FC = () => {
               }}
               inputType='text'
               inputPlaceholder='¿De dónde salís?'
+              keyDownEventActive={true}
+              handlerKeyDownEvent={async (event) => {
+                await fetch(
+                  `${locationIqApiBaseUrl}/autocomplete?key=${locationIqAccessToken}&q=${inputStartLocationValue}`,
+                )
+                  .then(async (response) => await response.json())
+                  .then((data) => {
+                    if (data.error) {
+                      console.log('error')
+                    } else {
+                      return data
+                    }
+                  })
+                  .then((data: typeLocationIQAutocompleteData) => {
+                    setPosiblesLocation(data)
+                  })
+                  .catch((error) => {
+                    console.log(error)
+                  })
+              }}
             />
           </div>
           <div className='flex items-center'>
@@ -80,27 +107,23 @@ const SetTrip: React.FC = () => {
               inputType='text'
               keyDownEventActive={true}
               handlerKeyDownEvent={async (event) => {
-                if (event.key === 'Enter') {
-                  // const body = {
-                  //   origen: inputStartLocationValue,
-                  //   destino: inputFinishLocationValue,
-                  //   token: localStorage.token,
-                  // }
-                  // await fetch(`${BASE_URL}/viajes`, {
-                  //   method: 'POST',
-                  //   headers: {
-                  //     'Content-Type': 'application/json',
-                  //   },
-                  //   body: JSON.stringify(body),
-                  // })
-                  //   .then(async (response) => await response.json())
-                  //   .then((data) => {
-                  //     console.log(data)
-                  //   })
-                  //   .catch((error) => {
-                  //     console.log(error)
-                  //   })
-                }
+                await fetch(
+                  `${locationIqApiBaseUrl}/autocomplete?key=${locationIqAccessToken}&q=${inputFinishLocationValue}`,
+                )
+                  .then(async (response) => await response.json())
+                  .then((data) => {
+                    if (data.error) {
+                      console.log('error')
+                    } else {
+                      return data
+                    }
+                  })
+                  .then((data: typeLocationIQAutocompleteData) => {
+                    setPosiblesLocation(data)
+                  })
+                  .catch((error) => {
+                    console.log(error)
+                  })
               }}
               inputPlaceholder='¿A dónde te llevamos?'
             />
@@ -110,21 +133,7 @@ const SetTrip: React.FC = () => {
           {locationAutocomplete ? (
             <>
               <h5>Resultados</h5>
-              <LocationAutocompleteItems
-                locationName='Banco Galicia'
-                location='Av Rafael Nuñez 3254, Córdoba'
-                km={3}
-              />
-              <LocationAutocompleteItems
-                locationName='Banco Galicia'
-                location='Av Rafael Nuñez 3254, Córdoba'
-                km={3}
-              />
-              <LocationAutocompleteItems
-                locationName='Banco Galicia'
-                location='Av Rafael Nuñez 3254, Córdoba'
-                km={3}
-              />
+              <LocationAutocomplete />
             </>
           ) : (
             <>

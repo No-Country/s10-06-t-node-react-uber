@@ -1,3 +1,3 @@
-const locationIqApi: string = import.meta.env.VITE_LOCATIONIQ_API_BASE_URL
+const locationIqApiBaseUrl: string = import.meta.env.VITE_LOCATIONIQ_API_BASE_URL
 
-export default locationIqApi
+export default locationIqApiBaseUrl

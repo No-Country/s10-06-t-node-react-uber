@@ -13,12 +13,14 @@ const LocationAutocompleteItems: React.FC<LocationAutocompleteProps> = ({
 }) => {
   return (
     <ItemsContainer>
-      <HiLocationMarker className='mr-3 text-24 text-primary' />
-      <p className='overflow-hidden text-ellipsis font-light'>
-        <span className='block font-bold'>{locationName}</span>
+      <HiLocationMarker className='mr-3 min-w-max text-24 text-primary' />
+      <p className='flex-shrink flex-grow overflow-hidden text-ellipsis font-light'>
+        <span className='block whitespace-nowrap font-bold'>
+          {locationName}
+        </span>
         <span className='whitespace-nowrap'>{location}</span>
       </p>
-      <span className='justify-self-end font-bold'>{km} km</span>
+      <span className='ml-3 min-w-max justify-self-end font-bold'>{km} km</span>
     </ItemsContainer>
   )
 }
