@@ -90,13 +90,13 @@ export const PaymentCard: FC = () => {
               <p className='text-12 font-semibold'>1000</p>
             </section>
             <div className='flex justify-center py-6'>
-                <button
-                  type='submit'
-                  className='h-[32px] 
+              <button
+                type='submit'
+                className='h-[32px] 
             w-[193px] rounded-3xl bg-[#29103A] text-[14px] uppercase text-white'
-                >
-                  Confirmar viaje
-                </button>
+              >
+                Confirmar viaje
+              </button>
             </div>
           </div>
         </div>
