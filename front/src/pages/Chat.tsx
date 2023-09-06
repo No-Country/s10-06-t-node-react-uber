@@ -131,7 +131,7 @@ export const Chat: React.FC = () => {
                       <p className='text-gray-800 text-sm'>{message.message}</p>
                     </div>
                     <p className='text-gray-500 ml-2 text-xs'>
-                      {new Date().toLocaleString('es-AR', {
+                      {message.date.toLocaleString('es-AR', {
                         day: 'numeric',
                         month: 'long',
                         year: 'numeric',
