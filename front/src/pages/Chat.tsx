@@ -402,7 +402,7 @@ const Faqs: React.FC<IFaq> = ({ handleUbiChat, ubiChat }) => {
         return (
           <button
             key={faq.id}
-            className='flex cursor-pointer flex-col gap-2 rounded-md border border-gray p-1 text-sm disabled:opacity-40'
+            className='flex cursor-pointer flex-col gap-2 rounded-md border border-gray p-1 text-sm disabled:cursor-not-allowed disabled:opacity-40'
             onClick={() => {
               handleUbiChat({
                 question: faq.question,
