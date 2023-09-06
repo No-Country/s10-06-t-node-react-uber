@@ -1,4 +1,4 @@
-import { type FC } from 'react';
+import { type FC, useEffect, useState } from 'react';
 import { HiUserCircle } from "react-icons/hi";
 import { FaLocationDot } from "react-icons/fa6";
 import { BsCreditCard2Back } from "react-icons/bs";
@@ -6,6 +6,7 @@ import { RxExit } from "react-icons/rx";
 import { GrFormNext } from "react-icons/gr";
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '@/context/GoogleAuthContext';
+import { fetchData } from '@/utils/getUserById';
 
 interface Profile {
     name: string,
@@ -13,10 +14,29 @@ interface Profile {
     link: string | null
 };
 
+interface UserData {
+    firstName: string,
+    lastName: string,
+    email: string,
+    dateOfBirth: string | null,
+    dateOfBirthUnformatted: Date,
+    nationality: string | null,
+    cellNumber: string | null
+};
+
 export const AccountManager: FC = () => {
 
-    const { user , signOut } = useAuthStore();
+    const [ data, setData ] = useState<UserData | null>(null);
+    const { signOut } = useAuthStore();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        async function fetchDataAndSetData(): Promise<void> {
+            const fetchedData = await fetchData();
+            setData(fetchedData);
+        }
+        void fetchDataAndSetData();
+    }, []);
 
     const profileButtonData: Profile[] = [
         {
@@ -60,7 +80,7 @@ export const AccountManager: FC = () => {
                 text-[24px] text-center 
                 py-5 font-semibold'
             >
-                {user?.firstName ?? 'Gonzalo'} {user?.lastName ?? 'Ramirez'}
+                {data?.firstName ?? ''} {data?.lastName ?? ''}
             </h2>
             <ul>
                 {

@@ -25,7 +25,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     try {
       const result = await signInWithPopup(auth, provider)
       const user = result.user
-      console.log(user)
+      
       if (user.displayName) {
         const fullName = user.displayName
         const names = fullName.split(' ')
@@ -69,12 +69,12 @@ export const useAuthStore = create<AuthState>((set) => ({
   },
   signOut: async () => {
     try {
-      await signOut(auth)
-      set(() => ({ user: null }))
-      localStorage.clear()
-      window.location.reload()
+      await signOut(auth);
+      set(() => ({ user: null }));
+      localStorage.clear();
+      window.location.reload();
     } catch (error) {
-      console.error('Error signing out:', error)
+      console.error('Error signing out:', error);
     }
   },
 }))
