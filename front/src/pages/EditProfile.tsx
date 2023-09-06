@@ -7,22 +7,24 @@ import { fetchData } from '@/utils/getUserById';
 import { HeaderTitle } from '@/components/AccountManager/HeaderTitle';
 
 interface Inputs {
-    firstName: string,
-    lastName: string,
-    email: string,
-    dateOfBirth: Date | string,
-    nationality: string,
-    cellNumber: number | string
+    firstName: string;
+    lastName: string;
+    email: string;
+    dateOfBirth: Date | string;
+    nationality: string;
+    cellNumber: number | string;
+    reference: string;
+    address: string;
 };
 
 interface UserData {
-    firstName: string,
-    lastName: string,
-    email: string,
-    dateOfBirth: string | null,
-    dateOfBirthUnformatted: Date,
-    nationality: string | null,
-    cellNumber: string | null
+    firstName: string;
+    lastName: string;
+    email: string;
+    dateOfBirth: string | null;
+    dateOfBirthUnformatted: Date;
+    nationality: string | null;
+    cellNumber: string | null;
 };
 
 export const EditProfile: FC = () => {
@@ -90,7 +92,12 @@ export const EditProfile: FC = () => {
                 }
                 <FixedFieldInputs label={'Correo electrónico'} dataUser={data?.email ?? data?.email ?? ''}/>
                 <FixedFieldInputs label={'Contraseña'} dataUser={'*********'}/>
-                <CampoInputFieldset label={"País"} value={data?.nationality ?? ''} fieldName={'nationality'}  type={"text"} register={register} />
+                {
+                    data?.nationality !== null?
+                    <FixedFieldInputs label={"País"}  dataUser={data?.nationality ?? ''}/>
+                    :
+                    <CampoInputFieldset label={"País"} fieldName={'nationality'}  type={"text"} register={register} />
+                }
                 <CampoInputFieldset label={"Número de teléfono"} value={data?.cellNumber ?? ''} fieldName={'cellNumber'}  type={"number"} register={register} />
                 <div className='flex justify-center pt-6'>
                     <button type='submit' className='bg-[#29103A] w-[193px] h-[32px] 

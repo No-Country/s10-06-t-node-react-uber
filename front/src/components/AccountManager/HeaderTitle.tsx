@@ -12,7 +12,7 @@ export const HeaderTitle: FC<Header> = ({ link, title }) => {
         <div className='flex items-center gap-5'>
             <Link to={link}>
                 <i className='bg-[#CCCCCC] w-[42px] h-[42px] border border-[#29103A]
-                    rounded-full flex items-center justify-center'
+                    rounded-full flex items-center justify-center shadow-xl'
                 >
                     <AiOutlineArrowLeft color='#29103A' size='25'/>
                 </i>

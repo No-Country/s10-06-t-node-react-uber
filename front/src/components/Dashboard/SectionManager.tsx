@@ -18,17 +18,17 @@ export const SectionManager: FC = () => {
         {
             name: 'mi actividad',
             icon: <BiTimeFive size='28' />,
-            link: 'activity-history',
+            link: '/dashboard/activity-history',
         },
         {
             name: 'chat',
             icon: <BsChatLeftTextFill size='28' />,
-            link: 'chat',
+            link: '/dashboard/chat',
         },
         {
             name: 'mi cuenta',
             icon: <RiAccountCircleFill size='28' />,
-            link: 'account-manager',
+            link: '/dashboard/account-manager',
         },
     ];
 

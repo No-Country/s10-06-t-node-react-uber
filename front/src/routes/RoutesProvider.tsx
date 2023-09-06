@@ -5,9 +5,7 @@ import {
   Login,
   Register,
   RegisterCodigo,
-  RegisterData,
-  UserProfile,
-  Payment,
+  RegisterData
 } from '@/pages'
 import { Layout } from '@/components/layouts/Layout'
 import { Dashboard } from '@/pages/Dashboard'
@@ -22,8 +20,6 @@ const RoutesProvider: FC = () => {
           <Route path='/' element={<LandingPage />} />
         </Route>
         <Route element={<AuthGuard />}>
-          <Route path='/profile' element={<UserProfile />} />
-          <Route path='/payment' element={<Payment />} />
           <Route path='/settrip' element={<SetTrip />} />
           <Route path='/dashboard/*' element={<Dashboard />} />
         </Route>
