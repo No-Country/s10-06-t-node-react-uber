@@ -392,7 +392,7 @@ interface IFaq {
 
 const Faqs: React.FC<IFaq> = ({ handleUbiChat, ubiChat }) => {
   return (
-    <div className='flex flex-col items-end gap-2 text-center'>
+    <div className='flex w-full flex-col items-end gap-2 text-center'>
       {faqData.map((faq) => {
         const isAlreadyAsked =
           ubiChat.messages.find(
