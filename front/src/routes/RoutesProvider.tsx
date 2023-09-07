@@ -5,15 +5,12 @@ import {
   Login,
   Register,
   RegisterCodigo,
-  RegisterData,
-  UserProfile,
-  Payment,
+  RegisterData
 } from '@/pages'
 import { Layout } from '@/components/layouts/Layout'
 import { Dashboard } from '@/pages/Dashboard'
 import SetTrip from '@/pages/SetTrip'
 import { AuthGuard } from './guard/AuthGuard'
-import { PaymentCard } from '@/pages/PaymentCards'
 
 const RoutesProvider: FC = () => {
   return (
@@ -23,9 +20,6 @@ const RoutesProvider: FC = () => {
           <Route path='/' element={<LandingPage />} />
         </Route>
         <Route element={<AuthGuard />}>
-          <Route path='/profile' element={<UserProfile />} />
-          <Route path='/payment' element={<Payment />} />
-          <Route path='/payment/cards' element={<PaymentCard />} />
           <Route path='/settrip' element={<SetTrip />} />
           <Route path='/dashboard/*' element={<Dashboard />} />
         </Route>

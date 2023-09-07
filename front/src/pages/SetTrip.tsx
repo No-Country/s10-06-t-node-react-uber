@@ -9,11 +9,11 @@ import Input from '../components/common/Input'
 import RecentTripsItem from '@/components/common/RecentTripsItem'
 import locationIqApiBaseUrl from '@/utils/locationIqApi'
 import locationIqAccessToken from '@/utils/locationIqAccessToken'
+import { LocationAutocomplete } from '@/components/common/LocationAutocomplete'
 import {
-  LocationAutocomplete,
   type typeLocationIQAutocompleteData,
   usePosiblesLocationStore,
-} from '@/components/common/LocationAutocomplete'
+} from '@/context/usePosibleLocationStore'
 interface typeSetTripState {
   locationAutocomplete: boolean
   activeLocationAutocomplete: () => void
@@ -75,7 +75,7 @@ const SetTrip: React.FC = () => {
               inputType='text'
               inputPlaceholder='¿De dónde salís?'
               keyDownEventActive={true}
-              handlerKeyDownEvent={async (event) => {
+              handlerKeyDownEvent={async () => {
                 await fetch(
                   `${locationIqApiBaseUrl}/autocomplete?key=${locationIqAccessToken}&q=${inputStartLocationValue}`,
                 )
@@ -106,7 +106,7 @@ const SetTrip: React.FC = () => {
               }}
               inputType='text'
               keyDownEventActive={true}
-              handlerKeyDownEvent={async (event) => {
+              handlerKeyDownEvent={async () => {
                 await fetch(
                   `${locationIqApiBaseUrl}/autocomplete?key=${locationIqAccessToken}&q=${inputFinishLocationValue}`,
                 )
