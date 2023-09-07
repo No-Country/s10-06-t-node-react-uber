@@ -12,6 +12,7 @@ import locationIqAccessToken from '@/utils/locationIqAccessToken'
 import { LocationAutocomplete } from '@/components/common/LocationAutocomplete'
 import type { typeLocationIQAutocompleteData } from '@/components/common/LocationAutocomplete'
 import usePosiblesLocationStore from '@/stateManagement/usePosiblesLocationStore'
+import useLocationIqAutocomplete from '@/utils/uselocationIqAutocomplete'
 interface typeSetTripState {
   locationAutocomplete: boolean
   activeLocationAutocomplete: () => void
@@ -73,30 +74,10 @@ const SetTrip: React.FC = () => {
               inputType='text'
               inputPlaceholder='¿De dónde salís?'
               keyDownEventActive={true}
-              handlerKeyDownEvent={async (event) => {
-                await fetch(
-                  `${locationIqApiBaseUrl}/autocomplete?key=${locationIqAccessToken}&q=${inputStartLocationValue}`,
-                )
-                  .then(async (response) => await response.json())
-                  .then((data) => {
-                    if (
-                      data.error === 'Invalid Request' ||
-                      data.error === 'Unable to geocode'
-                    ) {
-                      return undefined
-                    } else if (data.error) {
-                      throw data.error
-                    } else {
-                      return data
-                    }
-                  })
-                  .then((data: typeLocationIQAutocompleteData | undefined) => {
-                    setPosiblesLocation(data)
-                  })
-                  .catch((error) => {
-                    console.log(error)
-                  })
-              }}
+              handlerKeyDownEvent={useLocationIqAutocomplete(
+                'inputStartLocation',
+                inputStartLocationValue,
+              )}
             />
           </div>
           <div className='flex items-center'>
@@ -121,8 +102,8 @@ const SetTrip: React.FC = () => {
                       return data
                     }
                   })
-                  .then((data: typeLocationIQAutocompleteData) => {
-                    setPosiblesLocation(data)
+                  .then((data: typeLocationIQAutocompleteData | undefined) => {
+                    setPosiblesLocation(data, 'inputFinishLocation')
                   })
                   .catch((error) => {
                     console.log(error)

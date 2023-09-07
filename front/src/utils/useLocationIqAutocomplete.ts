@@ -1,11 +1,15 @@
 import locationIqAccessToken from './locationIqAccessToken'
 import locationIqApiBaseUrl from './locationIqApi'
 import usePosiblesLocationStore from '@/stateManagement/usePosiblesLocationStore'
+import type { typeLocationIQAutocompleteData } from '@/components/common/LocationAutocomplete'
 
-async function useLocationIqAutocomplete(): Promise<T> {
+async function useLocationIqAutocomplete(
+  posiblesLocationFrom: 'inputFinishLocation' | 'inputStartLocation',
+  value: string,
+): Promise<any> {
   const { setPosiblesLocation } = usePosiblesLocationStore((state) => state)
   await fetch(
-    `${locationIqApiBaseUrl}/autocomplete?key=${locationIqAccessToken}&q=${inputFinishLocationValue}`,
+    `${locationIqApiBaseUrl}/autocomplete?key=${locationIqAccessToken}&q=${value}`,
   )
     .then(async (response) => await response.json())
     .then((data) => {
@@ -16,7 +20,7 @@ async function useLocationIqAutocomplete(): Promise<T> {
       }
     })
     .then((data: typeLocationIQAutocompleteData | undefined) => {
-      setPosiblesLocation(data, 'inputFinishLocation')
+      setPosiblesLocation(data, posiblesLocationFrom)
     })
     .catch((error) => {
       console.log(error)
