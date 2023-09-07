@@ -2,7 +2,7 @@ import locationIqAccessToken from './locationIqAccessToken'
 import locationIqApiBaseUrl from './locationIqApi'
 import type { typeLocationIQAutocompleteData } from '@/components/common/LocationAutocomplete'
 
-async function useLocationIqAutocomplete(
+async function locationIqAutocomplete(
   posiblesLocationFrom: 'inputFinishLocation' | 'inputStartLocation',
   value: string,
 ): Promise<void> {
@@ -25,4 +25,4 @@ async function useLocationIqAutocomplete(
     })
 }
 
-export default useLocationIqAutocomplete
+export default locationIqAutocomplete
