@@ -6,27 +6,48 @@ import mercadoPagoIcon from '../assets/mercado-pago-icon.svg'
 import moneyIcon from '../assets/money-icon.svg'
 import cardPayIcon from '../assets/tarjeta-pago-icon.svg'
 import { SectionManager } from '@/components/Dashboard/SectionManager'
-// import { BASE_URL } from '@/utils/api'
+import { BASE_URL } from '@/utils/api'
 
-// const handlePayment = async (): Promise<void> => {
-//   const res = await fetch(`${BASE_URL}/api/register`, {
-//     method: 'POST',
-//     body: JSON.stringify({}),
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   })
-//   const data = await res.json()
-//   if (res.status === 200) {
-//     console.log('res', res)
-//   } else {
-//     console.log('res', data)
-//   }
+// interface FormData {
+//   idUsuario: 'string'
+//   idConductor: 'string'
+//   idViaje: 'string'
+//   token: 'string'
+//   amount: 'string'
+//   metodo: 'string'
+//   fecha: 'string'
 // }
 
 export const Payment: FC = () => {
   const [payment, setPayment] = useState('cash' as string)
   const navigate = useNavigate()
+
+  const handlePayment = async (): Promise<void> => {
+    console.log('handlePayment:', handlePayment)
+    const res = await fetch(`${BASE_URL}/payment`, {
+      method: 'POST',
+      body: JSON.stringify({
+        idUsuario: '64f61860500eb464d7b717b7',
+        idConductor: '64eea22e93d51227247663b5',
+        idViaje: '64ec9fcd68f99ae8049d3a72',
+        token:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZTRhYzdkNDQzMzQ1NjE4OTc1YTM5YSIsImlhdCI6MTY5Mzg3Mzg4MCwiZXhwIjoxNjkzOTYwMjgwfQ.pvT4EZhC0N2wsJhcoi3YWiSPrdz4JHTXPFVZCQ__qG4',
+        amount: '50',
+        metodo: 'tarjeta',
+        fecha: '2023-08-22T12:00:00Z',
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    const data = await res.json()
+    if (res.status === 200) {
+      console.log('res', res)
+    } else {
+      console.log('res', data)
+    }
+  }
+
   return (
     <div className='relative h-screen w-screen'>
       <div className='px-4 pt-16'>
@@ -166,10 +187,13 @@ export const Payment: FC = () => {
               {(payment === 'mercado' || payment === 'cash') && (
                 <button
                   type='submit'
-                  // onSubmit={handlePayment}
                   onClick={() => {
-                    navigate('/dashboard')
+                    console.log('hi')
+                    void handlePayment()
                   }}
+                  // onClick={() => {
+                  //   navigate('/dashboard')
+                  // }}
                   className='h-[32px] 
             w-[193px] rounded-3xl bg-[#29103A] text-[14px] uppercase text-white'
                 >

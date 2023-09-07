@@ -14,13 +14,13 @@ const headers = {
 }
 
 interface PaymentData {
-    idUsuario: "64f61860500eb464d7b717b7",
-    idConductor: "64eea22e93d51227247663b5",
-    idViaje: "64ec9fcd68f99ae8049d3a72",
-    token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZTRhYzdkNDQzMzQ1NjE4OTc1YTM5YSIsImlhdCI6MTY5Mzg3Mzg4MCwiZXhwIjoxNjkzOTYwMjgwfQ.pvT4EZhC0N2wsJhcoi3YWiSPrdz4JHTXPFVZCQ__qG4",
-    amount: 50,
-    metodo: "tarjeta",
-    fecha: "2023-08-22T12:00:00Z"
+  idUsuario: '64f61860500eb464d7b717b7'
+  idConductor: '64eea22e93d51227247663b5'
+  idViaje: '64ec9fcd68f99ae8049d3a72'
+  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZTRhYzdkNDQzMzQ1NjE4OTc1YTM5YSIsImlhdCI6MTY5Mzg3Mzg4MCwiZXhwIjoxNjkzOTYwMjgwfQ.pvT4EZhC0N2wsJhcoi3YWiSPrdz4JHTXPFVZCQ__qG4'
+  amount: 50
+  metodo: 'tarjeta'
+  fecha: '2023-08-22T12:00:00Z'
 }
 
 export const submitPayment = async ({

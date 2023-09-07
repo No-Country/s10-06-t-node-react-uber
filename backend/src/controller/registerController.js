@@ -1,11 +1,11 @@
-import Users from '../models/userModels.js';
-import { sendVerificationEmail } from '../services/emailConfig.js';
-import generateRandomCode from '../utils/verificationCode.js';
-import { hashPassword } from '../utils/encriptation.js';
-import { login } from '../controller/loginController.js';
-import { createToken } from '../utils/jwt.js';
+import Users from "../models/userModels.js";
+import { sendVerificationEmail } from "../services/emailConfig.js";
+import generateRandomCode from "../utils/verificationCode.js";
+import { hashPassword } from "../utils/encriptation.js";
+import { login } from "../controller/loginController.js";
+import { createToken } from "../utils/jwt.js";
 
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 dotenv.config();
 
 // Controller for user registration
@@ -17,8 +17,11 @@ export const registerUser = async (req, res) => {
 
     // registered user with google
 
-    if (user && user.verificationCode === undefined || user && user.cellNumber) {
-      return res.status(401).json({ message: 'Email registrado' });
+    if (
+      (user && user.verificationCode === undefined) ||
+      (user && user.cellNumber)
+    ) {
+      return res.status(401).json({ message: "Email registrado" });
     }
 
     if (!user) {
@@ -29,7 +32,7 @@ export const registerUser = async (req, res) => {
       user = new Users({
         email,
         verificationCode,
-        emailStatus: 'UNVERIFIED', // Assuming this field is used for email status
+        emailStatus: "UNVERIFIED", // Assuming this field is used for email status
       });
 
       // Save the new user in the database
@@ -43,9 +46,11 @@ export const registerUser = async (req, res) => {
       // Send the verification code to the user (e.g., via email)
       await sendVerificationEmail(user, verificationCode);
 
-      return res.status(200).json({ message: 'Verification code sent.', ...payload });
+      return res
+        .status(200)
+        .json({ message: "Verification code sent.", ...payload });
     } else {
-      if (user.emailStatus === 'UNVERIFIED') {
+      if (user.emailStatus === "UNVERIFIED") {
         // User is registered but hasn't verified the code
         // Resend the verification code
         const verificationCode = user.verificationCode;
@@ -56,8 +61,8 @@ export const registerUser = async (req, res) => {
 
         await sendVerificationEmail(user, verificationCode);
 
-        return res.json({ message: 'Verification code resent.', ...payload });
-      } else if (user.emailStatus === 'VERIFIED') {
+        return res.json({ message: "Verification code resent.", ...payload });
+      } else if (user.emailStatus === "VERIFIED") {
         if (!user.hasAllData) {
           const { firstName, lastName, password, cellNumber } = req.body;
 
@@ -87,7 +92,7 @@ export const registerUser = async (req, res) => {
     }
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: 'Server error.' });
+    return res.status(500).json({ error: "Server error." });
   }
 };
 
@@ -98,31 +103,31 @@ export const emailVerification = async (req, res) => {
     let user = await Users.findOne({ email });
     console.log(user);
     if (!user) {
-      return res.status(404).json({ error: 'User not found.' });
+      return res.status(404).json({ error: "User not found." });
     }
 
-    if (user.emailStatus === 'VERIFIED') {
-      return res.status(400).json({ message: 'User is already verified.' });
+    if (user.emailStatus === "VERIFIED") {
+      return res.status(400).json({ message: "User is already verified." });
     }
 
     if (user.verificationCode !== verificationCode) {
-      return res.status(400).json({ error: 'Incorrect verification code.' });
+      return res.status(400).json({ error: "Incorrect verification code." });
     }
 
     // Verify verification code in database and save user verified status
-    user.emailStatus = 'VERIFIED';
+    user.emailStatus = "VERIFIED";
     await user.save();
     const payload = {
       emailStatus: user.emailStatus,
       hasAllData: user.hasAllData,
     };
 
-    return res.status(200).json({ message: 'User verified.', ...payload });
+    return res.status(200).json({ message: "User verified.", ...payload });
   } catch (error) {
-    console.error('Error during email verification:', error);
+    console.error("Error during email verification:", error);
     return res
       .status(500)
-      .json({ error: 'An internal server error occurred.' });
+      .json({ error: "An internal server error occurred." });
   }
 };
 
@@ -146,14 +151,13 @@ export const registerLogin = async (req, res) => {
       const token = await createToken({
         id: user._id,
       });
-
       // send token by coockie
-      res.cookie('token', token, {
-        httpOnly: process.env.NODE_ENV !== 'development',
+      res.cookie("token", token, {
+        httpOnly: process.env.NODE_ENV !== "development",
         secure: true,
-        sameSite: 'none',
+        sameSite: "none",
       });
-      res.status(200).json({ message: 'logged sucessfully', token });
+      res.status(200).json({ message: "logged sucessfully", token });
     } else {
       // crate a token to be send in correct response
       const token = await createToken({
@@ -161,16 +165,17 @@ export const registerLogin = async (req, res) => {
       });
 
       // send token by coockie
-      res.cookie('token', token, {
-        httpOnly: process.env.NODE_ENV !== 'development',
+      res.cookie("token", token, {
+        httpOnly: process.env.NODE_ENV !== "development",
         secure: true,
-        sameSite: 'none',
+        sameSite: "none",
       });
-      res.status(200).json({ message: 'logged sucessfully', token });
+      res.status(200).json({ message: "logged sucessfully", token });
+      localStorage.setItem("token", token);
     }
   } catch (error) {
     return res
       .status(500)
-      .json({ error: 'An internal server error occurred.' });
+      .json({ error: "An internal server error occurred." });
   }
 };
