@@ -6,7 +6,7 @@ import type { typeLocationIQAutocompleteData } from '@/components/common/Locatio
 async function useLocationIqAutocomplete(
   posiblesLocationFrom: 'inputFinishLocation' | 'inputStartLocation',
   value: string,
-): Promise<any> {
+): Promise<void> {
   const { setPosiblesLocation } = usePosiblesLocationStore((state) => state)
   await fetch(
     `${locationIqApiBaseUrl}/autocomplete?key=${locationIqAccessToken}&q=${value}`,
