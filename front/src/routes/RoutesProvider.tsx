@@ -5,7 +5,9 @@ import {
   Login,
   Register,
   RegisterCodigo,
-  RegisterData
+  RegisterData,
+  ForgotPassword,
+  SelectTrip,
 } from '@/pages'
 import { Layout } from '@/components/layouts/Layout'
 import { Dashboard } from '@/pages/Dashboard'
@@ -22,8 +24,10 @@ const RoutesProvider: FC = () => {
         <Route element={<AuthGuard />}>
           <Route path='/settrip' element={<SetTrip />} />
           <Route path='/dashboard/*' element={<Dashboard />} />
+          <Route path='/select-trip' element={<SelectTrip />} />
         </Route>
         <Route path='/login' element={<Login />} />
+        <Route path='/change-password' element={<ForgotPassword />} />
         <Route path='/register' element={<Register />} />
         <Route path='/register-codigo' element={<RegisterCodigo />} />
         <Route path='/register-data' element={<RegisterData />} />
