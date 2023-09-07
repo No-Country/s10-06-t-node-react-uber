@@ -24,27 +24,34 @@ export const Payment: FC = () => {
   const [payment, setPayment] = useState('cash' as string)
   const navigate = useNavigate()
 
-  const handlePayment = (data: FormData): void => {
-    console.log('handlePayment:')
-    const idUsuario = '64f61860500eb464d7b717b7'
-    const idConductor = '64eea22e93d51227247663b5'
-    apiPayment
-      .submitPayment({
-        idUsuario,
-        idConductor,
-        idViaje: '64ec9fcd68f99ae8049d3a72',
-        token:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZTY5MWU5NTRlYzg0NmEyYWQ2MDRhZSIsImlhdCI6MTY5NDExNjA2MiwiZXhwIjoxNjk0MjAyNDYyfQ.7UOZyZquz_2P_vGNoALM3MSmEuPiPKQLrkFKdCPJKck',
-        amount: '50',
-        metodo: 'tarjeta',
-        fecha: '2023-08-22T12:00:00Z',
-      })
-      .then(() => {
-        console.log(idUsuario, 'todo-bien')
-      })
-      .catch((err) => {
-        console.log('err:', err)
-      })
+  const handlePayment = async (data: FormData): Promise<void> => {
+    try {
+      const res = await fetch(
+        'https://uber-project-nocountry-backend-production.up.railway.app/payment',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            id_usuario: '64f61860500eb464d7b717b7',
+            id_conductor: '64eea22e93d51227247663b5',
+            id_viaje: '64ec9fcd68f99ae8049d3a72',
+            token:
+              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZTY5MWU5NTRlYzg0NmEyYWQ2MDRhZSIsImlhdCI6MTY5NDExNjA2MiwiZXhwIjoxNjk0MjAyNDYyfQ.7UOZyZquz_2P_vGNoALM3MSmEuPiPKQLrkFKdCPJKck',
+            amount: 50,
+            metodo: 'tarjeta',
+            fecha: '2023-08-22T12:00:00Z',
+          }),
+        },
+      )
+      const data = await res.json()
+      console.log('data:', data)
+      console.log(data)
+      location.href = data
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   return (
