@@ -13,6 +13,8 @@ import { Layout } from '@/components/layouts/Layout'
 import { Dashboard } from '@/pages/Dashboard'
 import SetTrip from '@/pages/SetTrip'
 import { AuthGuard } from './guard/AuthGuard'
+import { PaymentCard } from '@/pages/PaymentCards'
+import { Payment } from '@/pages/Payment'
 
 const RoutesProvider: FC = () => {
   return (
@@ -25,6 +27,8 @@ const RoutesProvider: FC = () => {
           <Route path='/settrip' element={<SetTrip />} />
           <Route path='/dashboard/*' element={<Dashboard />} />
           <Route path='/select-trip' element={<SelectTrip />} />
+          <Route path='/payment' element={<Payment />} />
+          <Route path='/payment-card' element={<PaymentCard />} />
         </Route>
         <Route path='/login' element={<Login />} />
         <Route path='/change-password' element={<ForgotPassword />} />
