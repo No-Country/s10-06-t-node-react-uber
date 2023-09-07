@@ -1,22 +1,11 @@
 import { useState, type FC } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
-import '../styles/index.css'
 import mercadoPagoIcon from '../assets/mercado-pago-icon.svg'
 import moneyIcon from '../assets/money-icon.svg'
 import cardPayIcon from '../assets/tarjeta-pago-icon.svg'
 import { SectionManager } from '@/components/Dashboard/SectionManager'
-import * as apiPayment from '@/utils/apiPayment'
 import { useForm } from 'react-hook-form'
-
-interface FormData {
-  idConductor: 'string'
-  idViaje: 'string'
-  token: 'string'
-  amount: 'string'
-  metodo: 'string'
-  fecha: 'string'
-}
 
 export const Payment: FC = () => {
   const { handleSubmit } = useForm<FormData>({ mode: 'onChange' })
@@ -24,7 +13,7 @@ export const Payment: FC = () => {
   const [payment, setPayment] = useState('cash' as string)
   const navigate = useNavigate()
 
-  const handlePayment = async (data: FormData): Promise<void> => {
+  const handlePayment = async (): Promise<void> => {
     try {
       const res = await fetch(
         'https://uber-project-nocountry-backend-production.up.railway.app/payment',
@@ -47,7 +36,6 @@ export const Payment: FC = () => {
       )
       const data = await res.json()
       console.log('data:', data)
-      console.log(data)
       location.href = data
     } catch (err) {
       console.log(err)
