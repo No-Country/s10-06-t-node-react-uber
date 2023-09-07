@@ -6,46 +6,45 @@ import mercadoPagoIcon from '../assets/mercado-pago-icon.svg'
 import moneyIcon from '../assets/money-icon.svg'
 import cardPayIcon from '../assets/tarjeta-pago-icon.svg'
 import { SectionManager } from '@/components/Dashboard/SectionManager'
-import { BASE_URL } from '@/utils/api'
+import * as apiPayment from '@/utils/apiPayment'
+import { useForm } from 'react-hook-form'
 
-// interface FormData {
-//   idUsuario: 'string'
-//   idConductor: 'string'
-//   idViaje: 'string'
-//   token: 'string'
-//   amount: 'string'
-//   metodo: 'string'
-//   fecha: 'string'
-// }
+interface FormData {
+  idConductor: 'string'
+  idViaje: 'string'
+  token: 'string'
+  amount: 'string'
+  metodo: 'string'
+  fecha: 'string'
+}
 
 export const Payment: FC = () => {
+  const { handleSubmit } = useForm<FormData>({ mode: 'onChange' })
+
   const [payment, setPayment] = useState('cash' as string)
   const navigate = useNavigate()
 
-  const handlePayment = async (): Promise<void> => {
-    console.log('handlePayment:', handlePayment)
-    const res = await fetch(`${BASE_URL}/payment`, {
-      method: 'POST',
-      body: JSON.stringify({
-        idUsuario: '64f61860500eb464d7b717b7',
-        idConductor: '64eea22e93d51227247663b5',
+  const handlePayment = (data: FormData): void => {
+    console.log('handlePayment:')
+    const idUsuario = '64f61860500eb464d7b717b7'
+    const idConductor = '64eea22e93d51227247663b5'
+    apiPayment
+      .submitPayment({
+        idUsuario,
+        idConductor,
         idViaje: '64ec9fcd68f99ae8049d3a72',
         token:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZTRhYzdkNDQzMzQ1NjE4OTc1YTM5YSIsImlhdCI6MTY5Mzg3Mzg4MCwiZXhwIjoxNjkzOTYwMjgwfQ.pvT4EZhC0N2wsJhcoi3YWiSPrdz4JHTXPFVZCQ__qG4',
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZTY5MWU5NTRlYzg0NmEyYWQ2MDRhZSIsImlhdCI6MTY5NDExNjA2MiwiZXhwIjoxNjk0MjAyNDYyfQ.7UOZyZquz_2P_vGNoALM3MSmEuPiPKQLrkFKdCPJKck',
         amount: '50',
         metodo: 'tarjeta',
         fecha: '2023-08-22T12:00:00Z',
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-    const data = await res.json()
-    if (res.status === 200) {
-      console.log('res', res)
-    } else {
-      console.log('res', data)
-    }
+      })
+      .then(() => {
+        console.log(idUsuario, 'todo-bien')
+      })
+      .catch((err) => {
+        console.log('err:', err)
+      })
   }
 
   return (
@@ -187,10 +186,7 @@ export const Payment: FC = () => {
               {(payment === 'mercado' || payment === 'cash') && (
                 <button
                   type='submit'
-                  onClick={() => {
-                    console.log('hi')
-                    void handlePayment()
-                  }}
+                  onClick={handleSubmit(handlePayment)}
                   // onClick={() => {
                   //   navigate('/dashboard')
                   // }}
