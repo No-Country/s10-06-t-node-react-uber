@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 interface ItemsContainerProps {
   children: React.ReactNode
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
@@ -9,7 +11,8 @@ const ItemsContainer: React.FC<ItemsContainerProps> = ({
   onClick,
 }) => {
   return (
-    <button
+    <Link
+      to='/select-trip'
       onClick={(event) => {
         if (onClick) {
           onClick(event)
@@ -18,7 +21,7 @@ const ItemsContainer: React.FC<ItemsContainerProps> = ({
       className='mt-3 flex items-center rounded-full bg-[#f8f8f8] px-[12px] py-[6px] font-light shadow-setTripItems'
     >
       {children}
-    </button>
+    </Link>
   )
 }
 
