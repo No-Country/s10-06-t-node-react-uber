@@ -12,7 +12,7 @@ import locationIqAccessToken from '@/utils/locationIqAccessToken'
 import { LocationAutocomplete } from '@/components/common/LocationAutocomplete'
 import type { typeLocationIQAutocompleteData } from '@/components/common/LocationAutocomplete'
 import { usePosiblesLocationStore } from '@/stateManagement/usePosiblesLocationStore'
-import useLocationIqAutocomplete from '@/utils/locationIqAutocomplete'
+import locationIqAutocomplete from '@/utils/locationIqAutocomplete'
 interface typeSetTripState {
   locationAutocomplete: boolean
   activeLocationAutocomplete: () => void
@@ -74,11 +74,13 @@ const SetTrip: React.FC = () => {
               inputType='text'
               inputPlaceholder='¿De dónde salís?'
               keyDownEventActive={true}
-              handlerKeyDownEvent={useLocationIqAutocomplete(
-                'inputStartLocation',
-                inputStartLocationValue,
-                setPosiblesLocation,
-              )}
+              handlerKeyDownEvent={async () => {
+                await locationIqAutocomplete(
+                  'inputStartLocation',
+                  inputStartLocationValue,
+                  setPosiblesLocation,
+                )
+              }}
             />
           </div>
           <div className='flex items-center'>
