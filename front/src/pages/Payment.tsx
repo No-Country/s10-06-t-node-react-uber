@@ -6,6 +6,24 @@ import mercadoPagoIcon from '../assets/mercado-pago-icon.svg'
 import moneyIcon from '../assets/money-icon.svg'
 import cardPayIcon from '../assets/tarjeta-pago-icon.svg'
 import { SectionManager } from '@/components/Dashboard/SectionManager'
+import { BASE_URL } from '@/utils/api'
+
+const handlePayment = async (): Promise<void> => {
+  const res = await fetch(`${BASE_URL}/api/register`, {
+    method: 'POST',
+    body: JSON.stringify({
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+  const data = await res.json()
+  if (res.status === 200) {
+    console.log('res', res)
+  } else {
+    setErrorFetch(data)
+  }
+}
 
 export const Payment: FC = () => {
   const [payment, setPayment] = useState('cash' as string)
@@ -149,6 +167,7 @@ export const Payment: FC = () => {
               {(payment === 'mercado' || payment === 'cash') && (
                 <button
                   type='submit'
+                  onSubmit={handlePayment}
                   className='h-[32px] 
             w-[193px] rounded-3xl bg-[#29103A] text-[14px] uppercase text-white'
                 >

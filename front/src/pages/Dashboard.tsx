@@ -8,6 +8,8 @@ import { AccountManager } from './AccountManager'
 import { EditProfile } from './EditProfile'
 import { MyAddresses } from './MyAddresses'
 import { PaymentMethods } from './PaymentMethods'
+import { Payment } from './Payment'
+import { PaymentCard } from './PaymentCards'
 
 export const Dashboard: FC = () => {
   return (
@@ -30,6 +32,8 @@ export const Dashboard: FC = () => {
             path='/account-manager/payment-methods'
             element={<PaymentMethods />}
           />
+          <Route path='/payment' element={<Payment />} />
+          <Route path='/payment/cards' element={<PaymentCard />} />
         </Routes>
       </div>
       <div className='h-[15%]'>
