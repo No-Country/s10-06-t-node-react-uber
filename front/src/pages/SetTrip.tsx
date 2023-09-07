@@ -11,8 +11,8 @@ import locationIqApiBaseUrl from '@/utils/locationIqApi'
 import locationIqAccessToken from '@/utils/locationIqAccessToken'
 import { LocationAutocomplete } from '@/components/common/LocationAutocomplete'
 import type { typeLocationIQAutocompleteData } from '@/components/common/LocationAutocomplete'
-import usePosiblesLocationStore from '@/stateManagement/usePosiblesLocationStore'
-import useLocationIqAutocomplete from '@/utils/uselocationIqAutocomplete'
+import { usePosiblesLocationStore } from '@/stateManagement/usePosiblesLocationStore'
+import useLocationIqAutocomplete from '@/utils/locationIqAutocomplete'
 interface typeSetTripState {
   locationAutocomplete: boolean
   activeLocationAutocomplete: () => void
@@ -77,6 +77,7 @@ const SetTrip: React.FC = () => {
               handlerKeyDownEvent={useLocationIqAutocomplete(
                 'inputStartLocation',
                 inputStartLocationValue,
+                setPosiblesLocation,
               )}
             />
           </div>
