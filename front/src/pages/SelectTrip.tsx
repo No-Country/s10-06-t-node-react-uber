@@ -6,8 +6,10 @@ import marker from '@/assets/marker.svg'
 import time from '@/assets/time.svg'
 import dolar from '@/assets/dolar.svg'
 import { BsArrowLeft } from 'react-icons/bs'
+import { useNavigate } from 'react-router'
 
 export const SelectTrip: React.FC = () => {
+  const navigate = useNavigate()
   const [standardVehicle, setStandardVehicle] = useState(true)
   const handleStandardVehicle = (): void => {
     setStandardVehicle(true)
@@ -68,7 +70,12 @@ export const SelectTrip: React.FC = () => {
           </div>
         </div>
         <div className='flex items-center justify-center'>
-          <button className='rounded-full bg-primary px-6 py-1.5 text-sm text-white'>
+          <button
+            onClick={() => {
+              navigate('/payment')
+            }}
+            className='rounded-full bg-primary px-6 py-1.5 text-sm text-white'
+          >
             CONTINUAR AL PAGO
           </button>
         </div>
