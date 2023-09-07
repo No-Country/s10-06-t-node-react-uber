@@ -1,5 +1,5 @@
 import LocationAutocompleteItems from './LocationAutocompleteItems'
-import usePosiblesLocationStore from '@/stateManagement/usePosiblesLocationStore'
+import { usePosiblesLocationStore } from '@/stateManagement/usePosiblesLocationStore'
 
 export type typeLocationIQAutocompleteData = Array<{
   place_id: number
