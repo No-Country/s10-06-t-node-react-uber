@@ -2,10 +2,14 @@ import { Link } from 'react-router-dom'
 
 interface ItemsContainerProps {
   children: React.ReactNode
+  handler?: () => void
 }
 
 // Esté componente, se utiliza para estilizar el contenedor de los items.
-const ItemsContainer: React.FC<ItemsContainerProps> = ({ children }) => {
+const ItemsContainer: React.FC<ItemsContainerProps> = ({
+  children,
+  handler,
+}) => {
   return (
     <Link
       to='/select-trip'
