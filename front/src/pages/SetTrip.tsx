@@ -10,6 +10,7 @@ import RecentTripsItem from '@/components/common/RecentTripsItem'
 import { LocationAutocomplete } from '@/components/common/LocationAutocomplete'
 import { usePosiblesLocationStore } from '@/context/usePosibleLocationStore'
 import locationIqAutocomplete from '@/utils/locationIqAutocomplete'
+import useSetTripInputsStore from '@/context/useSetTripInputsStore'
 interface typeSetTripState {
   locationAutocomplete: boolean
   activeLocationAutocomplete: () => void
