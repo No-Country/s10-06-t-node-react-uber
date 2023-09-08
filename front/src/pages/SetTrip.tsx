@@ -21,25 +21,6 @@ const useSetTripStore = create<typeSetTripState>()((set) => ({
   },
 }))
 
-interface typeSetTripInputsState {
-  inputStartLocationValue: string
-  inputFinishLocationValue: string
-  setInputStartLocationValue: (newValue: string) => void
-  setInputFinishLocationValue: (newValue: string) => void
-}
-export const useSetTripInputsStore = create<typeSetTripInputsState>()(
-  (set) => ({
-    inputStartLocationValue: '',
-    inputFinishLocationValue: '',
-    setInputStartLocationValue: (newValue) => {
-      set(() => ({ inputStartLocationValue: newValue }))
-    },
-    setInputFinishLocationValue: (newValue) => {
-      set(() => ({ inputFinishLocationValue: newValue }))
-    },
-  }),
-)
-
 export const SetTrip: React.FC = () => {
   const { setPosiblesLocation } = usePosiblesLocationStore((state) => state)
   const { locationAutocomplete, activeLocationAutocomplete } = useSetTripStore(
