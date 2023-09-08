@@ -8,7 +8,7 @@ import Input from '../components/common/Input'
 // import { BASE_URL } from '@/utils/api'
 import RecentTripsItem from '@/components/common/RecentTripsItem'
 import { LocationAutocomplete } from '@/components/common/LocationAutocomplete'
-import { usePosiblesLocationStore } from '@/stateManagement/usePosiblesLocationStore'
+import { usePosiblesLocationStore } from '@/context/usePosibleLocationStore'
 import locationIqAutocomplete from '@/utils/locationIqAutocomplete'
 interface typeSetTripState {
   locationAutocomplete: boolean

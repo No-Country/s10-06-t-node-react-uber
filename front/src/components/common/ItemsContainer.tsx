@@ -1,3 +1,5 @@
+import { usePosiblesLocationStore } from '@/context/usePosibleLocationStore'
+
 interface ItemsContainerProps {
   children: React.ReactNode
   handler?: () => void
@@ -14,6 +16,7 @@ const ItemsContainer: React.FC<ItemsContainerProps> = ({
     <button
       value={value}
       onClick={() => {
+        console.log(value)
         if (handler) {
           handler()
         }
