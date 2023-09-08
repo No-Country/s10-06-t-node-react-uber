@@ -23,7 +23,7 @@ const Input: React.FC<InputProps> = ({
         onChange={(event) => {
           handler(event)
         }}
-        onKeyDown={(event) => {
+        onKeyDown={() => {
           if (handlerKeyDownEvent) {
             handlerKeyDownEvent()
           }
