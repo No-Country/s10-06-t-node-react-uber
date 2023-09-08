@@ -21,9 +21,10 @@ const ItemsContainer: React.FC<ItemsContainerProps> = ({
     <button
       value={value}
       onClick={() => {
-        console.log(value)
-        if (handler) {
-          handler()
+        if (posiblesLocationFrom === 'inputFinishLocation') {
+          setInputFinishLocationValue(value)
+        } else {
+          setInputStartLocationValue(value)
         }
       }}
       className='mt-3 flex w-full items-center rounded-full bg-[#f8f8f8] px-[12px] py-[6px] font-light shadow-setTripItems'
