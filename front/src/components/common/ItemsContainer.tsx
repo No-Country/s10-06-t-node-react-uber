@@ -1,4 +1,5 @@
 import { usePosiblesLocationStore } from '@/context/usePosibleLocationStore'
+import { useSetTripInputsStore } from '@/pages/SetTrip'
 
 interface ItemsContainerProps {
   children: React.ReactNode
@@ -12,6 +13,10 @@ const ItemsContainer: React.FC<ItemsContainerProps> = ({
   handler,
   value,
 }) => {
+  const { posiblesLocationFrom } = usePosiblesLocationStore((state) => state)
+  const { setInputFinishLocationValue, setInputStartLocationValue } =
+    useSetTripInputsStore((state) => state)
+
   return (
     <button
       value={value}
