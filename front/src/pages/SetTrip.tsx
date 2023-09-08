@@ -21,7 +21,7 @@ const useSetTripStore = create<typeSetTripState>()((set) => ({
   },
 }))
 
-export const SetTrip: React.FC = () => {
+const SetTrip: React.FC = () => {
   const { setPosiblesLocation } = usePosiblesLocationStore((state) => state)
   const { locationAutocomplete, activeLocationAutocomplete } = useSetTripStore(
     (state) => state,
@@ -98,3 +98,5 @@ export const SetTrip: React.FC = () => {
     </Container>
   )
 }
+
+export default SetTrip
