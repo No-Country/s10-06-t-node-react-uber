@@ -1,15 +1,18 @@
 interface ItemsContainerProps {
   children: React.ReactNode
   handler?: () => void
+  value: string
 }
 
 // Esté componente, se utiliza para estilizar el contenedor de los items.
 const ItemsContainer: React.FC<ItemsContainerProps> = ({
   children,
   handler,
+  value,
 }) => {
   return (
     <button
+      value={value}
       onClick={() => {
         if (handler) {
           handler()
