@@ -93,7 +93,7 @@ const SetTrip: React.FC = () => {
               }}
               inputType='text'
               keyDownEventActive={true}
-              handlerKeyDownEvent={async (event) => {
+              handlerKeyDownEvent={async () => {
                 await fetch(
                   `${locationIqApiBaseUrl}/autocomplete?key=${locationIqAccessToken}&q=${inputFinishLocationValue}`,
                 )

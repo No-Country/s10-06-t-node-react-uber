@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 interface ItemsContainerProps {
   children: React.ReactNode
   handler?: () => void
@@ -9,12 +11,12 @@ const ItemsContainer: React.FC<ItemsContainerProps> = ({
   handler,
 }) => {
   return (
-    <button
-      onClick={handler}
-      className='mt-3 flex w-full items-center rounded-full bg-[#f8f8f8] px-[12px] py-[6px] font-light shadow-setTripItems'
+    <Link
+      to='/select-trip'
+      className='mt-3 flex items-center rounded-full bg-[#f8f8f8] px-[12px] py-[6px] font-light shadow-setTripItems'
     >
       {children}
-    </button>
+    </Link>
   )
 }
 

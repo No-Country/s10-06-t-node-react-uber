@@ -12,8 +12,8 @@ export const FixedFieldInputs: FC<FixedField> = ({ label, dataUser }) => {
       px-5 flex items-center'
     >
       <div className='flex flex-col'>
-          <p className='text-[12px]'>{label}</p>
-          <p className='text-[16px]'>{dataUser}</p>
+          <p className='text-12 text-[#49454F]'>{label}</p>
+          <p className='text-[16px] text-[#1D1B20]'>{dataUser}</p>
       </div>
     </div>
   );

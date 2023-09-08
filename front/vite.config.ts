@@ -21,6 +21,9 @@ export default defineConfig({
   preview: {
     port: 3000,
   },
+  build: {
+    chunkSizeWarningLimit: 1600,
+  },
   resolve: {
     alias: {
       '@': '/src',
