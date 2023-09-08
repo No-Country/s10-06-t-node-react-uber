@@ -7,12 +7,10 @@ import { Link } from 'react-router-dom'
 import Input from '../components/common/Input'
 // import { BASE_URL } from '@/utils/api'
 import RecentTripsItem from '@/components/common/RecentTripsItem'
-import locationIqApiBaseUrl from '@/utils/locationIqApi'
-import locationIqAccessToken from '@/utils/locationIqAccessToken'
 import { LocationAutocomplete } from '@/components/common/LocationAutocomplete'
-import type { typeLocationIQAutocompleteData } from '@/components/common/LocationAutocomplete'
-import { usePosiblesLocationStore } from '@/stateManagement/usePosiblesLocationStore'
+import { usePosiblesLocationStore } from '@/context/usePosibleLocationStore'
 import locationIqAutocomplete from '@/utils/locationIqAutocomplete'
+import useSetTripInputsStore from '@/context/useSetTripInputsStore'
 interface typeSetTripState {
   locationAutocomplete: boolean
   activeLocationAutocomplete: () => void
@@ -21,23 +19,6 @@ const useSetTripStore = create<typeSetTripState>()((set) => ({
   locationAutocomplete: false,
   activeLocationAutocomplete: () => {
     set(() => ({ locationAutocomplete: true }))
-  },
-}))
-
-interface typeSetTripInputsState {
-  inputStartLocationValue: string
-  inputFinishLocationValue: string
-  setInputStartLocationValue: (newValue: string) => void
-  setInputFinishLocationValue: (newValue: string) => void
-}
-const useSetTripInputsStore = create<typeSetTripInputsState>()((set) => ({
-  inputStartLocationValue: '',
-  inputFinishLocationValue: '',
-  setInputStartLocationValue: (newValue) => {
-    set(() => ({ inputStartLocationValue: newValue }))
-  },
-  setInputFinishLocationValue: (newValue) => {
-    set(() => ({ inputFinishLocationValue: newValue }))
   },
 }))
 
@@ -67,20 +48,18 @@ const SetTrip: React.FC = () => {
             <TbPointFilled className='mr-[4px] text-24 text-primary' />
             <Input
               value={inputStartLocationValue}
-              handler={(e: React.ChangeEvent<HTMLInputElement>) => {
+              handler={async (e: React.ChangeEvent<HTMLInputElement>) => {
                 setInputStartLocationValue(e.target.value)
                 activeLocationAutocomplete()
-              }}
-              inputType='text'
-              inputPlaceholder='¿De dónde salís?'
-              keyDownEventActive={true}
-              handlerKeyDownEvent={async () => {
                 await locationIqAutocomplete(
                   'inputStartLocation',
                   inputStartLocationValue,
                   setPosiblesLocation,
                 )
               }}
+              inputType='text'
+              inputPlaceholder='¿De dónde salís?'
+              keyDownEventActive={true}
             />
           </div>
           <div className='flex items-center'>
@@ -90,28 +69,13 @@ const SetTrip: React.FC = () => {
               handler={async (e: React.ChangeEvent<HTMLInputElement>) => {
                 setInputFinishLocationValue(e.target.value)
                 activeLocationAutocomplete()
+                await locationIqAutocomplete(
+                  'inputFinishLocation',
+                  inputFinishLocationValue,
+                  setPosiblesLocation,
+                )
               }}
               inputType='text'
-              keyDownEventActive={true}
-              handlerKeyDownEvent={async () => {
-                await fetch(
-                  `${locationIqApiBaseUrl}/autocomplete?key=${locationIqAccessToken}&q=${inputFinishLocationValue}`,
-                )
-                  .then(async (response) => await response.json())
-                  .then((data) => {
-                    if (data.error) {
-                      console.log('error')
-                    } else {
-                      return data
-                    }
-                  })
-                  .then((data: typeLocationIQAutocompleteData | undefined) => {
-                    setPosiblesLocation(data, 'inputFinishLocation')
-                  })
-                  .catch((error) => {
-                    console.log(error)
-                  })
-              }}
               inputPlaceholder='¿A dónde te llevamos?'
             />
           </div>
