@@ -1,5 +1,5 @@
 import { usePosiblesLocationStore } from '@/context/usePosibleLocationStore'
-import { useSetTripInputsStore } from '@/pages/SetTrip'
+import useSetTripInputsStore from '@/context/useSetTripInputsStore'
 
 interface ItemsContainerProps {
   children: React.ReactNode
