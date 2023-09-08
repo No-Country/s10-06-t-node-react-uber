@@ -1,7 +1,6 @@
 import { type FC } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
-import '../styles/index.css'
 import { SectionManager } from '@/components/Dashboard/SectionManager'
 import { BsFillPlusCircleFill } from 'react-icons/bs'
 

@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import './styles/index.css'
 import RoutesProvider from './routes/RoutesProvider'
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
