@@ -1,7 +1,7 @@
 import locationIqAccessToken from './locationIqAccessToken'
 import locationIqApiBaseUrl from './locationIqApi'
 import type { typeLocationIQAutocompleteData } from '@/components/common/LocationAutocomplete'
-import type { typePosiblesLocationState } from '@/stateManagement/usePosiblesLocationStore'
+import type { typePosiblesLocationState } from '@/context/usePosibleLocationStore'
 
 async function locationIqAutocomplete(
   posiblesLocationFrom: 'inputFinishLocation' | 'inputStartLocation',
