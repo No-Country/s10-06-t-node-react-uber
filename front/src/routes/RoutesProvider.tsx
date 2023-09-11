@@ -28,7 +28,7 @@ const RoutesProvider: FC = () => {
           <Route path='/dashboard/*' element={<Dashboard />} />
           <Route path='/select-trip' element={<SelectTrip />} />
           <Route path='/payment' element={<Payment />} />
-          <Route path='/payment-card' element={<PaymentCard />} />
+          <Route path='/payment/cards' element={<PaymentCard />} />
         </Route>
         <Route path='/login' element={<Login />} />
         <Route path='/change-password' element={<ForgotPassword />} />
