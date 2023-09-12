@@ -20,6 +20,7 @@ import polyline from '@mapbox/polyline';
 
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import Viaje from './src/models/viajesModels.js';
 
 dotenv.config();
 const app = express();
@@ -62,21 +63,42 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 let currentOrigin = "Av. Corrientes 1500, Buenos Aires, Argentina"; // Ubicación de partida conductor(puedes cambiarla)
-const destino = "Av. Corrientes 1000, Buenos Aires, Argentina"; // Ubicación de llegada recoger pasajero(puedes cambiarla)
+const destino = "Cerrito 800, Santa Fe, Argentina"; // Ubicación de llegada recoger pasajero(puedes cambiarla)
 const ACCESS_TOKEN_MB = 'pk.eyJ1IjoieWVpbndpbGxpZSIsImEiOiJjbGx2bzVianAxY3VyM2ZwaDAwc2dyd2lyIn0._qZShL6XUUYlIQ_km2IUDg';
 const UPDATE_INTERVAL = 3000; 
 let currentIndex = 0; // Mover currentIndex fuera de la función sendCoordinates
- 
 
+ // const obtenerOrigen = async () => {
+  //   try {
+  //     const viaje = await Viaje.findById("64ece2e17adc22497df12936");
+  //     if (viaje) {
+  //       return (viaje);
+  //     } else {
+  //       return({ message: 'Viaje no encontrado' });
+  //     }
+  //   } catch (error) {
+  //     return({ error: error.message });
+  //   }
+  // };
 io.on('connection', (socket) => {
   console.log('A user connected');
 
   let intervalId;
-
+ 
   const sendCoordinates = async () => {
     try {
+      const origen = await obtenerOrigen();
       // convertir la direccion de origen para que la lea el fetch de mapbox
-      
+      const idDelUsuario = "64ece2e17adc22497df12936"
+      const ultimoViaje = await Viaje.findOne({ id_usuario: idDelUsuario })
+      .sort({ fecha: -1 }) // Ordena en orden descendente por fecha (el más reciente primero)
+      .exec();
+
+    if (!ultimoViaje) {
+      throw new Error('No se encontró el último viaje del usuario');
+    }
+
+    const destino2 = ultimoViaje.origen;
       const geocodingResponseOrigen = await fetch(
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(currentOrigin)}.json` +
         `?access_token=${ACCESS_TOKEN_MB}`
@@ -90,7 +112,7 @@ io.on('connection', (socket) => {
 
       // convertir la direccion de origen para que la lea el fetch de mapbox
       const geocodingResponseDestino = await fetch(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(destino)}.json` +
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(destino2)}.json` +
         `?access_token=${ACCESS_TOKEN_MB}`
       );
 
@@ -132,6 +154,7 @@ io.on('connection', (socket) => {
       console.error('Error fetching coordinates:', error);
     }
   };
+ 
 
   // Inicializar currentIndex a 0 cuando se conecta un nuevo usuario
   currentIndex = 0;
