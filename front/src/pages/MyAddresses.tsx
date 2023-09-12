@@ -1,48 +1,57 @@
-import { type FC } from 'react';
+import { type FC, useEffect, useState } from 'react';
 import { FaHouse } from 'react-icons/fa6';
-import { BsFillBriefcaseFill, BsFillPlusCircleFill } from "react-icons/bs";
-import { CgGym } from "react-icons/cg";
+import { BsFillPlusCircleFill } from "react-icons/bs";
 import { BiSolidPencil } from "react-icons/bi";
 import { HeaderTitle } from '@/components/AccountManager/HeaderTitle';
 import { useNavigate } from 'react-router-dom';
+import { BASE_URL } from '@/utils/api';
+import { useUserId } from '@/context/UserIdContext';
 
 export const MyAddresses: FC = () => {
 
-    const addresses = [
-        {
-            location: 'Casa',
-            address: 'Rafael Nuñez 1972',
-            icon: <FaHouse color='#29103A' size='25' />
-        },
-        {
-            location: 'Trabajo',
-            address: 'Av General Paz 760',
-            icon: <BsFillBriefcaseFill color='#29103A' size='25' />
-        },
-        {
-            location: 'Gimnasio',
-            address: 'Ricardo Pedroni 8102',
-            icon: <CgGym color='#29103A' size='25' />
-        }
-    ];
+    const [ favorites, setFavorites ] = useState([]);
 
     const navigate = useNavigate();
+    const { userId } = useUserId();
+    
+    useEffect(()=>{
+        const getFavorites = async (): Promise<void> => {
+            const response = await fetch(`${BASE_URL}/favorito/usuario/${userId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ token: localStorage.getItem('token')})
+            })
+
+            const data = await response.json();
+
+            if(response.ok){
+                setFavorites(data);
+            }
+            else{
+                console.error('Error en la solicitud:', data.message);
+            }
+        }
+
+        void getFavorites();
+    },[ userId ]);
 
     return (
         <div className='h-full px-5 pt-16 relative'>
             <HeaderTitle title={'Mis Direcciones'} link={'/dashboard/account-manager'}/>
             <ul className='pt-5'>
                 {
-                    addresses.map((address, index)=>(
+                    favorites.map((favorite, index)=>(
                         <li className='flex justify-between items-center h-[66px] bg-[#CCCCCC] 
                             px-5 rounded-[25px] border border-[#29103A] mt-5'
                             key={index}
                         >   
                             <div className='flex items-center'>
-                                {address.icon}
+                                {<FaHouse size='25'/>}
                                 <div className='pl-2'>
-                                    <h2 className='text-[18px]'>{address.location}</h2>
-                                    <p className='text-[#49494A] text-[16px]'>{address.address}</p>
+                                    <h2 className='text-[18px]'>{favorite.titulo}</h2>
+                                    <p className='text-[#49494A] text-[16px]'>{favorite.direccion}</p>
                                 </div>
                             </div>
                             <BiSolidPencil color='#29103A' size='25' />

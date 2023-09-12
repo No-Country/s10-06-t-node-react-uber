@@ -5,11 +5,12 @@ interface CampoInputFieldsetProps {
   label: string;
   type: string;
   value?: string;
-  fieldName: "firstName" | "lastName" | "email" | "dateOfBirth" | "nationality" | "cellNumber" | "reference" | "address";
-  register: (name: "firstName" | "lastName" | "email" | "dateOfBirth" | "nationality" | "cellNumber" | "reference" | "address", options?: RegisterOptions) => UseFormRegisterReturn;
+  fieldName: "firstName" | "lastName" | "email" | "dateOfBirth" | "nationality" | "cellNumber" | "titulo";
+  register: (name: "firstName" | "lastName" | "email" | "dateOfBirth" | "nationality" | "cellNumber" | "titulo", options?: RegisterOptions) => UseFormRegisterReturn;
+  holder?: string;
 };
 
-export const CampoInputFieldset: FC<CampoInputFieldsetProps> = ({ label, value, type,  register, fieldName }) => {
+export const CampoInputFieldset: FC<CampoInputFieldsetProps> = ({ label, value, type,  register, fieldName, holder }) => {
   
   return (
     <fieldset className='bg-[#CCCCCC] h-[56px] border-b-[1px] text-12
@@ -17,7 +18,8 @@ export const CampoInputFieldset: FC<CampoInputFieldsetProps> = ({ label, value, 
     >
       <label htmlFor={label}>{label}</label>
       <input type={type} id={label} 
-        required 
+        required
+        placeholder={holder}
         defaultValue={value} 
         className='bg-[#CCCCCC] border-none p-0 text-[16px] text-[#1D1B20]' 
         {...register(fieldName)} 

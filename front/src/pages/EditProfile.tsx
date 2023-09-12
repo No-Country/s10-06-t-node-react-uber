@@ -5,6 +5,7 @@ import { FixedFieldInputs } from '@/components/AccountManager/FixedFieldInputs';
 import { BASE_URL } from '@/utils/api';
 import { fetchData } from '@/utils/getUserById';
 import { HeaderTitle } from '@/components/AccountManager/HeaderTitle';
+import { ChangePasswordModal } from '@/components/AccountManager/ChangePasswordModal';
 
 interface Inputs {
     firstName: string;
@@ -13,8 +14,7 @@ interface Inputs {
     dateOfBirth: Date | string;
     nationality: string;
     cellNumber: number | string;
-    reference: string;
-    address: string;
+    titulo: string;
 };
 
 interface UserData {
@@ -30,9 +30,10 @@ interface UserData {
 export const EditProfile: FC = () => {
 
     const [ data, setData ] = useState<UserData | null>(null);
+    const [ modal, setModal ] = useState(false);
 
     useEffect(() => {
-        async function fetchDataAndSetData(): Promise<void> {
+        const fetchDataAndSetData = async (): Promise<void> => {
             const fetchedData = await fetchData();
             setData(fetchedData);
         }
@@ -78,8 +79,15 @@ export const EditProfile: FC = () => {
         };
     };
 
+    const handleModal = (): void =>{
+        setModal(!modal)
+    }
+
     return (
-        <div className='h-[85%] px-5 pt-16'>
+        <div className='h-full px-5 pt-16 relative'>
+            {
+                modal && <ChangePasswordModal handleModal={handleModal} />
+            }
             <HeaderTitle title='Editar perfil' link='/dashboard/account-manager' />
             <form className='pt-2' onSubmit={handleSubmit(onSubmit)}>
                 <FixedFieldInputs label={'Nombre'} dataUser={data?.firstName ?? data?.firstName ?? ''}/>
@@ -91,7 +99,9 @@ export const EditProfile: FC = () => {
                     <CampoInputFieldset label={"Fecha de nacimiento"} fieldName={'dateOfBirth'}  type={"date"} register={register} />
                 }
                 <FixedFieldInputs label={'Correo electrónico'} dataUser={data?.email ?? data?.email ?? ''}/>
-                <FixedFieldInputs label={'Contraseña'} dataUser={'*********'}/>
+                <button type='button' className='w-full' onClick={()=> {handleModal()}}>
+                    <FixedFieldInputs label={'Contraseña'} dataUser={'*********'}/>
+                </button>
                 {
                     data?.nationality !== null?
                     <FixedFieldInputs label={"País"}  dataUser={data?.nationality ?? ''}/>

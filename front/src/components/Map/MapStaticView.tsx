@@ -7,7 +7,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoibHVjYXZpdG9yaW5vMjgiLCJhIjoiY2xtNThiczQ0MTZpY
 export const MapStaticView: FC = () => {
     
     useEffect(() => {
-        let map: mapboxgl.Map | null = null;
+        let map: mapboxgl.Map | null;
 
         navigator.geolocation.getCurrentPosition(
             (position) => {
