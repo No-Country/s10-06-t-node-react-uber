@@ -3,14 +3,12 @@ import useSetTripInputsStore from '@/context/useSetTripInputsStore'
 
 interface ItemsContainerProps {
   children: React.ReactNode
-  handler?: () => void
   value: string
 }
 
 // Esté componente, se utiliza para estilizar el contenedor de los items.
 const ItemsContainer: React.FC<ItemsContainerProps> = ({
   children,
-  handler,
   value,
 }) => {
   const { posiblesLocationFrom } = usePosiblesLocationStore((state) => state)

@@ -26,8 +26,7 @@ export const Payment: FC = () => {
             id_usuario: '64f61860500eb464d7b717b7',
             id_conductor: '64eea22e93d51227247663b5',
             id_viaje: '64ec9fcd68f99ae8049d3a72',
-            token:
-              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZTY5MWU5NTRlYzg0NmEyYWQ2MDRhZSIsImlhdCI6MTY5NDExNjA2MiwiZXhwIjoxNjk0MjAyNDYyfQ.7UOZyZquz_2P_vGNoALM3MSmEuPiPKQLrkFKdCPJKck',
+            token: localStorage.getItem('token'),
             amount: 50,
             metodo: 'tarjeta',
             fecha: '2023-08-22T12:00:00Z',
