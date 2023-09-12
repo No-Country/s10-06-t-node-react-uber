@@ -3,9 +3,10 @@ import { BiArrowBack } from 'react-icons/bi'
 import { TbPointFilled } from 'react-icons/tb'
 import { GoTriangleDown } from 'react-icons/go'
 import { create } from 'zustand'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Input from '../components/common/Input'
 // import { BASE_URL } from '@/utils/api'
+import { useLocationTrip } from '@/context/useLocationTrip'
 import RecentTripsItem from '@/components/common/RecentTripsItem'
 import { LocationAutocomplete } from '@/components/common/LocationAutocomplete'
 import { usePosiblesLocationStore } from '@/context/usePosibleLocationStore'
@@ -27,7 +28,8 @@ const SetTrip: React.FC = () => {
   const { locationAutocomplete, activeLocationAutocomplete } = useSetTripStore(
     (state) => state,
   )
-
+  const navigate = useNavigate()
+  const { setLocations } = useLocationTrip()
   const {
     inputFinishLocationValue,
     inputStartLocationValue,
@@ -35,6 +37,15 @@ const SetTrip: React.FC = () => {
     setInputStartLocationValue,
   } = useSetTripInputsStore((state) => state)
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault()
+    if (inputStartLocationValue && inputFinishLocationValue) {
+      setLocations(inputStartLocationValue, inputFinishLocationValue)
+      localStorage.setItem('startLocation', inputStartLocationValue)
+      localStorage.setItem('finishLocation', inputFinishLocationValue)
+      navigate('/select-trip')
+    }
+  }
   return (
     <Container>
       <main className='text-20'>
@@ -43,7 +54,7 @@ const SetTrip: React.FC = () => {
             <BiArrowBack className='mr-3 text-primary' /> Solicitar un viaje
           </Link>
         </h2>
-        <form className='relative my-7'>
+        <form className='relative my-7' onSubmit={handleSubmit}>
           <div className='mb-5 flex items-center'>
             <TbPointFilled className='mr-[4px] text-24 text-primary' />
             <Input
@@ -79,6 +90,9 @@ const SetTrip: React.FC = () => {
               inputPlaceholder='¿A dónde te llevamos?'
             />
           </div>
+          <button type='submit' className='sr-only'>
+            Buscar viaje
+          </button>
         </form>
         <section>
           {locationAutocomplete ? (
