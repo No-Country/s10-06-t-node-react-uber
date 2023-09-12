@@ -1,5 +1,5 @@
 import { useState, type FC } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import mercadoPagoIcon from '../assets/mercado-pago-icon.svg'
 import moneyIcon from '../assets/money-icon.svg'
@@ -18,7 +18,8 @@ export const Payment: FC = () => {
   const { handleSubmit } = useForm<FormData>({ mode: 'onChange' })
 
   const [payment, setPayment] = useState('cash' as string)
-
+  const location = useLocation()
+  const { dataInfo, standardVehicle } = location.state || {}
   const navigate = useNavigate()
   const currentDate = new Date()
   const isoString = currentDate.toISOString()
@@ -67,7 +68,7 @@ export const Payment: FC = () => {
       )
       const data = await res.json()
       console.log('data:', data)
-      location.href = data
+      window.location.href = data
     } catch (err) {
       console.log(err)
     }
@@ -176,7 +177,12 @@ export const Payment: FC = () => {
                   fill='#29103A'
                 />
               </svg>
-              <p className='text-12 font-semibold'>3 km</p>
+              <p className='text-12 font-semibold'>
+                {dataInfo?.distancia
+                  ? (dataInfo.distancia / 1000).toFixed(1)
+                  : 'N/A'}{' '}
+                km
+              </p>
               <svg
                 width='20'
                 height='20'
@@ -193,7 +199,10 @@ export const Payment: FC = () => {
                   fill='#29103A'
                 />
               </svg>
-              <p className='text-12 font-semibold'>12 min</p>
+              <p className='text-12 font-semibold'>
+                {dataInfo?.tiempo ? Math.round(dataInfo.tiempo / 60) : 'N/A'}{' '}
+                min
+              </p>
               <svg
                 width='12'
                 height='20'
@@ -206,7 +215,11 @@ export const Payment: FC = () => {
                   fill='#29103A'
                 />
               </svg>
-              <p className='text-12 font-semibold'>1000</p>
+              <p className='text-12 font-semibold'>
+                {standardVehicle
+                  ? dataInfo?.precioStandar
+                  : dataInfo?.precioPremiun}
+              </p>
             </section>
             <div className='flex justify-center py-6'>
               {(payment === 'mercado' || payment === 'cash') && (

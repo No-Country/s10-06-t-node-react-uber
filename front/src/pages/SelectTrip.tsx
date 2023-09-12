@@ -96,7 +96,7 @@ export const SelectTrip: React.FC = () => {
       amount,
     }
     localStorage.setItem('infoPayment', JSON.stringify(infoPayment))
-    navigate('/payment')
+    navigate('/payment', { state: { dataInfo, standardVehicle  } })
   }
 
   return (
