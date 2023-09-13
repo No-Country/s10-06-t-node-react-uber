@@ -72,11 +72,11 @@ export const SelectTrip: React.FC = () => {
         setStartCoords(data.directionsData.waypoints[0].location)
         setFinishCoords(data.directionsData.waypoints[1].location)
       } else {
-        navigate('/settrip')
+        navigate('/set-trip')
       }
     } catch (error) {
       console.error('Error fetching data:', error)
-      navigate('/dashboard')
+      navigate('/set-trip')
     }
   }
   const handleSubmit = (): void => {
@@ -102,7 +102,7 @@ export const SelectTrip: React.FC = () => {
   return (
     <div className='relative flex h-screen flex-col bg-[#F3EDF7]'>
       <Link
-        to='/dashboard'
+        to='/set-trip'
         className='absolute left-7 top-7 z-50 flex h-10 w-10 items-center justify-center rounded-full border bg-[#dfdfdf]'
       >
         <BsArrowLeft />

@@ -4,6 +4,8 @@ import server from './src/routes/serverRoute.js';
 import user from './src/routes/userRoute.js';
 import paymentRoute from './src/routes/paymentRoutes.js';
 import conductor from './src/routes/conductorRoutes.js';
+import ticket from './src/routes/ticketRoutes.js';
+import favorito from './src/routes/favoritoRoutes.js';
 import { initDBConnection } from './src/data/dbConnection.js';
 import authRoutes from "./src/routes/authRoutes.js"
 
@@ -34,6 +36,9 @@ app.use(express.json());
 app.use('/users', user);
 
 app.use('/conductor', conductor);
+app.use(express.json());
+app.use('/tickets',ticket );
+app.use('/favorito',favorito );
 
 app.use("/api", authRoutes)
 app.use('/protected-route', validateTokenController);
