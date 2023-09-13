@@ -7,6 +7,7 @@ import { GrFormNext } from "react-icons/gr";
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '@/context/GoogleAuthContext';
 import { fetchData } from '@/utils/getUserById';
+import { useUserId } from '@/context/UserIdContext';
 
 interface Profile {
     name: string,
@@ -30,13 +31,15 @@ export const AccountManager: FC = () => {
     const { signOut } = useAuthStore();
     const navigate = useNavigate();
 
+    const { updateUserId } = useUserId();
+
     useEffect(() => {
         async function fetchDataAndSetData(): Promise<void> {
-            const fetchedData = await fetchData();
+            const fetchedData = await fetchData(updateUserId);
             setData(fetchedData);
         }
         void fetchDataAndSetData();
-    }, []);
+    }, [ updateUserId ]);
 
     const profileButtonData: Profile[] = [
         {

@@ -15,6 +15,7 @@ import SetTrip from '@/pages/SetTrip'
 import { AuthGuard } from './guard/AuthGuard'
 import { PaymentCard } from '@/pages/PaymentCards'
 import { Payment } from '@/pages/Payment'
+import { LookingForDriver } from '@/pages/LookingForDriver'
 
 const RoutesProvider: FC = () => {
   return (
@@ -29,6 +30,7 @@ const RoutesProvider: FC = () => {
           <Route path='/select-trip' element={<SelectTrip />} />
           <Route path='/payment' element={<Payment />} />
           <Route path='/payment/cards' element={<PaymentCard />} />
+          <Route path='/looking-for-driver' element={<LookingForDriver />} />
         </Route>
         <Route path='/login' element={<Login />} />
         <Route path='/change-password' element={<ForgotPassword />} />

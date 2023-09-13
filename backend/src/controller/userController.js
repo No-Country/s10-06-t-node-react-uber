@@ -40,6 +40,7 @@ const usersGetById = async (req, res) => {
       dateOfBirth: user.dateOfBirth,
       nationality: user.nationality,
       cellNumber: user.cellNumber,
+      _id: user._id,
     }
     const payloadWithNulls = Object.fromEntries(
       Object.entries(payload).map(([key, value]) => [key, value !== undefined ? value : null])
@@ -101,7 +102,7 @@ const usersPut = async (req, res) => {
     email: req.body.email,
     dateOfBirth: req.body.dateOfBirth,
     nationality: req.body.nationality,
-    cellnumber: req.body.cellNumber,
+    cellNumber: req.body.cellNumber,
   };
 
   try {
@@ -208,12 +209,40 @@ async function sendrecoveryPasswordEmail(existingUser, recovPassword) {
   const result = await transporter.sendMail(mailOptions);
 
 };
+
+const changePassword = async(req,res) =>{
+  const { email, contrasena_actual, nueva_contrasena } = req.body;
+
+  try {
+    // Busca al usuario por su correo electrónico
+    const usuario = await User.findOne({ email });
+
+    if (!usuario) {
+      return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+    }
+
+    if (contrasena_actual !== usuario.password) {
+      return res.status(401).json({ mensaje: 'Contraseña actual incorrecta' });
+    }
+
+    const salt = bcrypt.genSaltSync(10); //cantidad de saltos que da para encriptar, entre mas vuelta da es mas segura.
+    const PasswordHash = bcrypt.hashSync(nueva_contrasena, salt);
+    usuario.contrasena = PasswordHash;
+    await usuario.save();
+
+    return res.status(200).json({ mensaje: 'Contraseña cambiada con éxito' });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ mensaje: 'Error interno del servidor' });
+  }
+}
 export {
   usersGet,
   usersGetById,
   usersPut,
   usersDelete,
   recoverypassword,
+  changePassword,
 }
 
 

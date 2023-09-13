@@ -10,7 +10,9 @@ interface UserData {
   cellNumber: string | null
 }
 
-export const fetchData = async (): Promise<UserData | null> => {
+export const fetchData = async (
+  updateUserId: ((id: string) => void) | null = null
+): Promise<UserData | null> => {  
   try {
     const response = await fetch(`${BASE_URL}/users/id`, {
       method: 'POST',
@@ -31,6 +33,9 @@ export const fetchData = async (): Promise<UserData | null> => {
           null,
         dateOfBirthUnformatted: responseData.dateOfBirth
       };
+      if (updateUserId !== null) {
+        updateUserId(transformedData._id);
+      }
       return transformedData;
     } else {
       console.error('Error en la respuesta:', responseData);
