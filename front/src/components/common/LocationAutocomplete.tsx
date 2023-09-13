@@ -1,5 +1,5 @@
 import LocationAutocompleteItems from './LocationAutocompleteItems'
-import { create } from 'zustand'
+import { usePosiblesLocationStore } from '@/context/usePosibleLocationStore'
 
 export type typeLocationIQAutocompleteData = Array<{
   place_id: number
@@ -27,38 +27,24 @@ export type typeLocationIQAutocompleteData = Array<{
     country_code: string
   }
 }>
-interface typePosiblesLocationState {
-  posiblesLocation: typeLocationIQAutocompleteData | undefined
-  setPosiblesLocation: (
-    newPosiblesLocation: typeLocationIQAutocompleteData,
-  ) => void
-}
-export const usePosiblesLocationStore = create<typePosiblesLocationState>()(
-  (set) => ({
-    posiblesLocation: undefined,
-    setPosiblesLocation: (newPosiblesLocation) => {
-      set(() => ({
-        posiblesLocation: newPosiblesLocation,
-      }))
-    },
-  }),
-)
 
 export const LocationAutocomplete: React.FC = () => {
   const { posiblesLocation } = usePosiblesLocationStore((state) => state)
   if (posiblesLocation) {
-    const posiblesLocationElements = posiblesLocation.map((posibleLocation) => {
-      return (
-        <LocationAutocompleteItems
-          key={posibleLocation.place_id}
-          km={5}
-          location={posibleLocation.display_address}
-          locationName={posibleLocation.display_name}
-        />
-      )
-    })
+    const posiblesLocationElements = posiblesLocation.map(
+      (posibleLocation, index) => {
+        return (
+          <LocationAutocompleteItems
+            key={posibleLocation.place_id + index}
+            km={5}
+            location={posibleLocation.display_address}
+            locationName={posibleLocation.display_name}
+          />
+        )
+      },
+    )
 
     return <>{posiblesLocationElements}</>
   }
-  return <></>
+  return <>Buscando...</>
 }

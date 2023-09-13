@@ -1,15 +1,46 @@
 import { useState, type FC } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
-import '../styles/index.css'
 import mercadoPagoIcon from '../assets/mercado-pago-icon.svg'
 import moneyIcon from '../assets/money-icon.svg'
 import cardPayIcon from '../assets/tarjeta-pago-icon.svg'
 import { SectionManager } from '@/components/Dashboard/SectionManager'
+import { useForm } from 'react-hook-form'
 
 export const Payment: FC = () => {
+  const { handleSubmit } = useForm<FormData>({ mode: 'onChange' })
+
   const [payment, setPayment] = useState('cash' as string)
   const navigate = useNavigate()
+
+  const handlePayment = async (): Promise<void> => {
+    try {
+      const res = await fetch(
+        'https://uber-project-nocountry-backend-production.up.railway.app/payment',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            id_usuario: '64f61860500eb464d7b717b7',
+            id_conductor: '64eea22e93d51227247663b5',
+            id_viaje: '64ec9fcd68f99ae8049d3a72',
+            token: localStorage.getItem('token'),
+            amount: 50,
+            metodo: 'tarjeta',
+            fecha: '2023-08-22T12:00:00Z',
+          }),
+        },
+      )
+      const data = await res.json()
+      console.log('data:', data)
+      location.href = data
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
     <div className='relative h-screen w-screen'>
       <div className='px-4 pt-16'>
@@ -149,6 +180,10 @@ export const Payment: FC = () => {
               {(payment === 'mercado' || payment === 'cash') && (
                 <button
                   type='submit'
+                  onClick={handleSubmit(handlePayment)}
+                  // onClick={() => {
+                  //   navigate('/dashboard')
+                  // }}
                   className='h-[32px] 
             w-[193px] rounded-3xl bg-[#29103A] text-[14px] uppercase text-white'
                 >

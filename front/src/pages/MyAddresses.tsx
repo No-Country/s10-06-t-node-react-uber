@@ -17,11 +17,10 @@ export const MyAddresses: FC = () => {
     useEffect(()=>{
         const getFavorites = async (): Promise<void> => {
             const response = await fetch(`${BASE_URL}/favorito/usuario/${userId}`, {
-                method: 'POST',
+                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ token: localStorage.getItem('token')})
+                }
             })
 
             const data = await response.json();

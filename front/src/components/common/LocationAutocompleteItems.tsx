@@ -12,9 +12,9 @@ const LocationAutocompleteItems: React.FC<LocationAutocompleteProps> = ({
   km,
 }) => {
   return (
-    <ItemsContainer>
+    <ItemsContainer value={locationName}>
       <HiLocationMarker className='mr-3 min-w-max text-24 text-primary' />
-      <p className='flex-shrink flex-grow overflow-hidden text-ellipsis font-light'>
+      <p className='flex flex-shrink flex-grow flex-col items-start overflow-hidden text-ellipsis font-light'>
         <span className='block whitespace-nowrap font-bold'>
           {locationName}
         </span>
