@@ -68,7 +68,7 @@ export const PayCard = async (req, res) => {
       back_urls: {
         success:  "https://urbanmove.vercel.app/looking-for-driver",
         failure: "https://urbanmove.vercel.app/payment",
-        pending: 'URL_DE_PENDIENTE',
+        pending: 'https://urbanmove.vercel.app/payment',
       },
       auto_return: 'approved',
     };
