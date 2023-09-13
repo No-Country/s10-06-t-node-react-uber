@@ -78,7 +78,7 @@ export const Payment: FC = () => {
     <div className='relative h-screen w-screen'>
       <div className='px-4 pt-16'>
         <div className='flex items-center gap-[11px]'>
-          <Link to='/dashboard'>
+          <Link to='/select-trip'>
             <i
               className='flex h-[42px] w-[42px] items-center justify-center
             rounded-full border border-[#29103A] bg-[#CCCCCC]'
