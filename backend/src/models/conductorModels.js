@@ -9,6 +9,12 @@ const conductorSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  patente: {
+    type: String,
+  },
+  modelo: {
+    type: String,
+  },
   correoElectronico: {
     type: String,
     required: true,
@@ -25,6 +31,7 @@ const conductorSchema = new mongoose.Schema({
     enum: ["activo", "en viaje", "inactivo"],
     required: true,
   },
+  
   vehiculo: {
     type: String,
     enum: ["auto", "utilitario"],
