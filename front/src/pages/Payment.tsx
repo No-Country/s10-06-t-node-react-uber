@@ -7,11 +7,36 @@ import cardPayIcon from '../assets/tarjeta-pago-icon.svg'
 import { SectionManager } from '@/components/Dashboard/SectionManager'
 import { useForm } from 'react-hook-form'
 
+interface InfoPayment {
+  idUsuario: string
+  idConductor: string
+  idViaje: string
+  amount: number
+}
+
 export const Payment: FC = () => {
   const { handleSubmit } = useForm<FormData>({ mode: 'onChange' })
 
   const [payment, setPayment] = useState('cash' as string)
+
   const navigate = useNavigate()
+  const currentDate = new Date()
+  const isoString = currentDate.toISOString()
+  let idUsuario = ''
+  let idConductor = ''
+  let idViaje = ''
+  let amount = 0
+  console.log('isoString:', isoString)
+  const infoPaymentString = localStorage.getItem('infoPayment')
+  if (infoPaymentString) {
+    const infoPaymentObject: InfoPayment = JSON.parse(infoPaymentString)
+    idUsuario = infoPaymentObject.idUsuario
+    idConductor = infoPaymentObject.idConductor
+    idViaje = infoPaymentObject.idViaje
+    amount = infoPaymentObject.amount
+  } else {
+    console.error('No "infoPayment" data found in localStorage.')
+  }
 
   const handlePayment = async (): Promise<void> => {
     try {
@@ -23,13 +48,20 @@ export const Payment: FC = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            id_usuario: '64f61860500eb464d7b717b7',
-            id_conductor: '64eea22e93d51227247663b5',
-            id_viaje: '64ec9fcd68f99ae8049d3a72',
+            // id_usuario:  localStorage.getItem('infoPayment'),
+            // id_conductor: localStorage.getItem('infoPayment.idConductor'),
+            // id_viaje: localStorage.getItem('infoPayment.idViaje'),
+            // token: localStorage.getItem('token'),
+            // amount: localStorage.getItem('infoPayment.amount'),
+            // metodo: 'tarjeta',
+            // fecha: isoString,
+            id_usuario: idUsuario,
+            id_conductor: idConductor,
+            id_viaje: idViaje,
             token: localStorage.getItem('token'),
-            amount: 50,
+            amount,
             metodo: 'tarjeta',
-            fecha: '2023-08-22T12:00:00Z',
+            fecha: isoString,
           }),
         },
       )
