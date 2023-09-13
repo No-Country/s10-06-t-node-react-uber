@@ -59,8 +59,8 @@ app.use('/viajes', viajes);
 
 // socket viaje de conductor 
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+/*const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);*/
 
 let currentOrigin = "Av. Corrientes 1500, Buenos Aires, Argentina"; // Ubicación de partida conductor(puedes cambiarla)
 const destino = "Cerrito 800, Santa Fe, Argentina"; // Ubicación de llegada recoger pasajero(puedes cambiarla)
