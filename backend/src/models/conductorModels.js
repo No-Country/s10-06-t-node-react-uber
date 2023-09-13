@@ -31,6 +31,7 @@ const conductorSchema = new mongoose.Schema({
     enum: ["activo", "en viaje", "inactivo"],
     required: true,
   },
+  
   vehiculo: {
     type: String,
     enum: ["auto", "utilitario"],
