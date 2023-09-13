@@ -1,5 +1,5 @@
 import { HeaderTitle } from '@/components/AccountManager/HeaderTitle';
-import { type FC } from 'react';
+import { useEffect, type FC, useState } from 'react';
 import ellipse_lg from '../assets/img/ellipse-lg.png';
 import ellipse_md from '../assets/img/ellipse-md.png';
 import ellipse_sm from '../assets/img/ellipse-sm.png';
@@ -7,8 +7,33 @@ import { HiUserCircle } from "react-icons/hi";
 import { MdLocationPin, MdOutlineWatchLater } from "react-icons/md";
 import { FaDollarSign } from "react-icons/fa";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { useNavigate } from 'react-router-dom';
 
 export const LookingForDriver: FC = () => {
+
+    const navigate = useNavigate();
+
+    const [ isCancel, setIsCancel ] = useState(false);
+
+
+    const cancelTrip = (): void =>{
+        setIsCancel(true);
+        navigate('/set-trip');
+    };
+
+    useEffect(()=> {
+
+        const nextPage = setTimeout(()=>{
+            navigate('/dashboard')
+        }, 5000);
+        
+        if(isCancel){
+            clearTimeout(nextPage)
+        };
+
+        
+    }, [ navigate, isCancel ]);
+
     return (
         <div className="w-full h-screen bg-[#E0DBD5] bg-[url(../assets/img/vector.png)] 
             bg-contain bg-no-repeat px-5 pt-16 flex flex-col justify-between"
@@ -33,12 +58,15 @@ export const LookingForDriver: FC = () => {
                     <p className='flex items-center'><span className='pr-4'><MdOutlineWatchLater color='#29103A' size='20' /></span>12m</p>
                     <p className='flex items-center'><span className='pr-4'><FaDollarSign color='#29103A' size='20' /></span>1000</p>
                 </div>
-                <div className='bg-[#E0DBD5] w-[247px] h-[60px] rounded-3xl mb-8 shadow-lg flex items-center px-8'>
+                <button className='bg-[#E0DBD5] w-[247px] h-[60px] 
+                    rounded-3xl mb-8 shadow-lg flex items-center px-8'
+                    onClick={cancelTrip}
+                >
                     <div className='bg-[#29103A] w-[50px] h-[50px] rounded-full mr-5 flex items-center justify-center'>
                         <AiFillCloseCircle color='white' size='35'/>
                     </div>
                     <p>Cancelar</p>
-                </div>
+                </button>
             </div>
         </div>
     );

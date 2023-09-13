@@ -6,7 +6,7 @@ import type { typePosiblesLocationState } from '@/context/usePosibleLocationStor
 interface Coordinates {
   latitude: number;
   longitude: number;
-}
+};
 
 let searchTimeout: NodeJS.Timeout | null = null;
 
@@ -17,7 +17,7 @@ async function locationIqAutocomplete(
 ): Promise<void> {
   if (searchTimeout) {
     clearTimeout(searchTimeout);
-  }
+  };
 
   searchTimeout = setTimeout(async () => {
     try {
