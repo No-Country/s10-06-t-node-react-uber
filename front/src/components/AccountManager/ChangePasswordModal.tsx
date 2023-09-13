@@ -1,37 +1,49 @@
-import { type FC } from 'react';
-import { useForm, type SubmitHandler } from "react-hook-form";
-import { CampoInputFieldset } from './CampoInputFieldset';
-import { AiFillCloseCircle } from "react-icons/ai";
+// import { type FC } from 'react';
+// import { useForm, type SubmitHandler } from "react-hook-form";
+// import { CampoInputFieldset } from './CampoInputFieldset';
+// import { AiFillCloseCircle } from "react-icons/ai";
 
-interface ChangePasswordModalProps {
-    handleModal: () => void;
-}
+// interface ChangePasswordModalProps {
+//     handleModal: () => void;
+// }
 
-export const ChangePasswordModal: FC<ChangePasswordModalProps> = ({ handleModal }) => {
+// interface Inputs {
+//     firstName: string;
+//     lastName: string;
+//     email: string;
+//     dateOfBirth: Date | string;
+//     nationality: string;
+//     cellNumber: number | string;
+//     titulo: string;
+//     contrasena_actual: string;
+//     constrasena_nueva: string;
+// };
 
-    const { register, handleSubmit } = useForm();
+// export const ChangePasswordModal: FC<ChangePasswordModalProps> = ({ handleModal }) => {
 
-    const onSubmit: SubmitHandler<Inputs> = async (formData) => {
-        console.log(formData)
-    };
+//     const { register } = useForm();
 
-    return (
-        <div className='w-[100%] h-[100%] backdrop-blur-lg bg-[#29103A]/30 flex items-center justify-center absolute top-0 left-0'>
-            <form className='bg-white p-5 rounded-xl border-[1px] border-[#29103A]'>
-                <i className='flex justify-end'>
-                    <AiFillCloseCircle size='25' color='#29103A' onClick={()=>{handleModal()}}/>
-                </i>
-                <CampoInputFieldset label={'Contraseña actual'} fieldName={'contrasena_actual'} register={register} />
-                <CampoInputFieldset label={'Contraseña nueva'} fieldName={'nueva_contrasena'} register={register} />
-                <CampoInputFieldset label={'Repetir contraseña'} fieldName={'nueva_contrasena'}  register={register} />
-                <div className='flex justify-center pt-6'>
-                    <button type='submit' className='bg-[#29103A] w-[193px] h-[32px] 
-                        uppercase rounded-3xl text-[14px] text-white'
-                    > 
-                        cambiar contraseña
-                    </button>
-                </div>
-            </form>
-        </div>
-    );
-};
+//     // const submit: SubmitHandler<Inputs> = async (formData) => {
+//     //     console.log(formData)
+//     // };
+
+//     return (
+//         <div className='w-[100%] h-[100%] backdrop-blur-lg bg-[#29103A]/30 flex items-center justify-center absolute top-0 left-0'>
+//             <form className='bg-white p-5 rounded-xl border-[1px] border-[#29103A]'>
+//                 <i className='flex justify-end'>
+//                     <AiFillCloseCircle size='25' color='#29103A' onClick={()=>{handleModal()}}/>
+//                 </i>
+//                 <CampoInputFieldset label={'Contraseña actual'} type={'text'} fieldName={'contrasena_actual'} register={register} />
+//                 <CampoInputFieldset label={'Contraseña nueva'} type={'text'} fieldName={'nueva_contrasena'} register={register} />
+//                 <CampoInputFieldset label={'Repetir contraseña'} type={'text'}  fieldName={'nueva_contrasena'}  register={register} />
+//                 <div className='flex justify-center pt-6'>
+//                     <button type='submit' className='bg-[#29103A] w-[193px] h-[32px] 
+//                         uppercase rounded-3xl text-[14px] text-white'
+//                     > 
+//                         cambiar contraseña
+//                     </button>
+//                 </div>
+//             </form>
+//         </div>
+//     );
+// };
