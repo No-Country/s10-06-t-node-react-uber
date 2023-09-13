@@ -25,7 +25,7 @@ const RoutesProvider: FC = () => {
           <Route path='/' element={<LandingPage />} />
         </Route>
         <Route element={<AuthGuard />}>
-          <Route path='/settrip' element={<SetTrip />} />
+          <Route path='/set-trip' element={<SetTrip />} />
           <Route path='/dashboard/*' element={<Dashboard />} />
           <Route path='/select-trip' element={<SelectTrip />} />
           <Route path='/payment' element={<Payment />} />

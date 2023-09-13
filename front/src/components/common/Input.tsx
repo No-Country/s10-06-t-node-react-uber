@@ -28,7 +28,7 @@ const Input: React.FC<InputProps> = ({
             handlerKeyDownEvent()
           }
         }}
-        value={value}
+        value={value.slice(0, 30)}
         className={`w-full rounded-full border-2 border-solid border-dark px-[12px] py-[6px] placeholder-dark shadow-setTripItems focus:outline-none ${className}`}
         type={inputType}
         placeholder={inputPlaceholder}
@@ -41,7 +41,7 @@ const Input: React.FC<InputProps> = ({
       onChange={(event) => {
         handler(event)
       }}
-      value={value}
+      value={value.slice(0, 35)}
       className={`w-full rounded-full border-2 border-solid border-dark px-[12px] py-[6px] placeholder-dark shadow-setTripItems focus:outline-none ${className}`}
       type={inputType}
       placeholder={inputPlaceholder}

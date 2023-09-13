@@ -10,7 +10,7 @@ export const Home: FC = () => {
             <MapStaticView />
             <div className='w-full px-5 absolute bottom-5'>
                 <CustomShortcut key="map-home"/>
-                <Link to="/settrip" className='flex items-center w-full h-12
+                <Link to="/set-trip" className='flex items-center w-full h-12
                     bg-slate-200 border text-[#49454F] px-5 my-5
                     rounded-3xl gap-5'
                 >
