@@ -36,7 +36,6 @@ export const LocationAutocomplete: React.FC = () => {
         return (
           <LocationAutocompleteItems
             key={posibleLocation.place_id + index}
-            km={5}
             location={posibleLocation.display_address}
             locationName={posibleLocation.display_name}
           />
