@@ -7,9 +7,14 @@ import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '@/utils/api';
 import { useUserId } from '@/context/UserIdContext';
 
+interface Favorite {
+    titulo: string;
+    direccion: string;
+}
+
 export const MyAddresses: FC = () => {
 
-    const [ favorites, setFavorites ] = useState([]);
+    const [ favorites, setFavorites ] = useState<Favorite[]>([]);
 
     const navigate = useNavigate();
     const { userId } = useUserId();
@@ -50,7 +55,7 @@ export const MyAddresses: FC = () => {
                                 {<FaHouse size='25'/>}
                                 <div className='pl-2'>
                                     <h2 className='text-[18px]'>{favorite.titulo}</h2>
-                                    <p className='text-[#49494A] text-[16px]'>{favorite.direccion}</p>
+                                    <p className='text-[#49494A] text-[16px]'>{favorite.direccion.slice(0, 30)}</p>
                                 </div>
                             </div>
                             <BiSolidPencil color='#29103A' size='25' />
