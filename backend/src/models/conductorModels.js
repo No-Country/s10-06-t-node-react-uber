@@ -9,6 +9,12 @@ const conductorSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  patente: {
+    type: String,
+  },
+  modelo: {
+    type: String,
+  },
   correoElectronico: {
     type: String,
     required: true,
