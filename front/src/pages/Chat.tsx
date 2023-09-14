@@ -2,11 +2,10 @@ import { useState, useRef, useEffect } from 'react'
 import { type ChatCardProps } from '@/components/Chat/ChatCard'
 import { ChatsContainer } from '@/components/Chat/ChatsContainer'
 import { Avatar } from '@/components/common/Avatar'
-
-import { IoSendSharp } from 'react-icons/io5'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { FaPhoneAlt } from 'react-icons/fa'
 import { BsThreeDots } from 'react-icons/bs'
+import ubiLogo from '@/assets/img/ubi.png'
 
 export const Chat: React.FC = () => {
   const [currentChat, setCurrentChat] = useState<ChatCardProps | null>(null)
@@ -87,7 +86,7 @@ export const Chat: React.FC = () => {
               <div className='flex w-full items-center justify-between gap-2'>
                 <div>
                   <button className='flex items-center gap-2'>
-                    <Avatar src={currentChat.avatar} alt={currentChat.name} />
+                    <Avatar src={ubiLogo} alt={currentChat.name} />
                     <h2 className='text-2xl font-semibold'>
                       {currentChat.name}
                     </h2>
@@ -147,7 +146,7 @@ export const Chat: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className='relative flex items-center justify-between px-4 py-3'>
+          {/* <div className='relative flex items-center justify-between px-4 py-3'>
             <input
               className='flex-grow rounded-full border-primary px-5 py-3 shadow-md outline-none disabled:cursor-not-allowed'
               placeholder='Escribe un mensaje...'
@@ -159,7 +158,7 @@ export const Chat: React.FC = () => {
             >
               <IoSendSharp size={24} color='white' />
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     )
@@ -341,14 +340,6 @@ const driversChat: ChatCardProps[] = [
       'https://avatar.oxro.io/avatar.svg?name=Paula+Lopez&background=0693e3&color=000&length=2',
     lastMessage: lastMessage(chats[2]),
     date: new Date(new Date().setFullYear(2023, 6, 12)),
-  },
-  {
-    id: 4,
-    name: 'Ramiro Brizuela',
-    avatar:
-      'https://avatar.oxro.io/avatar.svg?name=Ramiro+Brizuela&background=0693e3&color=000&length=2',
-    lastMessage: lastMessage(chats[3]),
-    date: new Date(new Date().setFullYear(2023, 6, 1)),
   },
 ]
 

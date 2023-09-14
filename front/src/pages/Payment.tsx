@@ -1,10 +1,10 @@
 import { useState, type FC } from 'react'
-import { Link, useNavigate, useLocation } from 'react-router-dom'
-import { AiOutlineArrowLeft } from 'react-icons/ai'
+import { useNavigate, useLocation } from 'react-router-dom'
 import mercadoPagoIcon from '../assets/mercado-pago-icon.svg'
 import moneyIcon from '../assets/money-icon.svg'
 import { SectionManager } from '@/components/Dashboard/SectionManager'
 import { useForm } from 'react-hook-form'
+import { HeaderTitle } from '@/components/AccountManager/HeaderTitle'
 import marker from '@/assets/marker.svg'
 import time from '@/assets/time.svg'
 import dolar from '@/assets/dolar.svg'
@@ -80,21 +80,9 @@ export const Payment: FC = () => {
 
   return (
     <div className='relative h-screen w-screen'>
-      <div className='px-4 pt-16'>
-        <div className='flex items-center gap-[11px]'>
-          <Link to='/select-trip'>
-            <i
-              className='flex h-[42px] w-[42px] items-center justify-center
-            rounded-full border border-[#29103A] bg-[#CCCCCC]'
-            >
-              <AiOutlineArrowLeft color='#29103A' size='25' />
-            </i>
-          </Link>
-          <h1 className='text-[24px] font-semibold tracking-[0.03125rem]'>
-            Método de pago
-          </h1>
-        </div>
-        <div className='flex h-[609px] flex-col justify-between'>
+      <div className='px-4 pt-2'>
+        <HeaderTitle link={'/select-trip'} title={'Método de pago'}/>
+        <div className='flex h-[500px] flex-col justify-between'>
           <ul className='pt-[31px]'>
             <li
               className='mt-4 flex h-[60px] items-center justify-between rounded-[24px] 
@@ -184,8 +172,8 @@ export const Payment: FC = () => {
                 <div>
                   <img src={dolar} alt='price' />
                   {standardVehicle
-                    ? dataInfo?.precioStandar
-                    : dataInfo?.precioPremiun}
+                    ? dataInfo?.precioStandar.toFixed(2)
+                    : dataInfo?.precioPremiun.toFixed(2)}
                 </div>
               </div>
             </section>
@@ -218,9 +206,9 @@ export const Payment: FC = () => {
             </div>
           </div>
         </div>
-        <div className=' h-[15%] w-full'>
-          <SectionManager />
-        </div>
+      </div>
+      <div className=' h-[15%] w-full absolute bottom-0'>
+        <SectionManager />
       </div>
     </div>
   )

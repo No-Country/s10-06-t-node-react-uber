@@ -5,7 +5,7 @@ import { BsCreditCard2Back } from "react-icons/bs";
 
 export const AddPaymentsMethod: FC = () => {
     return (
-        <div className='h-full px-5 pt-16 relative'>
+        <div className='h-full px-5 pt-2 relative'>
             <HeaderTitle title={'Agregar medio de pago'} link={'/dashboard/account-manager/payment-methods'}/>
             <div className='flex justify-between items-center h-[66px] bg-[#CCCCCC] 
                 px-5 rounded-[25px] border border-[#29103A] mt-10 shadow-lg'

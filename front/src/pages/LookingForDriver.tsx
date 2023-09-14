@@ -15,7 +15,6 @@ export const LookingForDriver: FC = () => {
 
     const [ isCancel, setIsCancel ] = useState(false);
 
-
     const cancelTrip = (): void =>{
         setIsCancel(true);
         navigate('/set-trip');
@@ -24,7 +23,7 @@ export const LookingForDriver: FC = () => {
     useEffect(()=> {
 
         const nextPage = setTimeout(()=>{
-            navigate('/dashboard')
+            navigate('/driver-info')
         }, 5000);
         
         if(isCancel){

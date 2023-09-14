@@ -84,14 +84,13 @@ export const EditProfile: FC = () => {
     }
 
     return (
-        <div className='h-full px-5 pt-16 relative'>
+        <div className='h-full px-5 pt-2 relative'>
             {
                 // modal && <ChangePasswordModal handleModal={handleModal} />
             }
             <HeaderTitle title='Editar perfil' link='/dashboard/account-manager' />
-            <form className='pt-2' onSubmit={handleSubmit(onSubmit)}>
-                <FixedFieldInputs label={'Nombre'} dataUser={data?.firstName ?? data?.firstName ?? ''}/>
-                <FixedFieldInputs label={'Apellido'} dataUser={data?.lastName ?? data?.lastName ?? ''}/>
+            <form className='pt-1' onSubmit={handleSubmit(onSubmit)}>
+                <FixedFieldInputs label={'Nombre'} dataUser={`${data?.firstName} ${data?.lastName}` ?? ''}/>
                 {
                     data?.dateOfBirth !== null?
                     <FixedFieldInputs label={"Fecha de nacimiento"}  dataUser={data?.dateOfBirth ?? ''}/>
@@ -109,7 +108,7 @@ export const EditProfile: FC = () => {
                     <CampoInputFieldset label={"País"} fieldName={'nationality'}  type={"text"} register={register} />
                 }
                 <CampoInputFieldset label={"Número de teléfono"} value={data?.cellNumber ?? ''} fieldName={'cellNumber'}  type={"number"} register={register} />
-                <div className='flex justify-center pt-6'>
+                <div className='flex justify-center pt-8'>
                     <button type='submit' className='bg-[#29103A] w-[193px] h-[32px] 
                         uppercase rounded-3xl text-[14px] text-white'
                     > 

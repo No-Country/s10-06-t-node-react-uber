@@ -35,7 +35,7 @@ export const MapStaticView: FC = () => {
                 center: centerCoordinates,
                 zoom: 13,
             });
-
+            
             const geolocate = new mapboxgl.GeolocateControl({
                 positionOptions: {
                     enableHighAccuracy: true,
@@ -43,8 +43,23 @@ export const MapStaticView: FC = () => {
                 trackUserLocation: true,
                 showUserLocation: true,
             });
-
+            
             map.addControl(geolocate);
+
+            map.on('load', async () => {
+                try {
+                    const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${centerCoordinates[0]},${centerCoordinates[1]}.json?access_token=${MAPBOX_TOKEN}`);
+                    const data = await response.json();
+                    if (data.features && data.features.length > 0) {
+                        const locationName = data.features[0].place_name;
+                        localStorage.setItem('startLocation', locationName);
+                    } else {
+                        console.error('No se encontraron resultados de geocodificación.');
+                    }
+                } catch (error) {
+                    console.error('Error de geocodificación:', error);
+                }
+            });
 
             return () => {
                 if (map) {

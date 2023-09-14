@@ -14,6 +14,18 @@ export const geolocation = async (): Promise<UserGeolocation> => {
   }
   
   try {
+    
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+          const { longitude, latitude } = position.coords;
+          userLocation.userLongitude = longitude;
+          userLocation.userLatitude = latitude;
+      },
+      (error) => {
+          console.error('Error al obtener la ubicación:', error);
+      }
+    );
+
       const IPINFO_TOKEN: string = import.meta.env.VITE_IPINFO_TOKEN;
       const request = await fetch(`https://ipinfo.io?token=${IPINFO_TOKEN}`)
       const jsonResponse = await request.json();
@@ -33,16 +45,6 @@ export const geolocation = async (): Promise<UserGeolocation> => {
       console.error('Error en la solicitud:', error);
   }
 
-  navigator.geolocation.getCurrentPosition(
-    (position) => {
-        const { longitude, latitude } = position.coords;
-        userLocation.userLongitude = longitude;
-        userLocation.userLatitude = latitude;
-    },
-    (error) => {
-        console.error('Error al obtener la ubicación:', error);
-    }
-  );
 
   return userLocation;
 };

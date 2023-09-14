@@ -2,7 +2,11 @@ import { MapView } from '@/components/Map/MapView'
 import { useState, useEffect } from 'react'
 import standard from '@/assets/standard.svg'
 import premium from '@/assets/premium.svg'
-import { BsArrowLeft } from 'react-icons/bs'
+// import marker from '@/assets/marker.svg'
+// import time from '@/assets/time.svg'
+// import dolar from '@/assets/dolar.svg'
+import { AiOutlineArrowLeft } from "react-icons/ai";
+// import { BsArrowLeft } from 'react-icons/bs'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAuthStore } from '@/context/GoogleAuthContext'
 import { PaymentFooterInfo } from '@/components/PaymentFooterInfo'
@@ -67,7 +71,8 @@ export const SelectTrip: React.FC = () => {
       void getGeometry()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [navigate, user, standardVehicle])
+  }, [navigate, user, standardVehicle, localStorage.getItem('startLocation'), localStorage.getItem('finishLocation')], )
+
 
   const getGeometry = async (): Promise<void> => {
     try {
@@ -143,7 +148,7 @@ export const SelectTrip: React.FC = () => {
         to='/set-trip'
         className='absolute left-7 top-7 z-50 flex h-10 w-10 items-center justify-center rounded-full border bg-[#dfdfdf]'
       >
-        <BsArrowLeft />
+        <AiOutlineArrowLeft color='#29103A' size='25'/>
       </Link>
       <MapView
         geometry={geometry}

@@ -1,10 +1,22 @@
-import { type FC } from 'react';
+import { type FC, useEffect } from 'react';
 import { CustomShortcut } from '@/components/Home/CustomShortcut';
 import { BiSearch } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { MapStaticView } from '@/components/Map/MapStaticView';
+import { useUserId } from '@/context/UserIdContext';
+import { fetchData } from '@/utils/getUserById';
 
 export const Home: FC = () => {
+
+    const { updateUserId } = useUserId()
+
+    useEffect(() => {
+        async function fetchDataAndSetData(): Promise<void> {
+            await fetchData(updateUserId);
+        }
+        void fetchDataAndSetData();
+    }, [ updateUserId ]);
+
     return (
         <div className="h-full w-full relative">
             <MapStaticView />

@@ -26,7 +26,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     try {
       const result = await signInWithPopup(auth, provider)
       const user = result.user
-
+      
       if (user.displayName) {
         const fullName = user.displayName
         const names = fullName.split(' ')
