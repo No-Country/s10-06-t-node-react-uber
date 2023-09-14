@@ -9,6 +9,7 @@ import locationIqAutocomplete from '@/utils/locationIqAutocomplete'
 import useSetTripInputsStore from '@/context/useSetTripInputsStore'
 import ruta from '@/assets/img/ruta.png'
 import { HeaderTitle } from '@/components/AccountManager/HeaderTitle'
+import { BiCurrentLocation } from "react-icons/bi";
 
 interface typeSetTripState {
   locationAutocomplete: boolean
@@ -76,7 +77,11 @@ const SetTrip: React.FC = () => {
                   inputPlaceholder='¿De dónde salís?'
                   keyDownEventActive={true}
                 />
-                <p onClick={setAddress}><strong>U</strong></p>
+                <i className='border-[2px] ml-2 rounded-r-[50px] flex items-center justify-center'
+                  onClick={setAddress}
+                >
+                  <BiCurrentLocation color='#29103A' size='30'/>
+                </i>
               </div>
               <Input
                 value={inputFinishLocationValue}
