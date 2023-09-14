@@ -75,11 +75,11 @@ export const DriverInfo: React.FC = () => {
     }
     setTimeout(() => {
       setStartTrip(true)
-    }, 5000)
+    }, 10000)
 
     setTimeout(() => {
       setIsFinish(true)
-    }, 10000)
+    }, 20000)
 
     void getDriver()
   }, [driverId])

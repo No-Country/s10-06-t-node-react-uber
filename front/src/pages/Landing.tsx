@@ -1,4 +1,3 @@
-import { PiUserListFill } from 'react-icons/pi'
 import { BsFillCarFrontFill, BsArrowUpRight } from 'react-icons/bs'
 
 export const LandingPage: React.FC = () => {
@@ -10,25 +9,26 @@ export const LandingPage: React.FC = () => {
           alt='Landing'
           className='h-full w-full bg-no-repeat object-cover object-top'
         />
-        <div className='absolute left-0 right-0 top-24 mx-6 flex flex-col items-center rounded-3xl border-2 border-lightGray border-opacity-60 shadow-md backdrop-blur-[50px] transition-all md:left-auto md:right-16 md:mx-0 md:h-[617px] md:w-[660px] lg:right-24'>
+        <div className='absolute left-0 right-0 top-24 mx-6 flex flex-col 
+          items-center rounded-3xl border-2 border-lightGray 
+          border-opacity-60 shadow-md backdrop-blur-[50px] transition-all 
+          md:left-auto md:right-16 md:mx-0 md:h-[426px] md:w-[660px] lg:right-24'
+        >
           <div
             className='flex w-full items-center justify-between rounded-3xl 
           px-16 py-8 backdrop-blur-2xl sm:px-20'
           >
-            <button className='flex w-32 flex-col items-center gap-2 font-medium leading-4 text-primary'>
-              <PiUserListFill className='text-4xl' />
-              Registrarse como conductor
-            </button>
-            <button className='flex w-32 flex-col items-center gap-2 font-medium text-gray duration-500 hover:text-dark'>
+            <button className='flex flex-col items-center gap-2 
+              font-medium text-[#29103A] duration-500 hover:text-white'
+            >
               <BsFillCarFrontFill className='text-2xl' />
               Transporte
             </button>
           </div>
 
-          <div className='w-full px-14 py-12'>
+          <div className='w-full px-14 py-5'>
             <h3 className='pb-3 text-24 font-bold sm:pb-0 sm:text-36 md:leading-[64px]'>
-              Toma el asiento del conductor y comienza a convertir kilómetros en
-              efectivo
+              ¿A donde vamos?
             </h3>
 
             <span className='leading-[40px] md:leading-[64px]'>
@@ -36,10 +36,12 @@ export const LandingPage: React.FC = () => {
             </span>
 
             <div className='flex w-60 flex-col gap-9'>
-              <button className='mt-5 rounded-3xl bg-primary px-6 py-3 text-white duration-500 hover:bg-darkGray'>
-                Seguir como conductor
+              <button className='w-[134px] h-[46px] mt-5 rounded-3xl bg-primary px-6 py-3 text-white duration-500 hover:bg-darkGray'>
+                Comenzar
               </button>
-              <button className='flex items-center justify-start gap-1 border-b-2 border-neutral-300 text-sm duration-500 hover:border-dark'>
+              <button className='flex items-center justify-start 
+                gap-1 border-b-2 border-neutral-300 text-md duration-500
+               hover:border-dark pb-1'>
                 Para más información <BsArrowUpRight />
               </button>
             </div>
@@ -67,8 +69,7 @@ export const LandingPage: React.FC = () => {
               fontFamily: 'Montserrat',
             }}
           >
-            Una plataforma para gestionar viajes y entregas locales para su
-            negocio.
+            Una plataforma para gestionar viajes.
           </p>
           <button className='mt-6 rounded-3xl bg-lightGray px-7 py-3'>
             Comenzar

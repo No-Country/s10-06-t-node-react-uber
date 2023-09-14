@@ -13,7 +13,7 @@ export const Chat: React.FC = () => {
     id: 420,
     name: 'Ubi',
     avatar:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Solid_white.svg/512px-Solid_white.svg.png',
+      ubiLogo,
     messages: [
       {
         id: 1,
@@ -286,7 +286,7 @@ const chats: IChat[] = [
     id: 420,
     name: 'Ubi',
     avatar:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Solid_white.svg/512px-Solid_white.svg.png',
+      ubiLogo,
     messages: [
       {
         id: 1,
@@ -312,7 +312,7 @@ const supportChat = [
     description:
       'Con ubi vas a poder resolver cualquier inconveniente que tengas',
     avatar:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Solid_white.svg/512px-Solid_white.svg.png',
+      ubiLogo,
   },
 ]
 

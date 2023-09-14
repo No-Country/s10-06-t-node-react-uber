@@ -57,33 +57,5 @@ const dropdownOptions: DropdownOptions[] = [
   {
     text: 'About us',
     link: '/',
-  },
-  {
-    text: 'Our offerings',
-    link: '/',
-  },
-  {
-    text: 'How Uber Works',
-    link: '/',
-  },
-  {
-    text: 'Global citizienship',
-    link: '/',
-  },
-  {
-    text: 'Newsroom',
-    link: '/',
-  },
-  {
-    text: 'Investor relations',
-    link: '/',
-  },
-  {
-    text: 'Blog',
-    link: '/',
-  },
-  {
-    text: 'Carrers',
-    link: '/',
-  },
+  }
 ]

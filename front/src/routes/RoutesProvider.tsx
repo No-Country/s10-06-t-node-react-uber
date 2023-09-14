@@ -17,15 +17,24 @@ import { PaymentCard } from '@/pages/PaymentCards'
 import { Payment } from '@/pages/Payment'
 import { LookingForDriver } from '@/pages/LookingForDriver'
 import { DriverInfo } from '@/pages/DriverInfo'
-import { FinishTripModal } from '@/components/FinishTripModal'
+import { ChargingScreen } from '@/pages/ChargingScreen'
+import { AboutUrban } from '@/pages/AboutUrban'
 
 const RoutesProvider: FC = () => {
+
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Layout />}>
-          <Route path='/' element={<LandingPage />} />
-        </Route>
+        {
+          isMobile ? (
+          <Route path='/' element={<ChargingScreen />} />
+        ) : (
+          <Route element={<Layout />}>
+            <Route path='/' element={<LandingPage />} />
+          </Route>
+        )}
         <Route element={<AuthGuard />}>
           <Route path='/set-trip' element={<SetTrip />} />
           <Route path='/dashboard/*' element={<Dashboard />} />
@@ -35,7 +44,7 @@ const RoutesProvider: FC = () => {
           <Route path='/looking-for-driver' element={<LookingForDriver />} />
           <Route path='/driver-info' element={<DriverInfo />} />
         </Route>
-        <Route path='/prueba' element={<FinishTripModal />} />
+        <Route path='/about-us' element={<AboutUrban />} />
         <Route path='/login' element={<Login />} />
         <Route path='/change-password' element={<ForgotPassword />} />
         <Route path='/register' element={<Register />} />

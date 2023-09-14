@@ -77,10 +77,11 @@ const SetTrip: React.FC = () => {
                   inputPlaceholder='¿De dónde salís?'
                   keyDownEventActive={true}
                 />
-                <i className='border-[2px] ml-2 rounded-r-[50px] flex items-center justify-center'
+                <i className='border-[2px] ml-1 rounded-r-[50px] flex items-center 
+                  justify-center bg-[#29103A]'
                   onClick={setAddress}
                 >
-                  <BiCurrentLocation color='#29103A' size='30'/>
+                  <BiCurrentLocation color='white' size='30'/>
                 </i>
               </div>
               <Input

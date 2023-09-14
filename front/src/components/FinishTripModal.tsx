@@ -26,7 +26,7 @@ export const FinishTripModal: React.FC = () => {
         onClick={handleClick}
         className='rounded-full bg-primary px-5 py-1 text-white'
       >
-        Continuar
+        Finalizar
       </button>
     </div>
   )
