@@ -1,13 +1,13 @@
-import { useState, type FC } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useState, type FC, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import mercadoPagoIcon from '../assets/mercado-pago-icon.svg'
 import moneyIcon from '../assets/money-icon.svg'
 import { SectionManager } from '@/components/Dashboard/SectionManager'
 import { useForm } from 'react-hook-form'
 import { HeaderTitle } from '@/components/AccountManager/HeaderTitle'
-import marker from '@/assets/marker.svg'
-import time from '@/assets/time.svg'
-import dolar from '@/assets/dolar.svg'
+
+import { PaymentFooterInfo } from '@/components/PaymentFooterInfo'
+
 interface InfoPayment {
   idUsuario: string
   idConductor: string
@@ -18,8 +18,11 @@ interface InfoPayment {
 export const Payment: FC = () => {
   const { handleSubmit } = useForm<FormData>({ mode: 'onChange' })
   const [payment, setPayment] = useState('cash' as string)
-  const location = useLocation()
-  const { dataInfo, standardVehicle } = location.state || {}
+  const [tripInfo, setTripInfo] = useState({
+    amount: 0,
+    distance: 0,
+    duration: 0,
+  })
   const navigate = useNavigate()
   const currentDate = new Date()
   const isoString = currentDate.toISOString()
@@ -38,7 +41,9 @@ export const Payment: FC = () => {
   } else {
     console.error('No "infoPayment" data found in localStorage.')
   }
-
+  useEffect(() => {
+    setTripInfo(JSON.parse(localStorage.getItem('TripInfo') ?? '{}'))
+  }, [])
   const handlePayment = async (): Promise<void> => {
     if (payment === 'cash') {
       navigate('/looking-for-driver')
@@ -81,7 +86,7 @@ export const Payment: FC = () => {
   return (
     <div className='relative h-screen w-screen'>
       <div className='px-4 pt-2'>
-        <HeaderTitle link={'/select-trip'} title={'Método de pago'}/>
+        <HeaderTitle link={'/select-trip'} title={'Método de pago'} />
         <div className='flex h-[500px] flex-col justify-between'>
           <ul className='pt-[31px]'>
             <li
@@ -154,7 +159,7 @@ export const Payment: FC = () => {
 
           <div className='flex flex-col items-center'>
             <section>
-              <div className='flex w-full justify-center gap-5 rounded-full bg-[#29103A05] px-4 py-2 text-sm shadow-lg [&>div]:flex [&>div]:gap-2'>
+              {/* <div className='flex w-full justify-center gap-5 rounded-full bg-[#29103A05] px-4 py-2 text-sm shadow-lg [&>div]:flex [&>div]:gap-2'>
                 <div>
                   <img src={marker} alt='route' />
                   {dataInfo?.distancia
@@ -175,7 +180,12 @@ export const Payment: FC = () => {
                     ? dataInfo?.precioStandar.toFixed(2)
                     : dataInfo?.precioPremiun.toFixed(2)}
                 </div>
-              </div>
+              </div> */}
+              <PaymentFooterInfo
+                amount={tripInfo.amount}
+                distance={tripInfo.distance}
+                duration={tripInfo.duration}
+              />
             </section>
             <div className='flex justify-center py-6'>
               {(payment === 'mercado' || payment === 'cash') && (
@@ -207,7 +217,7 @@ export const Payment: FC = () => {
           </div>
         </div>
       </div>
-      <div className=' h-[15%] w-full absolute bottom-0'>
+      <div className=' absolute bottom-0 h-[15%] w-full'>
         <SectionManager />
       </div>
     </div>
