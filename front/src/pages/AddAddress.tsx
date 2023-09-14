@@ -7,6 +7,8 @@ import { useSelectedCoordinates } from '@/context/SelectedCoordinatesContext';
 import { FixedFieldInputs } from '@/components/AccountManager/FixedFieldInputs';
 import { BASE_URL } from '@/utils/api';
 import { useUserId } from '@/context/UserIdContext';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface Inputs {
     firstName: string;
@@ -27,6 +29,9 @@ export const AddAddress: FC = () => {
     const { userId } = useUserId();
     
     const { updateSelectedCoordinates, selectedCoordinates, selectedAddress } = useSelectedCoordinates();
+
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+    const notify = ()=> toast("Ruta añadida con éxito");
 
     const submit: SubmitHandler<Inputs> = async (formData) => {
         const addressData = {
@@ -52,6 +57,7 @@ export const AddAddress: FC = () => {
                 console.log('Dirección favorita creada con éxito');
                 updateSelectedCoordinates(null, null);
                 reset();
+                notify();
             }
             else{
                 console.error('Error al crear la dirección favorita:', data.message)
@@ -70,6 +76,7 @@ export const AddAddress: FC = () => {
             className='h-full px-5 pt-2 relative'
         >
             <HeaderTitle title={'Agregar Dirección'} link={'/dashboard/account-manager/my-directions'}/>
+            <ToastContainer />
             <div className='pt-5'>
                 <CampoInputFieldset label={'Referencia'} holder={'Ingrese una referencia'} fieldName={'titulo'} type={'text'} register={register} />
                 <FixedFieldInputs label='Dirección' dataUser={address ?? ''}/>

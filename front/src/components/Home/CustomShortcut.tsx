@@ -19,7 +19,7 @@ export const CustomShortcut: FC = () => {
     const [ otherFavorites, setOtherFavorites ] = useState<Favorite[]>([]);
 
     const [ isMost, setIsMost ] = useState(false);
-
+    
     useEffect(()=>{
         if(userId){
             const getFavorites = async (): Promise<void> => {
@@ -65,11 +65,13 @@ export const CustomShortcut: FC = () => {
                 ))
                 
             } 
-            <li className='flex items-center justify-center 
-                gap-2 w-[97px] h-[36px] border rounded-3xl
-                bg-white text-[#29103A] border-[#29103A] relative' 
-                onClick={()=> {setIsMost(!isMost)}}
-            >
+            {
+                otherFavorites.length > 0 &&
+                <li className='flex items-center justify-center 
+                    gap-2 w-[97px] h-[36px] border rounded-3xl
+                    bg-white text-[#29103A] border-[#29103A] relative' 
+                    onClick={()=> {setIsMost(!isMost)}}
+                >
                 <FaLocationDot color='#29103A' size='20'/>
                 <p>Más</p>
                 {
@@ -79,7 +81,8 @@ export const CustomShortcut: FC = () => {
                                 handleShortcut={handleShortcut}
                         />
                 }
-            </li>
+            
+            </li>}
         
         </ul>
         
