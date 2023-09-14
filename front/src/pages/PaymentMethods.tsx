@@ -30,7 +30,7 @@ export const PaymentMethods: FC = () => {
   ];
 
   return (
-    <div className='h-full px-5 pt-16 relative'>
+    <div className='h-full px-5 pt-2 relative'>
       <HeaderTitle title='Medios de pago' link='/dashboard/account-manager' />
       <ul className='pt-5'>
         {

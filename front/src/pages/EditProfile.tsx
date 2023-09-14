@@ -84,14 +84,13 @@ export const EditProfile: FC = () => {
     }
 
     return (
-        <div className='h-full px-5 pt-16 relative'>
+        <div className='h-full px-5 pt-2 relative'>
             {
                 // modal && <ChangePasswordModal handleModal={handleModal} />
             }
             <HeaderTitle title='Editar perfil' link='/dashboard/account-manager' />
             <form className='pt-2' onSubmit={handleSubmit(onSubmit)}>
-                <FixedFieldInputs label={'Nombre'} dataUser={data?.firstName ?? data?.firstName ?? ''}/>
-                <FixedFieldInputs label={'Apellido'} dataUser={data?.lastName ?? data?.lastName ?? ''}/>
+                <FixedFieldInputs label={'Nombre'} dataUser={`${data?.firstName} ${data?.lastName}` ?? ''}/>
                 {
                     data?.dateOfBirth !== null?
                     <FixedFieldInputs label={"Fecha de nacimiento"}  dataUser={data?.dateOfBirth ?? ''}/>

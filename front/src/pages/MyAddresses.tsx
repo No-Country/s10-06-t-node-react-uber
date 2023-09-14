@@ -1,5 +1,5 @@
 import { type FC, useEffect, useState } from 'react';
-import { FaHouse } from 'react-icons/fa6';
+import { FaLocationDot } from 'react-icons/fa6';
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import { BiSolidPencil } from "react-icons/bi";
 import { HeaderTitle } from '@/components/AccountManager/HeaderTitle';
@@ -42,7 +42,7 @@ export const MyAddresses: FC = () => {
     },[ userId ]);
 
     return (
-        <div className='h-full px-5 pt-16 relative'>
+        <div className='h-full px-5 pt-2 relative'>
             <HeaderTitle title={'Mis Direcciones'} link={'/dashboard/account-manager'}/>
             <ul className='pt-5'>
                 {
@@ -52,7 +52,7 @@ export const MyAddresses: FC = () => {
                             key={index}
                         >   
                             <div className='flex items-center'>
-                                {<FaHouse size='25'/>}
+                                <FaLocationDot color='#29103A' size='20'/>
                                 <div className='pl-2'>
                                     <h2 className='text-[18px]'>{favorite.titulo}</h2>
                                     <p className='text-[#49494A] text-[16px]'>{favorite.direccion.slice(0, 30)}</p>

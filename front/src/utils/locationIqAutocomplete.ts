@@ -36,7 +36,7 @@ async function locationIqAutocomplete(
       };
       
       const currentLocation = await getCurrentLocation();
-      const viewbox = `${currentLocation.longitude - 0.5},${currentLocation.latitude - 0.5},${currentLocation.longitude + 0.5},${currentLocation.latitude + 0.5}`;
+      const viewbox = `${currentLocation.longitude - 0.4},${currentLocation.latitude - 0.4},${currentLocation.longitude + 0.4},${currentLocation.latitude + 0.4}`;
 
       const url = `${locationIqApiBaseUrl}/autocomplete?key=${locationIqAccessToken}&q=${value}&viewbox=${viewbox}&bounded=1&limit=8`;
 

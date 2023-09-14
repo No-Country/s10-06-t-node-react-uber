@@ -5,7 +5,7 @@ import premium from '@/assets/premium.svg'
 import marker from '@/assets/marker.svg'
 import time from '@/assets/time.svg'
 import dolar from '@/assets/dolar.svg'
-import { BsArrowLeft } from 'react-icons/bs'
+import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate, Link } from 'react-router-dom'
 import { useAuthStore } from '@/context/GoogleAuthContext'
 interface DataInfo {
@@ -47,7 +47,7 @@ export const SelectTrip: React.FC = () => {
       void getGeometry()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [navigate, user])
+  }, [navigate, user, localStorage.getItem('startLocation'), localStorage.getItem('finishLocation')], )
 
   const getGeometry = async (): Promise<void> => {
     try {
@@ -105,7 +105,7 @@ export const SelectTrip: React.FC = () => {
         to='/set-trip'
         className='absolute left-7 top-7 z-50 flex h-10 w-10 items-center justify-center rounded-full border bg-[#dfdfdf]'
       >
-        <BsArrowLeft />
+        <AiOutlineArrowLeft color='#29103A' size='25'/>
       </Link>
       <MapView
         geometry={geometry}
@@ -127,7 +127,7 @@ export const SelectTrip: React.FC = () => {
               <p>7 Vehículos cercanos</p>
             </div>
           </div>
-          ${dataInfo?.precioStandar}
+          ${dataInfo?.precioStandar?.toFixed(2)}
         </div>
         <div
           onClick={handlePremiumVehicle}
@@ -142,7 +142,7 @@ export const SelectTrip: React.FC = () => {
               <p>3 Vehículos cercanos</p>
             </div>
           </div>
-          ${dataInfo?.precioPremiun}
+          ${dataInfo?.precioPremiun?.toFixed(2)}
         </div>
         <div className='flex w-full justify-center gap-5 rounded-full bg-[#29103A05] px-4 py-2 text-sm shadow-lg [&>div]:flex [&>div]:gap-2'>
           <div>
@@ -159,8 +159,8 @@ export const SelectTrip: React.FC = () => {
           <div>
             <img src={dolar} alt='price' />
             {standardVehicle
-              ? dataInfo?.precioStandar
-              : dataInfo?.precioPremiun}
+              ? dataInfo?.precioStandar?.toFixed(2)
+              : dataInfo?.precioPremiun?.toFixed(2)}
           </div>
         </div>
         <div className='flex items-center justify-center'>
