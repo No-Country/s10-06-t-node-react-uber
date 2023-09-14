@@ -55,7 +55,7 @@ export const MyAddresses: FC = () => {
                                 <FaLocationDot color='#29103A' size='20'/>
                                 <div className='pl-2'>
                                     <h2 className='text-[18px]'>{favorite.titulo}</h2>
-                                    <p className='text-[#49494A] text-[16px]'>{favorite.direccion.slice(0, 30)}</p>
+                                    <p className='text-[#49494A] text-[16px]'>{favorite.direccion.slice(0, 25)}</p>
                                 </div>
                             </div>
                             <BiSolidPencil color='#29103A' size='25' />
@@ -70,7 +70,7 @@ export const MyAddresses: FC = () => {
                 <BsFillPlusCircleFill color='#29103A' size='25'/>
                 <p className='pl-2 text-[18px]'>agregar dirección</p>
             </button>
-            <div className='flex justify-center pt-6'>
+            <div className='flex justify-center m-5'>
                 <button type='submit' className='bg-[#29103A] w-[193px] h-[32px] 
                     uppercase rounded-3xl text-[14px] text-white absolute bottom-[5vh]'
                 > 

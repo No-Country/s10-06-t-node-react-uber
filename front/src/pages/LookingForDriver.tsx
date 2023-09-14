@@ -15,7 +15,6 @@ export const LookingForDriver: FC = () => {
 
     const [ isCancel, setIsCancel ] = useState(false);
 
-
     const cancelTrip = (): void =>{
         setIsCancel(true);
         navigate('/set-trip');
@@ -24,7 +23,7 @@ export const LookingForDriver: FC = () => {
     useEffect(()=> {
 
         const nextPage = setTimeout(()=>{
-            navigate('/dashboard')
+            navigate('/driver-info')
         }, 5000);
         
         if(isCancel){
@@ -39,7 +38,7 @@ export const LookingForDriver: FC = () => {
             bg-contain bg-no-repeat px-5 pt-16 flex flex-col justify-between"
         >
             <div>
-                <HeaderTitle link={''} title={'Estamos buscando un chofer'}/>
+                <HeaderTitle link={'/payment'} title={'Estamos buscando un chofer'}/>
                 <p className='text-center text-[#858585] text-[14px]'>Esto puede tardar unos segundos</p>
             </div>
             <div className='h-[70%] flex flex-col items-center justify-between'>

@@ -46,7 +46,10 @@ const SetTrip: React.FC = () => {
   }
 
   const setAddress = (): void =>{
-    setInputStartLocationValue(localStorage.getItem('startLocation'))
+    const startAddress = localStorage.getItem('startLocation')
+    if (startAddress !== null) {
+      setInputStartLocationValue(startAddress)
+    }
   }
 
   return (
