@@ -2,12 +2,10 @@ import { MapView } from '@/components/Map/MapView'
 import { useState, useEffect } from 'react'
 import standard from '@/assets/standard.svg'
 import premium from '@/assets/premium.svg'
-import marker from '@/assets/marker.svg'
-import time from '@/assets/time.svg'
-import dolar from '@/assets/dolar.svg'
 import { BsArrowLeft } from 'react-icons/bs'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAuthStore } from '@/context/GoogleAuthContext'
+import { PaymentFooterInfo } from '@/components/PaymentFooterInfo'
 interface DataInfo {
   precioStandar?: number
   precioPremiun?: number
@@ -20,13 +18,29 @@ interface DataInfo {
 
 type ConditionalDataInfo = DataInfo | undefined
 
+interface TripInfo {
+  distance: number
+  duration: number
+  amount: number
+}
+
 export const SelectTrip: React.FC = () => {
   const navigate = useNavigate()
   const [standardVehicle, setStandardVehicle] = useState(true)
   const [geometry, setGeometry] = useState<string>('')
   const [startCoords, setStartCoords] = useState<number[]>([])
   const [finishCoords, setFinishCoords] = useState<number[]>([])
-  const [dataInfo, setDataInfo] = useState<ConditionalDataInfo>(undefined)
+  const [dataInfo, setDataInfo] = useState<ConditionalDataInfo>()
+  // const [amount, setAmount] = useState<number>(0)
+  // const [distance, setDistance] = useState<number>(0)
+  // const [duration, setDuration] = useState<number>(0)
+
+  const [, setTripInfo] = useState<TripInfo>({
+    distance: 0,
+    duration: 0,
+    amount: 0,
+  })
+
   const { user } = useAuthStore()
 
   const handleStandardVehicle = (): void => {
@@ -44,10 +58,16 @@ export const SelectTrip: React.FC = () => {
     if (!startLocation || !finishLocation) {
       navigate('/dashboard')
     } else {
+      // const selectedAmount = standardVehicle
+      //   ? dataInfo?.precioStandar
+      //   : dataInfo?.precioPremiun
+      // setAmount(selectedAmount ?? 0)
+      // setDistance(dataInfo?.distancia ?? 0)
+      // setDuration(dataInfo?.tiempo ?? 0)
       void getGeometry()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [navigate, user])
+  }, [navigate, user, standardVehicle])
 
   const getGeometry = async (): Promise<void> => {
     try {
@@ -96,7 +116,25 @@ export const SelectTrip: React.FC = () => {
       amount,
     }
     localStorage.setItem('infoPayment', JSON.stringify(infoPayment))
-    navigate('/payment', { state: { dataInfo, standardVehicle  } })
+    localStorage.setItem('startCoords', startCoords as unknown as string)
+    localStorage.setItem('finishCoords', finishCoords as unknown as string)
+    localStorage.setItem('geometry', geometry)
+
+    const TripInfo = {
+      distance: dataInfo?.distancia,
+      duration: dataInfo?.tiempo,
+      amount,
+    }
+
+    localStorage.setItem('TripInfo', JSON.stringify(TripInfo))
+
+    setTripInfo({
+      distance: dataInfo?.distancia ?? 0,
+      duration: dataInfo?.tiempo ?? 0,
+      amount: amount ?? 0,
+    })
+
+    navigate('/payment', { state: { dataInfo, standardVehicle } })
   }
 
   return (
@@ -127,7 +165,7 @@ export const SelectTrip: React.FC = () => {
               <p>7 Vehículos cercanos</p>
             </div>
           </div>
-          ${dataInfo?.precioStandar}
+          ${dataInfo?.precioStandar?.toFixed(2)}
         </div>
         <div
           onClick={handlePremiumVehicle}
@@ -142,27 +180,18 @@ export const SelectTrip: React.FC = () => {
               <p>3 Vehículos cercanos</p>
             </div>
           </div>
-          ${dataInfo?.precioPremiun}
+          ${dataInfo?.precioPremiun?.toFixed(2)}
         </div>
-        <div className='flex w-full justify-center gap-5 rounded-full bg-[#29103A05] px-4 py-2 text-sm shadow-lg [&>div]:flex [&>div]:gap-2'>
-          <div>
-            <img src={marker} alt='route' />
-            {dataInfo?.distancia
-              ? (dataInfo.distancia / 1000).toFixed(1)
-              : 'N/A'}{' '}
-            km
-          </div>
-          <div>
-            <img src={time} alt='travel duration' />
-            {dataInfo?.tiempo ? Math.round(dataInfo.tiempo / 60) : 'N/A'} min
-          </div>
-          <div>
-            <img src={dolar} alt='price' />
-            {standardVehicle
-              ? dataInfo?.precioStandar
-              : dataInfo?.precioPremiun}
-          </div>
-        </div>
+        <PaymentFooterInfo
+          amount={
+            standardVehicle
+              ? dataInfo?.precioStandar ?? 0
+              : dataInfo?.precioPremiun ?? 0
+          }
+          distance={dataInfo?.distancia ?? 0}
+          duration={dataInfo?.tiempo ?? 0}
+        />
+        {/* */}
         <div className='flex items-center justify-center'>
           <button
             onClick={handleSubmit}

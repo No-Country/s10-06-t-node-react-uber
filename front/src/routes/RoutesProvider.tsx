@@ -16,6 +16,7 @@ import { AuthGuard } from './guard/AuthGuard'
 import { PaymentCard } from '@/pages/PaymentCards'
 import { Payment } from '@/pages/Payment'
 import { LookingForDriver } from '@/pages/LookingForDriver'
+import { DriverInfo } from '@/pages/DriverInfo'
 
 const RoutesProvider: FC = () => {
   return (
@@ -31,6 +32,7 @@ const RoutesProvider: FC = () => {
           <Route path='/payment' element={<Payment />} />
           <Route path='/payment/cards' element={<PaymentCard />} />
           <Route path='/looking-for-driver' element={<LookingForDriver />} />
+          <Route path='/driver-info' element={<DriverInfo />} />
         </Route>
         <Route path='/login' element={<Login />} />
         <Route path='/change-password' element={<ForgotPassword />} />
