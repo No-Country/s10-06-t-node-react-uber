@@ -17,6 +17,7 @@ import { PaymentCard } from '@/pages/PaymentCards'
 import { Payment } from '@/pages/Payment'
 import { LookingForDriver } from '@/pages/LookingForDriver'
 import { DriverInfo } from '@/pages/DriverInfo'
+import { FinishTripModal } from '@/components/FinishTripModal'
 
 const RoutesProvider: FC = () => {
   return (
@@ -34,6 +35,7 @@ const RoutesProvider: FC = () => {
           <Route path='/looking-for-driver' element={<LookingForDriver />} />
           <Route path='/driver-info' element={<DriverInfo />} />
         </Route>
+        <Route path='/prueba' element={<FinishTripModal />} />
         <Route path='/login' element={<Login />} />
         <Route path='/change-password' element={<ForgotPassword />} />
         <Route path='/register' element={<Register />} />
