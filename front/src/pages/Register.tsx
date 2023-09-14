@@ -1,8 +1,9 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { HeaderAuth } from '@/components/HeaderAuth'
 import { useState } from 'react'
 import { BASE_URL } from '@/utils/api'
+import person from '../assets/img/person.png';
+import city from '../assets/img/city.jpg';
 
 interface FormData {
   email: string
@@ -44,8 +45,9 @@ export const Register: React.FC = () => {
 
   return (
     <>
-      <div className='flex h-screen flex-col items-center text-sm'>
-        <HeaderAuth />
+      <div className='flex h-screen justify-center items-center text-sm relative'>
+        <img src={person} alt="model-person" className='w-full absolute top-0 z-10'/>
+        <img src={city} alt="urban-city" className='w-full absolute bottom-0' />
         <form
           autoComplete='off'
           onSubmit={handleSubmit(handleRegister)}
@@ -54,13 +56,17 @@ export const Register: React.FC = () => {
           <div className='items-center justify-center pb-3 pt-5'>
             <Link
               to='/login'
-              className='relative left-3 rounded-[16.5px] border border-[#29103A] bg-[#fff] px-[35px] py-[10px] text-[10px] font-semibold text-[#29103A] shadow-lg'
+              className='relative left-3 rounded-[16.5px] border 
+                border-[#29103A] bg-[#fff] px-[25px] py-[10px] 
+                text-12 font-semibold text-[#29103A] shadow-lg'
             >
               Iniciar sesión
             </Link>
             <Link
               to='/register'
-              className='relative right-3 z-10 rounded-full border border-[#29103A] bg-[#29103A] px-[35px] py-[10px] text-[10px] font-semibold text-white shadow-lg'
+              className='relative right-3 z-10 rounded-full border
+               border-[#29103A] bg-[#29103A] px-[25px] py-[10px] text-12
+               font-semibold text-white shadow-lg'
             >
               Registrarse
             </Link>
@@ -77,7 +83,7 @@ export const Register: React.FC = () => {
                   },
                 })}
                 placeholder='Ingresar correo'
-                className={`w-[251px] border-b-[1px] border-[#CFCFCF] pl-1 text-[10px] ${
+                className={`w-[251px] border-b-[1px] border-[#CFCFCF] pl-1 text-12 ${
                   errorFetch ? 'text-red-500' : ''
                 } ${errors?.email?.message != null ? 'text-red-500' : ''}`}
                 autoComplete='off'
@@ -94,7 +100,7 @@ export const Register: React.FC = () => {
           <div className='flex w-full flex-col items-center justify-center gap-2'>
             <button
               disabled={!isDirty || !isValid || loading}
-              className='my-3 h-[33px] w-[160px] rounded-full bg-[#29103A] text-[10px] font-semibold text-white shadow-lg disabled:opacity-75'
+              className='my-3 h-[33px] w-[160px] rounded-full bg-[#29103A] text-12 font-semibold text-white shadow-lg'
             >
               Siguiente
             </button>

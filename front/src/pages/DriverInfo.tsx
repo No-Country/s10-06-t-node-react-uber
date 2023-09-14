@@ -1,6 +1,7 @@
 import { MapView } from '@/components/Map/MapView'
 import { useState, useEffect } from 'react'
 import { BiStar, BiXCircle } from 'react-icons/bi'
+import { BsChatLeftTextFill, BsFillTelephoneFill } from 'react-icons/bs'
 import driverPhoto from '@/assets/img/driverPhoto.png'
 import { PaymentFooterInfo } from '@/components/PaymentFooterInfo'
 import { useNavigate } from 'react-router-dom'
@@ -108,12 +109,24 @@ export const DriverInfo: React.FC = () => {
           distance={tripInfo.distance}
           duration={tripInfo.duration}
         />
-        <button
-          onClick={handleClick}
-          className='mx-auto w-fit rounded-full bg-primary p-2'
-        >
-          <BiXCircle className='text-4xl text-white' />
-        </button>
+        <div className='flex justify-evenly'>
+          <button
+            onClick={handleClick}
+            className='w-[50px] h-[50px] flex items-center justify-center rounded-full bg-primary'
+          >
+            <BiXCircle className='text-3xl text-white' />
+          </button>
+          <button
+            className='w-[50px] h-[50px] flex items-center justify-center rounded-full bg-primary'
+          >
+            <BsChatLeftTextFill className='text-2xl text-white'/>
+          </button>
+          <button
+            className='w-[50px] h-[50px] flex items-center justify-center rounded-full bg-primary'
+          >
+            <BsFillTelephoneFill className='text-2xl text-white' />
+          </button>
+        </div>
       </div>
     </div>
   )

@@ -5,7 +5,7 @@ import { FixedFieldInputs } from '@/components/AccountManager/FixedFieldInputs';
 import { BASE_URL } from '@/utils/api';
 import { fetchData } from '@/utils/getUserById';
 import { HeaderTitle } from '@/components/AccountManager/HeaderTitle';
-// import { ChangePasswordModal } from '@/components/AccountManager/ChangePasswordModal';
+import { ChangePasswordModal } from '@/components/AccountManager/ChangePasswordModal';
 
 interface Inputs {
     firstName: string;
@@ -86,7 +86,7 @@ export const EditProfile: FC = () => {
     return (
         <div className='h-full px-5 pt-2 relative'>
             {
-                // modal && <ChangePasswordModal handleModal={handleModal} />
+                modal && <ChangePasswordModal handleModal={handleModal} />
             }
             <HeaderTitle title='Editar perfil' link='/dashboard/account-manager' />
             <form className='pt-1' onSubmit={handleSubmit(onSubmit)}>
