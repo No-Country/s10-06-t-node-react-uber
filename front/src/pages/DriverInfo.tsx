@@ -82,7 +82,10 @@ export const DriverInfo: React.FC = () => {
           finishCoords={finishCoords}
         />
       </div>
-      <div className='mx-auto flex h-full w-full flex-1 flex-col justify-center gap-5 p-5 md:max-w-sm'>
+      <div className='mx-auto flex h-full w-full flex-1 flex-col justify-evenly 
+        gap-5 px-8 md:max-w-sm
+        border-[2px] rounded-tl-[30px] rounded-tr-[30px]'
+      >
         <h2 className='text-lg font-semibold'>Un vehículo esta en camino</h2>
         <div className='mx-auto flex w-full max-w-md items-center justify-between'>
           <img src={driverPhoto} alt='' />
