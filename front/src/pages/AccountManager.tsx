@@ -7,6 +7,7 @@ import { GrFormNext } from "react-icons/gr";
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '@/context/GoogleAuthContext';
 import { fetchData } from '@/utils/getUserById';
+import profileImg from '@/assets/img/profile-img.png'
 
 interface Profile {
     name: string,
@@ -74,7 +75,7 @@ export const AccountManager: FC = () => {
         <div className='h-full px-5 pt-16'>
             <h1 className='text-[24px] font-semibold'>Perfil</h1>
             <div className='flex items-center justify-center rounded-full'>
-                <HiUserCircle color='#718096' size='100'/>
+                <img src={profileImg} alt="profile-img" />
             </div>
             <h2 className='border-b-[1px] border-[#29103A] 
                 text-[24px] text-center 

@@ -12,7 +12,7 @@ input[type='radio'] {
   -moz-appearance: none;
   width: 20px;
   height: 20px;
-  border: 2px solid #29103A;
+  border: 2px solid #29103a;
   border-radius: 50%;
   outline: none;
   cursor: pointer;
@@ -20,14 +20,14 @@ input[type='radio'] {
 }
 
 input[type='radio']:checked {
-  background-color: #29103A;
+  background-color: #29103a;
 }
 
 input[type='radio']::before {
   content: '';
   width: 10px;
   height: 10px;
-  background-color: #29103A;
+  background-color: #29103a;
   border-radius: 50%;
   position: absolute;
   top: 50%;
@@ -45,6 +45,32 @@ input[type='radio']:checked::before {
 }
 
 .no-scrollbar {
-  -ms-overflow-style: none; 
-  scrollbar-width: none; 
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes rotate360 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.rotate360 {
+  animation: rotate360 6s linear infinite;
+}
+
+@keyframes rotate-360 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+.rotate-360 {
+  animation: rotate-360 6s linear infinite;
 }

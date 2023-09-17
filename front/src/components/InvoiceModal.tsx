@@ -12,7 +12,7 @@ export const InvoiceModal: FC = () => {
         <img src={logo} alt='logo-urban-move' />
         <h1 className='text-xl uppercase'>recibo de pago</h1>
       </div>
-      <div className='z-50h-[470px] absolute relative top-[-40px] top-[-40px] z-50 m-auto m-auto h-[470px] w-[90%] w-[90%] rounded-[40px] rounded-[40px] bg-white p-5 p-5 shadow-3xl shadow-3xl'>
+      <div className='z-50h-[470px] relative top-[-40px] z-50 m-auto h-[470px] w-[90%] rounded-[40px] bg-white p-5 shadow-3xl'>
         <div className='flex justify-between text-[#29103A]'>
           <h2 className='text-xl font-bold uppercase'>Factura</h2>
           <i>
@@ -23,11 +23,11 @@ export const InvoiceModal: FC = () => {
           <h3 className='text-xl font-bold'>Total</h3>
           <p className='text-xl font-bold'>ARS 480.00</p>
         </div>
-        <div className='flex justify-between border-b-[1px] border-slate-500 py-5 py-5'>
+        <div className='flex justify-between border-b-[1px] border-slate-500 py-5'>
           <p>Tarifa de viaje</p>
           <p>ARS 440.00</p>
         </div>
-        <div className='flex-col border-b-[1px] border-slate-500 py-5 py-5'>
+        <div className='flex-col border-b-[1px] border-slate-500 py-5'>
           <div className='flex justify-between'>
             <p>Subtotal</p>
             <p>ARS 440.00</p>
@@ -37,7 +37,7 @@ export const InvoiceModal: FC = () => {
             <p>ARS 40.00</p>
           </div>
         </div>
-        <div className='border-b-[1px] border-slate-500 py-5 py-5'>
+        <div className='border-b-[1px] border-slate-500 py-5'>
           <h3 className='font-semibold'>Payments</h3>
           <div className='flex justify-between py-2'>
             <div className='flex'>
