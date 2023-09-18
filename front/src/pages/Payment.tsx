@@ -57,13 +57,6 @@ export const Payment: FC = () => {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              // id_usuario:  localStorage.getItem('infoPayment'),
-              // id_conductor: localStorage.getItem('infoPayment.idConductor'),
-              // id_viaje: localStorage.getItem('infoPayment.idViaje'),
-              // token: localStorage.getItem('token'),
-              // amount: localStorage.getItem('infoPayment.amount'),
-              // metodo: 'tarjeta',
-              // fecha: isoString,
               id_usuario: idUsuario,
               id_conductor: idConductor,
               id_viaje: idViaje,
@@ -133,54 +126,9 @@ export const Payment: FC = () => {
                 className='outline-non form-radio appearance-none border-[#29103A] bg-transparent text-[#29103A] accent-black focus:ring-0 focus:ring-current focus:ring-offset-0'
               ></input>
             </li>
-            {/* <li
-              className='mt-4 flex h-[60px] items-center justify-between rounded-[24px] 
-                bg-[#CCCCCC] pl-[18px] pr-[11px]  shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]'
-            >
-              <div className='flex items-center'>
-                <img src={cardPayIcon} />
-                <div className='pl-[17px]'>
-                  <h2 className='text-[18px]'>Tarjeta de crédito/débito</h2>
-                </div>
-              </div>
-              <input
-                id='radio-card'
-                type='radio'
-                value='card'
-                name='payment'
-                checked={payment === 'card'}
-                onChange={(e) => {
-                  setPayment(e.target.value)
-                }}
-                className='outline-non form-radio appearance-none border-[#29103A] bg-transparent text-[#29103A] accent-black focus:ring-0 focus:ring-current focus:ring-offset-0'
-              ></input>
-            </li> */}
           </ul>
-
           <div className='flex flex-col items-center'>
             <section>
-              {/* <div className='flex w-full justify-center gap-5 rounded-full bg-[#29103A05] px-4 py-2 text-sm shadow-lg [&>div]:flex [&>div]:gap-2'>
-                <div>
-                  <img src={marker} alt='route' />
-                  {dataInfo?.distancia
-                    ? (dataInfo.distancia / 1000).toFixed(1)
-                    : 'N/A'}{' '}
-                  km
-                </div>
-                <div>
-                  <img src={time} alt='travel duration' />
-                  {dataInfo?.tiempo
-                    ? Math.round(dataInfo.tiempo / 60)
-                    : 'N/A'}{' '}
-                  min
-                </div>
-                <div>
-                  <img src={dolar} alt='price' />
-                  {standardVehicle
-                    ? dataInfo?.precioStandar.toFixed(2)
-                    : dataInfo?.precioPremiun.toFixed(2)}
-                </div>
-              </div> */}
               <PaymentFooterInfo
                 amount={tripInfo.amount}
                 distance={tripInfo.distance}
@@ -192,9 +140,6 @@ export const Payment: FC = () => {
                 <button
                   type='submit'
                   onClick={handleSubmit(handlePayment)}
-                  // onClick={() => {
-                  //   navigate('/dashboard')
-                  // }}
                   className='h-[32px] 
             w-[193px] rounded-3xl bg-[#29103A] text-[14px] uppercase text-white'
                 >
