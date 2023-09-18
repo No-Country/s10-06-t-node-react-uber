@@ -1,7 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { HeaderAuth } from '@/components/HeaderAuth'
-// import { useState } from 'react'
 import * as apiAuth from '../utils/apiAuth'
 
 interface FormData {
