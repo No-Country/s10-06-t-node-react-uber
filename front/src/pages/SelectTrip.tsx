@@ -2,11 +2,7 @@ import { MapView } from '@/components/Map/MapView'
 import { useState, useEffect } from 'react'
 import standard from '@/assets/standard.svg'
 import premium from '@/assets/premium.svg'
-// import marker from '@/assets/marker.svg'
-// import time from '@/assets/time.svg'
-// import dolar from '@/assets/dolar.svg'
 import { AiOutlineArrowLeft } from "react-icons/ai";
-// import { BsArrowLeft } from 'react-icons/bs'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAuthStore } from '@/context/GoogleAuthContext'
 import { PaymentFooterInfo } from '@/components/PaymentFooterInfo'
@@ -35,9 +31,6 @@ export const SelectTrip: React.FC = () => {
   const [startCoords, setStartCoords] = useState<number[]>([])
   const [finishCoords, setFinishCoords] = useState<number[]>([])
   const [dataInfo, setDataInfo] = useState<ConditionalDataInfo>()
-  // const [amount, setAmount] = useState<number>(0)
-  // const [distance, setDistance] = useState<number>(0)
-  // const [duration, setDuration] = useState<number>(0)
 
   const [, setTripInfo] = useState<TripInfo>({
     distance: 0,
@@ -62,12 +55,6 @@ export const SelectTrip: React.FC = () => {
     if (!startLocation || !finishLocation) {
       navigate('/dashboard')
     } else {
-      // const selectedAmount = standardVehicle
-      //   ? dataInfo?.precioStandar
-      //   : dataInfo?.precioPremiun
-      // setAmount(selectedAmount ?? 0)
-      // setDistance(dataInfo?.distancia ?? 0)
-      // setDuration(dataInfo?.tiempo ?? 0)
       void getGeometry()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
