@@ -9,7 +9,7 @@ interface AccessHomeButtonsProps {
 }
 
 export const AccessHomeButtons: FC<AccessHomeButtonsProps> = ({
-  icon /* modal */,
+  icon,
 }) => {
   const iconComponents: Record<string, JSX.Element> = {
     MENU: <AiOutlineMenu size='25' />,
