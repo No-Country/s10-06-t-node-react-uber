@@ -22,7 +22,7 @@ const userSchema = new Schema({
         type: String, 
         
     },    
-
+    passwordCreated: password? true:false,
     hasAllData: {
         type: Boolean, 
         default: false,
@@ -34,7 +34,7 @@ const userSchema = new Schema({
        
     },
     
-    dateOfBirth: Date,                                      // confirmar ya que en web pide que tenga mas de 18 años     
+    dateOfBirth: Date,                                           
     
     verificationCode: {
          type: String
@@ -43,14 +43,12 @@ const userSchema = new Schema({
     emailStatus: { 
         type: String,
         default: "UNVERIFIED" 
-    },                                                      // para devolver al verificar el code
+    },                                                      
             
     nationality: {
         type: String,
     }
-}, /* {
-    timestamps:true
-} */)
+}, )
 
 export default model("User", userSchema);
 
