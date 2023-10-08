@@ -1,5 +1,5 @@
 # s10-06-t-node-react-uber 
-# Proyecto Clon de UBER <img align="center" src="">  **"URBAN MOVE"**
+# Proyecto Clon de UBER **"URBAN MOVE"**
 ---
 ## Acerca de
 ### Urban Move está diseñada para hacer que tus viajes sean más fáciles, seguros y cómodos. Confía en nosotros para tus traslados diarios, tus viajes de negocios o tus escapadas de fin de semana. La inclusión de mujeres conductoras le da un enfoque igualitario a nuestra app, dando un valor agregado a nuestro servicio. Estamos aquí para llevarte a donde necesites ir, siempre con una sonrisa. 
