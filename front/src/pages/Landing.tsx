@@ -85,7 +85,7 @@ export const LandingPage: React.FC = () => {
 }
 
 const landingImageUrl =
-  'https://res.cloudinary.com/danjwp1pg/image/upload/v1696821700/urban%20move/xe4pyf4gsfj5nydfqzix.png'
+  'https://res.cloudinary.com/danjwp1pg/image/upload/v1696828529/urban%20move/v1c2xlbknduxni9hjvdh.webp'
 
 const landingImageUrl2 =
-  'https://res.cloudinary.com/danjwp1pg/image/upload/v1696821700/urban%20move/epnmepheseam7hsl2kvj.png'
+  'https://res.cloudinary.com/danjwp1pg/image/upload/v1696828529/urban%20move/n6z2tnxfaeo4lsfaxrjh.webp'
