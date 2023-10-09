@@ -146,19 +146,6 @@ export const Chat: React.FC = () => {
               </div>
             </div>
           </div>
-          {/* <div className='relative flex items-center justify-between px-4 py-3'>
-            <input
-              className='flex-grow rounded-full border-primary px-5 py-3 shadow-md outline-none disabled:cursor-not-allowed'
-              placeholder='Escribe un mensaje...'
-              disabled
-            />
-            <button
-              className='disabled:bg-gray-200 disabled:text-gray-400 absolute right-7 flex h-9 w-9 items-center justify-center rounded-full bg-primary disabled:cursor-not-allowed'
-              disabled
-            >
-              <IoSendSharp size={24} color='white' />
-            </button>
-          </div> */}
         </div>
       </div>
     )
